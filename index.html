@@ -207,7 +207,7 @@ body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-
 .settings-note{font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.5;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:8px}
 
 /* TOAST */
-.toast{position:fixed;top:calc(20px + var(--safe-top));left:50%;transform:translateX(-50%) translateY(-100px);background:rgba(42,42,62,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);color:var(--text);padding:12px 24px;border-radius:14px;font-size:14px;font-weight:500;z-index:300;transition:transform .3s ease;box-shadow:0 4px 24px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.08)}
+.toast{position:fixed;top:calc(20px + var(--safe-top));left:50%;transform:translateX(-50%) translateY(-100px);background:rgba(42,42,62,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);color:var(--text);padding:12px 24px;border-radius:14px;font-size:14px;font-weight:500;z-index:300;transition:transform .3s ease;box-shadow:0 4px 24px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.08);cursor:pointer}
 .toast.show{transform:translateX(-50%) translateY(0)}
 
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
@@ -215,7 +215,7 @@ body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-
 
 .section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);margin:20px 0}
 
-.gear-btn{position:absolute;top:0;right:0;background:none;border:none;font-size:22px;cursor:pointer;padding:4px;opacity:.6;transition:opacity .2s}
+.gear-btn{position:absolute;top:0;right:70px;background:none;border:none;font-size:22px;cursor:pointer;padding:4px;opacity:.6;transition:opacity .2s}
 .gear-btn:active{opacity:1}
 
 /* LANGUAGE TOGGLE */
@@ -256,6 +256,40 @@ body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-
 .email-input-row input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-sm);padding:12px 14px;color:var(--text);font-size:14px;outline:none;transition:border .2s}
 .email-input-row input:focus{border-color:var(--accent)}
 .email-input-row input::placeholder{color:var(--text-muted)}
+
+/* EXERCISE SWAP */
+.exercise-actions{display:flex;align-items:center;gap:8px}
+.ex-swap-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--text-dim);padding:4px 8px;border-radius:6px;font-size:14px;cursor:pointer;transition:all .2s}
+.ex-swap-btn:active{background:var(--accent-dim);color:var(--accent)}
+
+/* MEAL EATEN TOGGLE */
+.meal-eaten-row{display:flex;align-items:center;gap:10px;padding:10px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.meal-eaten-dot{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
+.meal-eaten-row.eaten .meal-eaten-dot{background:var(--accent);border-color:var(--accent)}
+.meal-eaten-row.eaten .meal-eaten-dot::after{content:'';width:5px;height:9px;border:2px solid #0b0b11;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px)}
+.meal-eaten-row.eaten .meal-eaten-text{color:var(--text-dim)}
+.meal-eaten-text{font-size:13px;flex:1;line-height:1.4;transition:all .2s}
+.meal-eaten-macro{font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* SHOPPING LIST */
+.shop-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--accent2),#7c4dff);color:#fff;border:none;border-radius:var(--radius-sm);padding:14px;font-size:15px;font-weight:600;cursor:pointer;width:100%;margin-top:12px;margin-bottom:16px;transition:all .2s}
+.shop-btn:active{transform:scale(.97);opacity:.9}
+.shop-section{margin-bottom:16px}
+.shop-section-title{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.shop-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg-card);border-radius:var(--radius-sm);margin-bottom:6px;border:1px solid var(--bg-card-border);cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.shop-item:active{background:var(--bg-card-hover)}
+.shop-check{width:20px;height:20px;border-radius:5px;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
+.shop-item.bought .shop-check{background:var(--accent);border-color:var(--accent)}
+.shop-item.bought .shop-check::after{content:'';width:5px;height:8px;border:2px solid #0b0b11;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px)}
+.shop-item.bought .shop-name{color:var(--text-muted);text-decoration:line-through}
+.shop-name{font-size:14px;flex:1}
+.shop-qty{font-size:13px;color:var(--accent2);font-weight:600;white-space:nowrap}
+.shop-need{font-size:12px;color:var(--coral);font-weight:500}
+.shop-actions{display:flex;gap:8px;margin-top:12px}
+.shop-action-btn{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--text-dim);padding:10px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;text-align:center;transition:all .2s}
+.shop-action-btn:active{background:var(--accent-dim);color:var(--accent)}
+.shop-action-btn.danger:active{background:var(--coral-dim);color:var(--coral)}
+.shop-summary{font-size:12px;color:var(--text-dim);text-align:center;margin-top:8px}
 </style>
 </head>
 <body>
@@ -300,10 +334,11 @@ body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-
 <div class="water-hint" data-i18n="water_hint">每杯约 250ml | 目标 3.5L (14杯)</div>
 </div>
 
-<!-- Today Meal Summary -->
-<div class="card" onclick="switchTab('diet')" style="cursor:pointer">
-<div class="card-title" data-i18n="today_diet">今日饮食</div>
+<!-- Today Meal Summary - Tap to mark eaten -->
+<div class="card">
+<div class="card-title"><span data-i18n="today_diet">今日饮食</span><span style="font-size:11px;color:var(--text-muted);margin-left:8px;text-transform:none;letter-spacing:0;font-weight:400" data-i18n="tap_to_track">点击标记已吃</span></div>
 <div id="today-meal-summary" style="font-size:14px;color:var(--text-dim);line-height:1.6"></div>
+<div style="margin-top:8px;text-align:center"><span style="font-size:12px;color:var(--accent);cursor:pointer" onclick="switchTab('diet')" data-i18n="view_diet_detail">查看饮食详情 →</span></div>
 </div>
 
 <!-- Daily Checklist -->
@@ -325,6 +360,7 @@ body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-
 <div class="snack-item"><span data-i18n="snack3">水煮蛋 2 个</span><span class="snack-macros">P:12g | 140kcal</span></div>
 <div class="snack-item"><span data-i18n="snack4">蛋白粉 1 勺</span><span class="snack-macros">P:25g | 120kcal</span></div>
 </div>
+<button class="shop-btn" onclick="openShoppingList()">&#128722; <span data-i18n="shopping_list">本周采购清单</span></button>
 <div class="daily-total" id="daily-total-container">
 <div class="total-label" data-i18n="daily_total_label">每日总计（不含零食）</div>
 <div class="total-values">
@@ -402,6 +438,8 @@ body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-
 <div class="modal-overlay" id="swap-modal"><div class="modal-content"><div class="modal-header"><h3 id="swap-modal-title">替换餐食</h3><button class="modal-close" onclick="closeModal('swap-modal')">&times;</button></div><div class="modal-body" id="swap-modal-body"></div></div></div>
 <div class="modal-overlay" id="recipe-modal"><div class="modal-content"><div class="modal-header"><h3 id="recipe-modal-title">食谱</h3><button class="modal-close" onclick="closeModal('recipe-modal')">&times;</button></div><div class="modal-body" id="recipe-modal-body"></div></div></div>
 <div class="modal-overlay" id="settings-modal"><div class="modal-content"><div class="modal-header"><h3 data-i18n="reminder_settings">提醒设置</h3><button class="modal-close" onclick="closeModal('settings-modal')">&times;</button></div><div class="modal-body" id="settings-modal-body"></div></div></div>
+<div class="modal-overlay" id="shopping-modal"><div class="modal-content" style="max-height:90vh"><div class="modal-header"><h3 id="shopping-modal-title" data-i18n="shopping_list">本周采购清单</h3><button class="modal-close" onclick="closeModal('shopping-modal')">&times;</button></div><div class="modal-body" id="shopping-modal-body"></div></div></div>
+<div class="modal-overlay" id="exercise-swap-modal"><div class="modal-content"><div class="modal-header"><h3 id="exercise-swap-modal-title">替换动作</h3><button class="modal-close" onclick="closeModal('exercise-swap-modal')">&times;</button></div><div class="modal-body" id="exercise-swap-modal-body"></div></div></div>
 <div class="modal-overlay" id="sticker-detail-modal"><div class="modal-content"><div class="modal-header"><h3 data-i18n="sticker_detail">贴纸详情</h3><button class="modal-close" onclick="closeModal('sticker-detail-modal')">&times;</button></div><div class="modal-body" id="sticker-detail-body"></div></div></div>
 
 <!-- Sticker earn toast -->
@@ -519,7 +557,33 @@ acc_hat:'小帽子',acc_bowtie:'领结',acc_glasses:'眼镜',acc_scarf:'围巾',
 sticker_combo_note:'70,560 种独特组合',
 data_backup:'数据备份',backup_desc:'将所有进度数据（体重、腰围、打卡记录、贴纸收藏等）导出为 JSON 文件保存到手机。之后可以导入恢复。',
 backup_btn:'下载备份文件',restore_btn:'从备份恢复',
-toast_backup_done:'备份文件已下载',toast_restore_done:'已恢复 {n} 项数据，即将刷新...',toast_restore_invalid:'文件格式无效'
+toast_backup_done:'备份文件已下载',toast_restore_done:'已恢复 {n} 项数据，即将刷新...',toast_restore_invalid:'文件格式无效',
+// Exercise swap
+swap_exercise:'替换动作',swap_exercise_en:'Swap Exercise',
+toast_exercise_swapped:'已替换!',
+// Meal tracking
+tap_to_track:'点击标记已吃',view_diet_detail:'查看饮食详情 →',
+meal_eaten_prefix:'已吃',
+// Protein/cal ring
+ring_eaten_hint:'标记饮食后更新',
+// Shopping list
+shopping_list:'本周采购清单',
+shop_protein_section:'蛋白质类',
+shop_carb_section:'碳水/主食',
+shop_salad_section:'沙拉/蔬菜',
+shop_dairy_section:'乳制品/蛋',
+shop_seasoning_section:'调味料/常备',
+shop_fruit_section:'水果/零食',
+shop_weekly_need:'本周需要',
+shop_have:'已有',
+shop_still_need:'还需购买',
+shop_bought:'已购',
+shop_clear_confirm:'确定清除所有采购记录？（不可恢复）',
+shop_clear_btn:'清除采购记录',
+shop_reset_info:'每周一自动重置',
+shop_items_left:'{n} 项待购',
+shop_all_bought:'全部已购！',
+toast_shop_cleared:'采购记录已清除'
 },
 en: {
 nav_today: 'Today', nav_diet: 'Diet', nav_training: 'Training', nav_progress: 'Progress', nav_collection: 'Collection',
@@ -608,7 +672,29 @@ acc_hat:'Hat',acc_bowtie:'Bow Tie',acc_glasses:'Glasses',acc_scarf:'Scarf',acc_c
 sticker_combo_note:'70,560 unique combinations',
 data_backup:'Data Backup',backup_desc:'Export all progress data (weight, waist, checklist, sticker collection, etc.) as a JSON file. You can import it later to restore.',
 backup_btn:'Download Backup',restore_btn:'Restore from Backup',
-toast_backup_done:'Backup file downloaded',toast_restore_done:'{n} items restored, refreshing...',toast_restore_invalid:'Invalid file format'
+toast_backup_done:'Backup file downloaded',toast_restore_done:'{n} items restored, refreshing...',toast_restore_invalid:'Invalid file format',
+swap_exercise:'Swap Exercise',
+toast_exercise_swapped:'Swapped!',
+tap_to_track:'Tap to mark eaten',view_diet_detail:'View diet details →',
+meal_eaten_prefix:'Ate',
+ring_eaten_hint:'Updates when meals marked',
+shopping_list:'Weekly Shopping List',
+shop_protein_section:'Proteins',
+shop_carb_section:'Carbs/Grains',
+shop_salad_section:'Salads/Greens',
+shop_dairy_section:'Dairy/Eggs',
+shop_seasoning_section:'Seasonings/Staples',
+shop_fruit_section:'Fruits/Snacks',
+shop_weekly_need:'Weekly Need',
+shop_have:'Have',
+shop_still_need:'Still Need',
+shop_bought:'Bought',
+shop_clear_confirm:'Clear all shopping records? (Cannot undo)',
+shop_clear_btn:'Clear Shopping List',
+shop_reset_info:'Auto-resets every Monday',
+shop_items_left:'{n} items left',
+shop_all_bought:'All bought!',
+toast_shop_cleared:'Shopping list cleared'
 }
 };
 
@@ -665,6 +751,9 @@ return new Date(s + 'T00:00:00');
 }
 function getCurrentWeek() { var n = new Date(), d = Math.floor((n - PROGRAM_START) / (864e5)); return Math.min(8, Math.max(1, Math.floor(d / 7) + 1)); }
 
+// Local date string helper (fixes midnight reset for non-UTC timezones)
+function localDateStr(d){d=d||new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+
 var BREAKFAST = {name: '3 个全蛋炒/煎 + 1 片全麦面包 + 希腊酸奶配蓝莓', nameEn: '3 eggs scrambled + 1 whole wheat toast + Greek yogurt w/ blueberries', protein: 30, cal: 380};
 
 var MEALS = {
@@ -684,7 +773,11 @@ var LUNCH_ALTS=[
 {name:'空气炸锅墨西哥风味鸡胸肉 180g + 沙拉包 + 半碗糙米',nameEn:'Air fryer Mexican chicken 180g + salad + brown rice',protein:45,cal:480,note:'空气炸锅200°C 12分钟',noteEn:'Air fryer 200C 12min',recipe:{ingredients:['鸡胸肉 180g','墨西哥调味粉 1大勺','青柠汁 1个','蒜末 1茶勺','橄榄油 1茶勺','沙拉包 1袋','糙米 半碗'],steps:['鸡胸肉用墨西哥调味粉、青柠汁、蒜末、橄榄油腌制20分钟','空气炸锅预热200°C','放入鸡胸肉，200°C炸12分钟，中途翻面','切片配沙拉包和糙米'],time:'12分钟',temp:'200°C'}},
 {name:'空气炸锅三文鱼 150g + 沙拉包 + 红薯',nameEn:'Air fryer salmon 150g + salad + sweet potato',protein:38,cal:450,note:'空气炸锅190°C 10分钟',noteEn:'Air fryer 190C 10min',recipe:{ingredients:['三文鱼 150g','盐 适量','黑胡椒 适量','柠檬 半个','沙拉包 1袋','红薯 1个'],steps:['三文鱼撒盐和黑胡椒','空气炸锅预热190°C','放入三文鱼皮面朝下，190°C炸10分钟','挤上柠檬汁，配沙拉包和烤红薯'],time:'10分钟',temp:'190°C'}},
 {name:'鸡胸肉沙拉碗（预煮鸡肉条+沙拉包+牛油果+柠檬汁）',nameEn:'Chicken salad bowl (precooked + avocado + lemon)',protein:40,cal:420,note:'提前准备鸡肉条，方便快速',noteEn:'Pre-cook chicken, quick prep',recipe:{ingredients:['预煮鸡胸肉 180g','沙拉包 1袋','牛油果 半个','柠檬汁 1大勺','橄榄油 1茶勺','盐和黑胡椒 适量'],steps:['鸡胸肉提前煮熟切条（或用空气炸锅200°C 12分钟）','沙拉包倒入碗中','放上鸡肉条和切片的牛油果','淋上柠檬汁和橄榄油，撒盐和胡椒'],time:'5分钟（不含预煮）',temp:'免烹饪'}},
-{name:'Costco 烤鸡（去皮）+ Caesar Salad Kit',nameEn:'Costco rotisserie chicken (skinless) + Caesar Salad Kit',protein:45,cal:500,note:'最方便快速的选择',noteEn:'Fastest option',recipe:{ingredients:['Costco 烤鸡 适量（去皮）','Caesar Salad Kit 1袋'],steps:['Costco 烤鸡撕成条，去掉鸡皮','打开 Caesar Salad Kit，倒入碗中','加入鸡肉条，拌匀即可'],time:'3分钟',temp:'免烹饪'}}
+{name:'Costco 烤鸡（去皮）+ Caesar Salad Kit',nameEn:'Costco rotisserie chicken (skinless) + Caesar Salad Kit',protein:45,cal:500,note:'最方便快速的选择',noteEn:'Fastest option',recipe:{ingredients:['Costco 烤鸡 适量（去皮）','Caesar Salad Kit 1袋'],steps:['Costco 烤鸡撕成条，去掉鸡皮','打开 Caesar Salad Kit，倒入碗中','加入鸡肉条，拌匀即可'],time:'3分钟',temp:'免烹饪'}},
+{name:'空气炸锅照烧鸡腿（去皮）+ 沙拉包 + 糙米',nameEn:'Air fryer teriyaki chicken thigh + salad + brown rice',protein:43,cal:520,note:'空气炸锅190°C 18分钟',noteEn:'Air fryer 190C 18min',recipe:{ingredients:['鸡腿 2个（去皮）','照烧酱 2大勺','蒜末 1茶勺','沙拉包 1袋','糙米 半碗'],steps:['鸡腿去皮用照烧酱腌制20分钟','空气炸锅190°C 18分钟，中途翻面','切片配沙拉和糙米'],time:'18分钟',temp:'190°C'}},
+{name:'柠檬香草鸡胸肉 180g + Kale Salad Kit',nameEn:'Lemon herb chicken breast 180g + Kale Salad Kit',protein:44,cal:460,note:'空气炸锅200°C 12分钟',noteEn:'Air fryer 200C 12min',recipe:{ingredients:['鸡胸肉 180g','柠檬汁 1个','意大利调味料 1大勺','蒜粉','Kale Salad Kit 1袋'],steps:['鸡胸肉用柠檬汁和调味料腌制','空气炸锅200°C 12分钟','切片配 Kale Salad Kit'],time:'12分钟',temp:'200°C'}},
+{name:'空气炸锅黑椒牛肉粒 200g + 沙拉包 + 红薯',nameEn:'Air fryer black pepper beef cubes 200g + salad + sweet potato',protein:48,cal:530,note:'空气炸锅200°C 10分钟',noteEn:'Air fryer 200C 10min',recipe:{ingredients:['牛肉切粒 200g','黑胡椒 适量','蒜粉','酱油 1茶勺','沙拉包 1袋','红薯 1个'],steps:['牛肉粒拌黑胡椒、蒜粉、酱油','空气炸锅200°C 10分钟，中途翻动','红薯微波5分钟或另炸','配沙拉包'],time:'10分钟',temp:'200°C'}},
+{name:'虾仁牛油果沙拉碗',nameEn:'Shrimp avocado salad bowl',protein:42,cal:400,note:'空气炸锅180°C 6分钟',noteEn:'Air fryer 180C 6min',recipe:{ingredients:['虾仁 200g','牛油果 半个','沙拉包 1袋','柠檬汁','橄榄油'],steps:['虾仁空气炸锅180°C 6分钟','沙拉包铺底，加虾仁和牛油果片','淋柠檬汁和橄榄油'],time:'6分钟',temp:'180°C'}}
 ];
 
 var DINNER_ALTS=[
@@ -695,7 +788,11 @@ var DINNER_ALTS=[
 {name:'空气炸锅鸡胸肉 180g + Caesar Salad Kit',nameEn:'Air fryer chicken breast 180g + Caesar Salad Kit',protein:42,cal:400,note:'空气炸锅200°C 12分钟',noteEn:'Air fryer 200C 12min',recipe:{ingredients:['鸡胸肉 180g','蒜粉 1茶勺','意大利调味料 1茶勺','盐 适量','Caesar Salad Kit 1袋'],steps:['鸡胸肉用蒜粉、意大利调味料、盐腌制','空气炸锅预热200°C','200°C炸12分钟，中途翻面','切片放在 Caesar Salad 上'],time:'12分钟',temp:'200°C'}},
 {name:'蒜蓉虾 250g + Spring Mix 沙拉',nameEn:'Garlic shrimp 250g + Spring Mix salad',protein:60,cal:300,note:'低卡高蛋白之选',noteEn:'Low cal high protein',recipe:{ingredients:['大虾 250g','蒜末 3大勺','橄榄油 1茶勺','盐 适量','Spring Mix 沙拉 1袋','柠檬 半个'],steps:['虾去壳去虾线','拌入蒜末、橄榄油和盐','空气炸锅预热180°C','180°C炸8分钟','挤柠檬汁配 Spring Mix 沙拉'],time:'8分钟',temp:'180°C'}},
 {name:'空气炸锅 Cajun 虾 200g + 沙拉包',nameEn:'Air fryer Cajun shrimp 200g + salad',protein:48,cal:350,note:'空气炸锅190°C 8分钟',noteEn:'Air fryer 190C 8min',recipe:{ingredients:['大虾 200g','Cajun 调味粉 1大勺','橄榄油 1茶勺','盐 适量','沙拉包 1袋'],steps:['虾去壳去虾线','拌入 Cajun 调味粉和橄榄油','空气炸锅预热190°C','190°C炸8分钟','配沙拉包食用'],time:'8分钟',temp:'190°C'}},
-{name:'鸡腿（去皮）空气炸锅蒜香 + 沙拉包',nameEn:'Chicken legs (skinless) garlic air fryer + salad',protein:40,cal:420,note:'空气炸锅190°C 20分钟',noteEn:'Air fryer 190C 20min',recipe:{ingredients:['鸡腿 2个（去皮）','蒜末 2大勺','橄榄油 1茶勺','盐 适量','黑胡椒 适量','沙拉包 1袋'],steps:['鸡腿去皮，用蒜末、橄榄油、盐、胡椒腌制','空气炸锅预热190°C','190°C炸20分钟，中途翻面','配沙拉包食用'],time:'20分钟',temp:'190°C'}}
+{name:'鸡腿（去皮）空气炸锅蒜香 + 沙拉包',nameEn:'Chicken legs (skinless) garlic air fryer + salad',protein:40,cal:420,note:'空气炸锅190°C 20分钟',noteEn:'Air fryer 190C 20min',recipe:{ingredients:['鸡腿 2个（去皮）','蒜末 2大勺','橄榄油 1茶勺','盐 适量','黑胡椒 适量','沙拉包 1袋'],steps:['鸡腿去皮，用蒜末、橄榄油、盐、胡椒腌制','空气炸锅预热190°C','190°C炸20分钟，中途翻面','配沙拉包食用'],time:'20分钟',temp:'190°C'}},
+{name:'空气炸锅椒盐虾 250g + Mediterranean Salad Kit',nameEn:'Air fryer salt & pepper shrimp 250g + Mediterranean Salad',protein:55,cal:380,note:'空气炸锅180°C 8分钟',noteEn:'Air fryer 180C 8min',recipe:{ingredients:['大虾 250g','椒盐调味粉 1大勺','橄榄油 少许','Mediterranean Salad Kit 1袋'],steps:['虾拌椒盐粉和橄榄油','空气炸锅180°C 8分钟','配沙拉'],time:'8分钟',temp:'180°C'}},
+{name:'空气炸锅牛排粒 200g + 沙拉包',nameEn:'Air fryer steak bites 200g + salad',protein:48,cal:430,note:'空气炸锅200°C 8分钟',noteEn:'Air fryer 200C 8min',recipe:{ingredients:['牛排切粒 200g','蒜粉、盐、黑胡椒','橄榄油 少许','沙拉包 1袋'],steps:['牛排切2cm粒，拌调味料','空气炸锅200°C 8分钟','配沙拉'],time:'8分钟',temp:'200°C'}},
+{name:'照烧鸡胸肉 180g + Asian Chopped Salad',nameEn:'Teriyaki chicken 180g + Asian Chopped Salad',protein:42,cal:420,note:'空气炸锅200°C 12分钟',noteEn:'Air fryer 200C 12min',recipe:{ingredients:['鸡胸肉 180g','照烧酱 2大勺','蒜末','Asian Chopped Salad Kit 1袋'],steps:['鸡胸肉刷照烧酱腌15分钟','空气炸锅200°C 12分钟','切片配沙拉'],time:'12分钟',temp:'200°C'}},
+{name:'柠檬蒜香虾 200g + 沙拉包 + 红薯',nameEn:'Lemon garlic shrimp 200g + salad + sweet potato',protein:44,cal:400,note:'空气炸锅180°C 8分钟',noteEn:'Air fryer 180C 8min',recipe:{ingredients:['虾 200g','柠檬汁、蒜末、橄榄油','沙拉包 1袋','红薯 1小个'],steps:['虾拌柠檬汁蒜末','空气炸锅180°C 8分钟','红薯微波5分钟','配沙拉'],time:'8分钟',temp:'180°C'}}
 ];
 
 var DEFAULT_RECIPES={
@@ -720,13 +817,61 @@ dinner:{
 };
 
 var WORKOUTS={
-1:{title:'核心 + 全身',titleEn:'Core + Full Body',time:'15 分钟',timeEn:'15 min',subtitle:'3 轮循环 | 动作间休息 20 秒 | 轮间休息 60 秒',subtitleEn:'3 rounds | 20s rest between | 60s rest between rounds',exercises:[{name:'平板支撑',nameEn:'Plank',detail:'30-45 秒',detailEn:'30-45 sec',url:'https://www.youtube.com/watch?v=BQu26ABuVS0'},{name:'死虫式',nameEn:'Dead Bug',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=XcYtWYMz39w'},{name:'哑铃高脚杯深蹲',nameEn:'Dumbbell Goblet Squat',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=9KzZD_n2r64'},{name:'登山跑',nameEn:'Mountain Climbers',detail:'30 秒',detailEn:'30 sec',url:'https://www.youtube.com/watch?v=T_BvreyYL0w'}]},
-2:{title:'上肢力量',titleEn:'Upper Body',time:'20 分钟',timeEn:'20 min',subtitle:'3 组 | 每组 10-12 次',subtitleEn:'3 sets | 10-12 reps each',exercises:[{name:'哑铃卧推',nameEn:'Dumbbell Bench Press',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=pKZMNVbfUzQ'},{name:'坐姿划船',nameEn:'Seated Row',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=vwHG9Jfu4sw'},{name:'哑铃肩推',nameEn:'Dumbbell Shoulder Press',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=qEwKCR5JCog'},{name:'二头弯举',nameEn:'Bicep Curl',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=XE_pHwbst04'},{name:'三头下压',nameEn:'Tricep Pushdown',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=nMqQNGo4Jtg'}]},
-3:{title:'单车 + 核心',titleEn:'Bike + Core',time:'25+10 分钟',timeEn:'25+10 min',subtitle:'3 轮',subtitleEn:'3 rounds',exercises:[{name:'仰卧抬腿',nameEn:'Leg Raise',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=sY2ZgV2Sj_s'},{name:'自行车卷腹',nameEn:'Bicycle Crunch',detail:'每边 15 次',detailEn:'15 each side',url:'https://www.youtube.com/watch?v=PAEo-zRSanM'},{name:'俄罗斯转体',nameEn:'Russian Twist',detail:'20 次',detailEn:'20 reps',url:'https://www.youtube.com/watch?v=NrBUdmJSTXk'},{name:'鸟狗式',nameEn:'Bird Dog',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=ZdAHe9_HeEw'}]},
-4:{title:'下肢力量',titleEn:'Lower Body',time:'20 分钟',timeEn:'20 min',subtitle:'3 组 | 每组 10-12 次',subtitleEn:'3 sets | 10-12 reps each',exercises:[{name:'哑铃罗马尼亚硬拉',nameEn:'Dumbbell Romanian Deadlift',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=hQgFixeXdZo'},{name:'哑铃箭步蹲',nameEn:'Dumbbell Lunge',detail:'每腿 10 次',detailEn:'10 each leg',url:'https://www.youtube.com/watch?v=qQyCK_rxzN0'},{name:'腿举/高脚杯深蹲',nameEn:'Leg Press/Goblet Squat',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=UYdx6ammdwU'},{name:'站姿提踵',nameEn:'Standing Calf Raise',detail:'15 次',detailEn:'15 reps',url:'https://www.youtube.com/watch?v=KRJIKsY02nE'}]},
-5:{title:'HIIT',titleEn:'HIIT',time:'15 分钟',timeEn:'15 min',subtitle:'热身 5 分钟 → 20秒高强度/40秒慢走 x8 → 放松 2 分钟',subtitleEn:'5min warmup - 20s sprint/40s walk x8 - 2min cooldown',exercises:[{name:'HIIT 间歇训练',nameEn:'HIIT Interval Training',detail:'20秒冲刺 / 40秒慢走 x 8 轮',detailEn:'20s sprint / 40s walk x 8 rounds',url:'https://www.youtube.com/watch?v=qVlXj1t1i6g'}]},
+1:{title:'核心 + 全身',titleEn:'Core + Full Body',time:'15 分钟',timeEn:'15 min',subtitle:'3 轮循环 | 动作间休息 20 秒 | 轮间休息 60 秒',subtitleEn:'3 rounds | 20s rest between | 60s rest between rounds',exercises:[{name:'平板支撑',nameEn:'Plank',detail:'30-45 秒',detailEn:'30-45 sec',url:'https://www.youtube.com/watch?v=BQu26ABuVS0',group:'core'},{name:'死虫式',nameEn:'Dead Bug',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=XcYtWYMz39w',group:'core'},{name:'哑铃高脚杯深蹲',nameEn:'Dumbbell Goblet Squat',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=9KzZD_n2r64',group:'lower'},{name:'登山跑',nameEn:'Mountain Climbers',detail:'30 秒',detailEn:'30 sec',url:'https://www.youtube.com/watch?v=T_BvreyYL0w',group:'core'}]},
+2:{title:'上肢力量',titleEn:'Upper Body',time:'20 分钟',timeEn:'20 min',subtitle:'3 组 | 每组 10-12 次',subtitleEn:'3 sets | 10-12 reps each',exercises:[{name:'哑铃卧推',nameEn:'Dumbbell Bench Press',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=pKZMNVbfUzQ',group:'push'},{name:'高位下拉(器械)',nameEn:'Lat Pulldown (Machine)',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=CAwf7n6Luuc',group:'pull'},{name:'哑铃肩推',nameEn:'Dumbbell Shoulder Press',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=qEwKCR5JCog',group:'push'},{name:'二头弯举',nameEn:'Bicep Curl',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=XE_pHwbst04',group:'arms'},{name:'绳索三头下压',nameEn:'Cable Tricep Pushdown',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=kiuVA0gs3EI',group:'arms'}]},
+3:{title:'单车 + 核心',titleEn:'Bike + Core',time:'25+10 分钟',timeEn:'25+10 min',subtitle:'3 轮',subtitleEn:'3 rounds',exercises:[{name:'仰卧抬腿',nameEn:'Leg Raise',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=sY2ZgV2Sj_s',group:'core'},{name:'自行车卷腹',nameEn:'Bicycle Crunch',detail:'每边 15 次',detailEn:'15 each side',url:'https://www.youtube.com/watch?v=PAEo-zRSanM',group:'core'},{name:'俄罗斯转体',nameEn:'Russian Twist',detail:'20 次',detailEn:'20 reps',url:'https://www.youtube.com/watch?v=NrBUdmJSTXk',group:'core'},{name:'鸟狗式',nameEn:'Bird Dog',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=ZdAHe9_HeEw',group:'core'}]},
+4:{title:'下肢力量',titleEn:'Lower Body',time:'20 分钟',timeEn:'20 min',subtitle:'3 组 | 每组 10-12 次',subtitleEn:'3 sets | 10-12 reps each',exercises:[{name:'哑铃罗马尼亚硬拉',nameEn:'Dumbbell Romanian Deadlift',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=hQgFixeXdZo',group:'lower'},{name:'哑铃箭步蹲',nameEn:'Dumbbell Lunge',detail:'每腿 10 次',detailEn:'10 each leg',url:'https://www.youtube.com/watch?v=qQyCK_rxzN0',group:'lower'},{name:'腿屈伸(器械)',nameEn:'Leg Extension (Machine)',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=YyvSfVjQeL0',group:'lower'},{name:'哑铃站姿提踵',nameEn:'Dumbbell Standing Calf Raise',detail:'15 次',detailEn:'15 reps',url:'https://www.youtube.com/watch?v=wx-PKH8aW_8',group:'lower'}]},
+5:{title:'HIIT',titleEn:'HIIT',time:'15 分钟',timeEn:'15 min',subtitle:'热身 5 分钟 → 20秒高强度/40秒慢走 x8 → 放松 2 分钟',subtitleEn:'5min warmup - 20s sprint/40s walk x8 - 2min cooldown',exercises:[{name:'HIIT 间歇训练',nameEn:'HIIT Interval Training',detail:'20秒冲刺 / 40秒慢走 x 8 轮',detailEn:'20s sprint / 40s walk x 8 rounds',url:'https://www.youtube.com/watch?v=qVlXj1t1i6g',group:'cardio'}]},
 6:{title:'主动恢复',titleEn:'Active Recovery',time:'40-60 分钟',timeEn:'40-60 min',subtitle:'带娃散步，早上或傍晚，避开正午',subtitleEn:'Walk with kids, morning or evening',exercises:[],isRest:true,restEmoji:'\u{1F6B6}',restDesc:'带娃散步 40-60 分钟\n早上或傍晚，避开正午\n享受户外时光',restDescEn:'Walk with kids 40-60 min\nMorning or evening\nEnjoy the outdoors'},
 0:{title:'完全休息',titleEn:'Full Rest',time:'休息日',timeEn:'Rest Day',subtitle:'恢复日 — 让身体充分恢复',subtitleEn:'Recovery day - let your body recover',exercises:[],isRest:true,restEmoji:'\u{1F634}',restDesc:'今天是恢复日\n好好休息，让肌肉恢复\n明天继续加油',restDescEn:'Today is recovery day\nRest well, let muscles recover\nKeep going tomorrow'}
+};
+
+// ===== EXERCISE ALTERNATIVES (grouped by muscle) =====
+var EXERCISE_ALTS={
+lower:[
+{name:'腿屈伸(器械)',nameEn:'Leg Extension (Machine)',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=YyvSfVjQeL0'},
+{name:'哑铃高脚杯深蹲',nameEn:'Dumbbell Goblet Squat',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=9KzZD_n2r64'},
+{name:'哑铃保加利亚分腿蹲',nameEn:'Bulgarian Split Squat',detail:'每腿 8 次',detailEn:'8 each leg',url:'https://www.youtube.com/watch?v=2C-uNgKwPLE'},
+{name:'背部伸展(器械)',nameEn:'Back Extension (Machine)',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=qtKXGrgQlM0'},
+{name:'哑铃箭步蹲',nameEn:'Dumbbell Lunge',detail:'每腿 10 次',detailEn:'10 each leg',url:'https://www.youtube.com/watch?v=qQyCK_rxzN0'},
+{name:'哑铃罗马尼亚硬拉',nameEn:'Dumbbell Romanian Deadlift',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=hQgFixeXdZo'},
+{name:'哑铃站姿提踵',nameEn:'Dumbbell Standing Calf Raise',detail:'15 次',detailEn:'15 reps',url:'https://www.youtube.com/watch?v=wx-PKH8aW_8'},
+{name:'哑铃台阶上步',nameEn:'Dumbbell Step Up',detail:'每腿 10 次',detailEn:'10 each leg',url:'https://www.youtube.com/watch?v=WCFCdxzFBa4'}
+],
+push:[
+{name:'哑铃卧推',nameEn:'Dumbbell Bench Press',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=pKZMNVbfUzQ'},
+{name:'坐姿推胸(器械)',nameEn:'Chest Press (Machine)',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=xUm0BiZCWlQ'},
+{name:'哑铃肩推',nameEn:'Dumbbell Shoulder Press',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=qEwKCR5JCog'},
+{name:'坐姿肩推(器械)',nameEn:'Shoulder Press (Machine)',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=Wqq43dKiMP0'},
+{name:'哑铃飞鸟',nameEn:'Dumbbell Fly',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=eozdVDA78K0'},
+{name:'绳索夹胸',nameEn:'Cable Fly',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=Iwe6AmxVf7o'},
+{name:'哑铃侧平举',nameEn:'Dumbbell Lateral Raise',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=3VcKaXpzqRo'}
+],
+pull:[
+{name:'坐姿划船(器械)',nameEn:'Seated Row (Machine)',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=vwHG9Jfu4sw'},
+{name:'高位下拉(器械)',nameEn:'Lat Pulldown (Machine)',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=CAwf7n6Luuc'},
+{name:'绳索面拉',nameEn:'Cable Face Pull',detail:'15 次',detailEn:'15 reps',url:'https://www.youtube.com/watch?v=rep-qVOkqgk'},
+{name:'哑铃单臂划船',nameEn:'Single Arm Dumbbell Row',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=pYcpY20QaE8'},
+{name:'绳索直臂下拉',nameEn:'Cable Straight Arm Pulldown',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=lueEJGjTuPQ'}
+],
+arms:[
+{name:'二头弯举',nameEn:'Bicep Curl',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=XE_pHwbst04'},
+{name:'绳索二头弯举',nameEn:'Cable Bicep Curl',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=NFzTWp2qpiE'},
+{name:'锤式弯举',nameEn:'Hammer Curl',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=TwD-YGVP4Bk'},
+{name:'绳索三头下压',nameEn:'Cable Tricep Pushdown',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=kiuVA0gs3EI'},
+{name:'哑铃过顶三头伸展',nameEn:'Overhead Tricep Extension',detail:'10 次',detailEn:'10 reps',url:'https://www.youtube.com/watch?v=_gsUck-7M74'},
+{name:'绳索三头绳索下压',nameEn:'Cable Rope Pushdown',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=nMqQNGo4Jtg'}
+],
+core:[
+{name:'平板支撑',nameEn:'Plank',detail:'30-45 秒',detailEn:'30-45 sec',url:'https://www.youtube.com/watch?v=BQu26ABuVS0'},
+{name:'死虫式',nameEn:'Dead Bug',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=XcYtWYMz39w'},
+{name:'登山跑',nameEn:'Mountain Climbers',detail:'30 秒',detailEn:'30 sec',url:'https://www.youtube.com/watch?v=T_BvreyYL0w'},
+{name:'仰卧抬腿',nameEn:'Leg Raise',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=sY2ZgV2Sj_s'},
+{name:'自行车卷腹',nameEn:'Bicycle Crunch',detail:'每边 15 次',detailEn:'15 each side',url:'https://www.youtube.com/watch?v=PAEo-zRSanM'},
+{name:'俄罗斯转体',nameEn:'Russian Twist',detail:'20 次',detailEn:'20 reps',url:'https://www.youtube.com/watch?v=NrBUdmJSTXk'},
+{name:'背部伸展(器械)',nameEn:'Back Extension (Machine)',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=qtKXGrgQlM0'},
+{name:'鸟狗式',nameEn:'Bird Dog',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=ZdAHe9_HeEw'}
+]
 };
 
 var CHECKLIST_KEYS=['chk_bike','chk_training','chk_protein','chk_water','chk_sleep'];
@@ -736,6 +881,15 @@ var currentTab='today';
 var selectedDietDay=new Date().getDay();
 var selectedTrainingDay=new Date().getDay();
 var swappedMeals={};
+var swappedExercises={};
+// ===== MEAL EATEN TRACKING =====
+function getMealEatenKey(){return 'meals_eaten_'+localDateStr()}
+function getMealEatenState(){try{return JSON.parse(localStorage.getItem(getMealEatenKey())||'[false,false,false]')}catch(e){return[false,false,false]}}
+function toggleMealEaten(idx){
+var s=getMealEatenState();s[idx]=!s[idx];
+localStorage.setItem(getMealEatenKey(),JSON.stringify(s));
+renderToday();
+}
 // ===== STICKER SYSTEM =====
 var ANIMAL_TYPES=['cat','dog','bunny','bear','panda','fox','owl','penguin','koala','frog','chick','hamster','unicorn','dragon','deer'];
 var ANIMAL_COLORS=['#FF6B6B','#4FC3F7','#81C784','#FFB74D','#BA68C8','#F06292','#4DD0E1','#FFD54F','#E0E0E0','#A1887F','#90CAF9','#F48FB1','#80DEEA','#FFAB91'];
@@ -1368,16 +1522,23 @@ document.getElementById('today-workout-name').textContent=currentLang==='en'&&wo
 document.getElementById('today-workout-time').textContent=currentLang==='en'&&workout.timeEn?workout.timeEn:workout.time;
 
 var meals=getMealsForDay(dow);
-var bp=BREAKFAST.protein+meals.lunch.protein+meals.dinner.protein;
-var bc=BREAKFAST.cal+meals.lunch.cal+meals.dinner.cal;
+var eaten=getMealEatenState();
 var bfName=getMealName(BREAKFAST);
 var lName=getMealName(meals.lunch);
 var dName=getMealName(meals.dinner);
-document.getElementById('today-meal-summary').innerHTML=
-'<div>\u{1F305} '+t('breakfast_label')+': '+bfName.substring(0,22)+'...</div>'+
-'<div>\u{2600}\u{FE0F} '+t('lunch_label')+': '+lName.substring(0,22)+'...</div>'+
-'<div>\u{1F319} '+t('dinner_label')+': '+dName.substring(0,22)+'...</div>'+
-'<div style="margin-top:6px;color:var(--text)">'+t('protein_short')+' '+bp+'g | '+bc+' kcal <span style="color:var(--text-muted);font-size:12px">'+t('excl_snack')+'</span></div>';
+var mealRows=[
+{icon:'\u{1F305}',label:t('breakfast_label'),name:bfName,p:BREAKFAST.protein,c:BREAKFAST.cal,idx:0},
+{icon:'\u{2600}\u{FE0F}',label:t('lunch_label'),name:lName,p:meals.lunch.protein,c:meals.lunch.cal,idx:1},
+{icon:'\u{1F319}',label:t('dinner_label'),name:dName,p:meals.dinner.protein,c:meals.dinner.cal,idx:2}
+];
+var mealHtml='';
+mealRows.forEach(function(m){
+var cls=eaten[m.idx]?'meal-eaten-row eaten':'meal-eaten-row';
+mealHtml+='<div class="'+cls+'" onclick="toggleMealEaten('+m.idx+')"><div class="meal-eaten-dot"></div><div class="meal-eaten-text">'+m.icon+' '+m.label+': '+m.name.substring(0,25)+'</div><div class="meal-eaten-macro">'+m.p+'g/'+m.c+'kcal</div></div>';
+});
+var etp=0,etc=0;eaten.forEach(function(e,i){if(e){etp+=mealRows[i].p;etc+=mealRows[i].c}});
+mealHtml+='<div style="margin-top:6px;color:var(--text);font-size:13px">'+t('protein_short')+' '+etp+'g | '+etc+' kcal <span style="color:var(--text-muted);font-size:12px">'+t('excl_snack')+'</span></div>';
+document.getElementById('today-meal-summary').innerHTML=mealHtml;
 
 renderWater();
 renderChecklist();
@@ -1402,10 +1563,14 @@ var waterOffset=RING_C*(1-waterPct);
 document.getElementById('ring-water').setAttribute('stroke-dashoffset',waterOffset);
 document.getElementById('ring-water-text').textContent=Math.round(waterPct*100)+'%';
 
+// Protein & Calories only count meals marked as eaten
 var dow=new Date().getDay();
 var meals=getMealsForDay(dow);
-var tp=BREAKFAST.protein+meals.lunch.protein+meals.dinner.protein;
-var tc=BREAKFAST.cal+meals.lunch.cal+meals.dinner.cal;
+var eaten=getMealEatenState();
+var tp=0,tc=0;
+if(eaten[0]){tp+=BREAKFAST.protein;tc+=BREAKFAST.cal;}
+if(eaten[1]){tp+=meals.lunch.protein;tc+=meals.lunch.cal;}
+if(eaten[2]){tp+=meals.dinner.protein;tc+=meals.dinner.cal;}
 var proteinPct=Math.min(1,tp/150);
 var calPct=Math.min(1,tc/1800);
 document.getElementById('ring-protein').setAttribute('stroke-dashoffset',RING_C*(1-proteinPct));
@@ -1415,7 +1580,7 @@ document.getElementById('ring-cal-text').textContent=tc;
 }
 
 // ===== WATER =====
-function getWaterKey(){return 'water_'+new Date().toISOString().split('T')[0]}
+function getWaterKey(){return 'water_'+localDateStr()}
 function getWaterAmount(){return parseInt(localStorage.getItem(getWaterKey())||'0')}
 function addWater(){
 var c=getWaterAmount();
@@ -1434,7 +1599,7 @@ document.getElementById('water-bar').style.width=p+'%';
 }
 
 // ===== CHECKLIST =====
-function getChecklistKey(){return 'checklist_'+new Date().toISOString().split('T')[0]}
+function getChecklistKey(){return 'checklist_'+localDateStr()}
 function getChecklistState(){try{return JSON.parse(localStorage.getItem(getChecklistKey())||'[]')}catch(e){return[]}}
 
 function toggleChecklist(i){
@@ -1557,10 +1722,14 @@ var rd=currentLang==='en'&&w.restDescEn?w.restDescEn:w.restDesc;
 c.innerHTML='<div class="card rest-day-card"><div class="rest-emoji">'+w.restEmoji+'</div><div class="rest-title">'+wTitle+'</div><div class="rest-desc">'+rd.replace(/\n/g,'<br>')+'</div></div>';return;
 }
 var h='<div class="card"><div class="workout-header">'+wTitle+'</div><div class="workout-subtitle">'+wSub+'</div></div>';
-w.exercises.forEach(function(ex){
-var eName=currentLang==='en'&&ex.nameEn?ex.nameEn:ex.name;
-var eDetail=currentLang==='en'&&ex.detailEn?ex.detailEn:ex.detail;
-h+='<div class="exercise-item" onclick="showExercise(\''+eName.replace(/'/g,"\\'")+'\',\''+ex.url+'\')"><div><div class="exercise-name">'+eName+'</div><div class="exercise-detail">'+eDetail+'</div></div><div class="exercise-link">\u25B6\u{FE0F}</div></div>';
+w.exercises.forEach(function(ex,i){
+var actualEx=swappedExercises[day+'_'+i]||ex;
+var eName=currentLang==='en'&&actualEx.nameEn?actualEx.nameEn:actualEx.name;
+var eDetail=currentLang==='en'&&actualEx.detailEn?actualEx.detailEn:actualEx.detail;
+var safeNameJs=eName.replace(/'/g,"\\'").replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+h+='<div class="exercise-item"><div style="flex:1" onclick="showExercise(\''+safeNameJs+'\',\''+actualEx.url+'\')"><div class="exercise-name">'+eName+'</div><div class="exercise-detail">'+eDetail+'</div></div><div class="exercise-actions">';
+if(actualEx.group&&actualEx.group!=='cardio'){h+='<button class="ex-swap-btn" onclick="event.stopPropagation();openExerciseSwap('+day+','+i+')" title="'+t('swap_exercise')+'">&#128260;</button>';}
+h+='<div class="exercise-link" onclick="showExercise(\''+safeNameJs+'\',\''+actualEx.url+'\')">\u25B6\u{FE0F}</div></div></div>';
 });
 c.innerHTML=h;
 }
@@ -1569,6 +1738,32 @@ function showExercise(name,url){
 document.getElementById('modal-exercise-name').textContent=name;
 document.getElementById('modal-exercise-body').innerHTML='<a href="'+url+'" target="_blank" rel="noopener">\u{1F3AC} '+t('watch_video')+'</a><p style="font-size:13px;color:var(--text-dim);padding:0 14px">'+t('watch_video_hint')+'</p>';
 document.getElementById('exercise-modal').classList.add('show');
+}
+
+// ===== EXERCISE SWAP =====
+function openExerciseSwap(day,exIdx){
+var w=WORKOUTS[day];
+var currentEx=swappedExercises[day+'_'+exIdx]||w.exercises[exIdx];
+var group=currentEx.group||'lower';
+var alts=EXERCISE_ALTS[group]||[];
+document.getElementById('exercise-swap-modal-title').textContent=t('swap_exercise');
+var body=document.getElementById('exercise-swap-modal-body');
+var h='';
+alts.forEach(function(alt,i){
+var nm=currentLang==='en'&&alt.nameEn?alt.nameEn:alt.name;
+var dt=currentLang==='en'&&alt.detailEn?alt.detailEn:alt.detail;
+h+='<div class="swap-item" onclick="doExerciseSwap('+day+','+exIdx+','+i+',\''+group+'\')"><div class="swap-name">'+nm+'</div><div class="swap-macros">'+dt+'</div></div>';
+});
+body.innerHTML=h;
+document.getElementById('exercise-swap-modal').classList.add('show');
+}
+function doExerciseSwap(day,exIdx,altIdx,group){
+var alt=EXERCISE_ALTS[group][altIdx];
+alt.group=group;
+swappedExercises[day+'_'+exIdx]=alt;
+closeModal('exercise-swap-modal');
+renderTraining();
+showToast(t('toast_exercise_swapped'));
 }
 
 // ===== MODALS =====
@@ -1581,7 +1776,7 @@ function saveWeight(){
 var inp=document.getElementById('weight-input');var v=parseFloat(inp.value);
 if(!v||v<50||v>400){showToast(t('toast_invalid_weight'));return}
 var d=JSON.parse(localStorage.getItem('weight_data')||'[]');
-var td=new Date().toISOString().split('T')[0];
+var td=localDateStr();
 d=d.filter(function(x){return x.date!==td});
 d.push({date:td,value:v});while(d.length>56)d.shift();
 localStorage.setItem('weight_data',JSON.stringify(d));inp.value='';
@@ -1591,7 +1786,7 @@ function saveWaist(){
 var inp=document.getElementById('waist-input');var v=parseFloat(inp.value);
 if(!v||v<30||v>200){showToast(t('toast_invalid_waist'));return}
 var d=JSON.parse(localStorage.getItem('waist_data')||'[]');
-var td=new Date().toISOString().split('T')[0];
+var td=localDateStr();
 d=d.filter(function(x){return x.date!==td});
 d.push({date:td,value:v});while(d.length>56)d.shift();
 localStorage.setItem('waist_data',JSON.stringify(d));inp.value='';
@@ -1649,7 +1844,7 @@ function updateStreak(){
 var streak=0;var today=new Date();
 for(var i=0;i<365;i++){
 var d=new Date(today);d.setDate(d.getDate()-i);
-var key='checklist_'+d.toISOString().split('T')[0];
+var key='checklist_'+localDateStr(d);
 var data=[];try{data=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
 if(data.length>0&&data.some(function(v){return v===true})){streak++}
 else if(i>0){break}
@@ -1667,7 +1862,7 @@ lines.push(t('export_week').replace('{w}',getCurrentWeek()));
 lines.push('');
 
 var streak=0;var today=new Date();
-for(var i=0;i<365;i++){var d=new Date(today);d.setDate(d.getDate()-i);var key='checklist_'+d.toISOString().split('T')[0];var data=[];try{data=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}if(data.length>0&&data.some(function(v){return v})){streak++}else if(i>0){break}}
+for(var i=0;i<365;i++){var d=new Date(today);d.setDate(d.getDate()-i);var key='checklist_'+localDateStr(d);var data=[];try{data=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}if(data.length>0&&data.some(function(v){return v})){streak++}else if(i>0){break}}
 lines.push(t('export_streak').replace('{n}',streak));
 lines.push('');
 
@@ -1686,7 +1881,7 @@ lines.push('');
 lines.push(t('export_checklist_header'));
 for(var i=0;i<14;i++){
 var d=new Date();d.setDate(d.getDate()-i);
-var ds=d.toISOString().split('T')[0];
+var ds=localDateStr(d);
 var key='checklist_'+ds;
 var data=[];try{data=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
 if(data.length>0){
@@ -1699,7 +1894,7 @@ lines.push('');
 lines.push(t('export_water_header'));
 for(var i=0;i<14;i++){
 var d=new Date();d.setDate(d.getDate()-i);
-var ds=d.toISOString().split('T')[0];
+var ds=localDateStr(d);
 var key='water_'+ds;
 var amt=parseInt(localStorage.getItem(key)||'0');
 if(amt>0)lines.push(ds+': '+(amt/1000).toFixed(1)+'L');
@@ -1759,7 +1954,7 @@ keys.forEach(function(k){var v=localStorage.getItem(k);if(v)backup[k]=v});
 // Also grab all date-keyed items (checklist, water)
 for(var i=0;i<localStorage.length;i++){
 var k=localStorage.key(i);
-if(k&&(k.startsWith('checklist_')||k.startsWith('water_')||k.startsWith('weight_')||k.startsWith('waist_')))backup[k]=localStorage.getItem(k);
+if(k&&(k.startsWith('checklist_')||k.startsWith('water_')||k.startsWith('weight_')||k.startsWith('waist_')||k.startsWith('meals_eaten_')||k.startsWith('shop_')))backup[k]=localStorage.getItem(k);
 }
 // Grab weight and waist arrays
 ['fitness_weights','fitness_waists'].forEach(function(k){var v=localStorage.getItem(k);if(v)backup[k]=v});
@@ -1860,14 +2055,192 @@ new Notification(t('notif_title'),{body:'\u{1F37D}\u{FE0F} '+t('notif_meal'),ico
 },60000);
 }
 
+// ===== SHOPPING LIST =====
+// Calculate weekly grocery needs from meal plan
+function getWeeklyIngredients(){
+var items={};
+function addItem(cat,name,nameEn,qty,unit){
+var key=name;
+if(!items[key])items[key]={cat:cat,name:name,nameEn:nameEn,qty:0,unit:unit};
+items[key].qty+=qty;
+}
+// Daily staples x 7
+addItem('dairy','鸡蛋','Eggs',21,'个'); // 3/day breakfast
+addItem('dairy','希腊酸奶','Greek Yogurt',7,'盒'); // breakfast daily
+addItem('carb','全麦面包','Whole Wheat Bread',7,'片'); // breakfast daily
+addItem('fruit','蓝莓','Blueberries',2,'盒'); // breakfast + snack
+addItem('dairy','蛋白粉','Protein Powder',1,'桶'); // snack
+addItem('fruit','苹果','Apples',4,'个'); // snack
+addItem('fruit','杏仁','Almonds',1,'袋'); // snack
+
+// Calculate from current weekly meals (Mon-Sun)
+for(var d=1;d<=6;d++){
+var meals=getMealsForDay(d);
+parseMealIngredients(meals.lunch,items);
+parseMealIngredients(meals.dinner,items);
+}
+var sunMeals=getMealsForDay(0);
+parseMealIngredients(sunMeals.lunch,items);
+parseMealIngredients(sunMeals.dinner,items);
+
+// Always need salad bags
+addItem('salad','沙拉包(混合)','Salad Mix Bags',7,'袋');
+// Brown rice for the week
+addItem('carb','糙米','Brown Rice',1,'袋');
+addItem('carb','红薯','Sweet Potatoes',3,'个');
+
+return Object.values(items);
+}
+
+function parseMealIngredients(meal,items){
+var name=meal.name||'';
+function add(cat,n,ne,q,u){
+if(!items[n])items[n]={cat:cat,name:n,nameEn:ne,qty:0,unit:u};
+items[n].qty+=q;
+}
+// Detect proteins
+if(name.indexOf('鸡胸肉')>=0)add('protein','鸡胸肉','Chicken Breast',180,'g');
+if(name.indexOf('鸡腿')>=0)add('protein','鸡腿(去皮)','Chicken Legs (skinless)',2,'个');
+if(name.indexOf('虾')>=0||name.indexOf('蒜蓉虾')>=0){
+var amt=250;
+if(name.indexOf('200g')>=0)amt=200;
+if(name.indexOf('250g')>=0)amt=250;
+add('protein','虾(去壳)','Shrimp (peeled)',amt,'g');
+}
+if(name.indexOf('牛排')>=0||name.indexOf('西冷')>=0)add('protein','西冷牛排','Sirloin Steak',200,'g');
+if(name.indexOf('牛肉片')>=0||name.indexOf('牛肉粒')>=0||name.indexOf('牛肉切')>=0)add('protein','牛肉','Beef',200,'g');
+if(name.indexOf('三文鱼')>=0)add('protein','三文鱼','Salmon',150,'g');
+if(name.indexOf('烤鸡')>=0)add('protein','Costco 烤鸡','Costco Rotisserie Chicken',1,'只');
+// Detect salad types
+if(name.indexOf('Caesar')>=0)add('salad','Caesar Salad Kit','Caesar Salad Kit',1,'袋');
+if(name.indexOf('Asian')>=0)add('salad','Asian Chopped Salad Kit','Asian Chopped Salad Kit',1,'袋');
+if(name.indexOf('Power Greens')>=0)add('salad','Power Greens','Power Greens',1,'袋');
+if(name.indexOf('Spring Mix')>=0)add('salad','Spring Mix','Spring Mix',1,'袋');
+if(name.indexOf('Kale')>=0)add('salad','Kale Salad Kit','Kale Salad Kit',1,'袋');
+if(name.indexOf('Mediterranean')>=0)add('salad','Mediterranean Salad Kit','Mediterranean Salad Kit',1,'袋');
+// Avocado
+if(name.indexOf('牛油果')>=0)add('fruit','牛油果','Avocados',1,'个');
+}
+
+function getShopWeekKey(){
+// Week key based on Monday of current week
+var now=new Date();var d=now.getDay();var diff=d===0?6:d-1;
+var mon=new Date(now);mon.setDate(now.getDate()-diff);
+return 'shop_'+localDateStr(mon);
+}
+
+function getShopBoughtState(){
+try{return JSON.parse(localStorage.getItem(getShopWeekKey())||'{}')}catch(e){return{}}
+}
+function saveShopBought(state){
+localStorage.setItem(getShopWeekKey(),state?JSON.stringify(state):'{}');
+}
+
+function toggleShopItem(itemName){
+var state=getShopBoughtState();
+state[itemName]=!state[itemName];
+saveShopBought(state);
+renderShoppingList();
+}
+
+function openShoppingList(){
+renderShoppingList();
+document.getElementById('shopping-modal').classList.add('show');
+}
+
+function renderShoppingList(){
+var ingredients=getWeeklyIngredients();
+var bought=getShopBoughtState();
+
+// Consolidate protein quantities (convert g to reasonable purchase amounts)
+var proteinTotals={};
+ingredients.forEach(function(item){
+if(item.cat==='protein'&&item.unit==='g'){
+if(!proteinTotals[item.name])proteinTotals[item.name]={item:item,total:0};
+proteinTotals[item.name].total+=item.qty;
+}
+});
+// Update display quantities for proteins (show in lbs for US)
+Object.keys(proteinTotals).forEach(function(k){
+var pt=proteinTotals[k];
+pt.item.qty=Math.ceil(pt.total/454*10)/10; // convert g to lbs, round up
+pt.item.unit='lbs';
+pt.item.displayQty=pt.item.qty+' '+pt.item.unit+' (~'+Math.round(pt.total)+'g)';
+});
+
+// Group by category
+var cats=[
+{key:'protein',icon:'\u{1F969}',title:t('shop_protein_section')},
+{key:'salad',icon:'\u{1F957}',title:t('shop_salad_section')},
+{key:'dairy',icon:'\u{1F95A}',title:t('shop_dairy_section')},
+{key:'carb',icon:'\u{1F35E}',title:t('shop_carb_section')},
+{key:'fruit',icon:'\u{1F34F}',title:t('shop_fruit_section')},
+{key:'seasoning',icon:'\u{1F9C2}',title:t('shop_seasoning_section')}
+];
+
+var h='';
+var totalItems=0,boughtCount=0;
+
+cats.forEach(function(cat){
+var catItems=ingredients.filter(function(i){return i.cat===cat.key});
+if(catItems.length===0)return;
+h+='<div class="shop-section"><div class="shop-section-title">'+cat.icon+' '+cat.title+'</div>';
+catItems.forEach(function(item){
+var isBought=bought[item.name]||false;
+var cls=isBought?'shop-item bought':'shop-item';
+var displayName=currentLang==='en'&&item.nameEn?item.nameEn:item.name;
+var qtyText=item.displayQty||(item.qty+' '+item.unit);
+totalItems++;
+if(isBought)boughtCount++;
+h+='<div class="'+cls+'" onclick="toggleShopItem(\''+item.name.replace(/'/g,"\\'")+'\')">';
+h+='<div class="shop-check"></div>';
+h+='<div class="shop-name">'+displayName+'</div>';
+h+='<div class="shop-qty">'+qtyText+'</div>';
+h+='</div>';
+});
+h+='</div>';
+});
+
+// Summary and actions
+var leftCount=totalItems-boughtCount;
+h+='<div class="shop-summary">'+(leftCount>0?t('shop_items_left').replace('{n}',leftCount):t('shop_all_bought'))+'</div>';
+h+='<div class="shop-actions">';
+h+='<div class="shop-action-btn danger" onclick="clearShoppingList()">'+t('shop_clear_btn')+'</div>';
+h+='</div>';
+h+='<div style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:8px">'+t('shop_reset_info')+'</div>';
+
+document.getElementById('shopping-modal-body').innerHTML=h;
+}
+
+function clearShoppingList(){
+if(confirm(t('shop_clear_confirm'))){
+saveShopBought({});
+renderShoppingList();
+showToast(t('toast_shop_cleared'));
+}
+}
+
+// Auto-reset shopping list on Monday
+function checkShopWeeklyReset(){
+var lastReset=localStorage.getItem('shop_last_reset')||'';
+var now=new Date();
+var weekKey=getShopWeekKey();
+if(lastReset!==weekKey){
+localStorage.setItem('shop_last_reset',weekKey);
+// Don't clear old data, just let the new week key handle it
+}
+}
+
 // ===== TOAST =====
-function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2000)}
+var _toastTimer=null;
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');if(_toastTimer)clearTimeout(_toastTimer);_toastTimer=setTimeout(function(){t.classList.remove('show');_toastTimer=null},2500);t.onclick=function(){t.classList.remove('show');if(_toastTimer){clearTimeout(_toastTimer);_toastTimer=null}}}
 
 // ===== INIT =====
 function init(){
 // Set lang toggle text
 document.getElementById('lang-toggle-text').textContent=currentLang==='zh'?'EN':'中';
 updateLanguage();
+checkShopWeeklyReset();
 renderToday();renderDiet();renderTraining();
 window.addEventListener('resize',function(){if(currentTab==='progress')renderProgress()});
 
@@ -1877,6 +2250,10 @@ if(Notification.permission==='default'){Notification.requestPermission().then(fu
 else{setupReminders()}
 }
 }
+
+// Auto-refresh at midnight (detect date change)
+var _lastDateStr=localDateStr();
+setInterval(function(){var now=localDateStr();if(now!==_lastDateStr){_lastDateStr=now;if(currentTab==='today')renderToday()}},60000);
 
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('service-worker.js').catch(function(){})})}
 document.addEventListener('DOMContentLoaded',init);
