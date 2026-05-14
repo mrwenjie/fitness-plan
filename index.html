@@ -290,6 +290,12 @@ body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-
 .shop-action-btn:active{background:var(--accent-dim);color:var(--accent)}
 .shop-action-btn.danger:active{background:var(--coral-dim);color:var(--coral)}
 .shop-summary{font-size:12px;color:var(--text-dim);text-align:center;margin-top:8px}
+
+/* CARB PREFERENCE */
+.carb-pref{display:flex;gap:6px;margin-bottom:14px;padding:10px 12px;background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--bg-card-border)}
+.carb-pref-label{font-size:12px;color:var(--text-dim);margin-right:4px;display:flex;align-items:center;white-space:nowrap}
+.carb-pill{flex:1;text-align:center;padding:8px 6px;border-radius:8px;font-size:12px;color:var(--text-dim);background:rgba(255,255,255,.04);cursor:pointer;transition:all .2s;border:1px solid transparent;font-weight:500}
+.carb-pill.active{background:var(--accent2);color:#fff;font-weight:600;border-color:var(--accent2)}
 </style>
 </head>
 <body>
@@ -352,6 +358,13 @@ body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-
 <div id="page-diet" class="page">
 <div class="page-header"><h1 data-i18n="diet_plan">饮食计划</h1><div class="subtitle" id="diet-day-label"></div></div>
 <div class="day-pills" id="diet-day-pills"></div>
+<div class="carb-pref">
+<div class="carb-pref-label" data-i18n="carb_pref_label">主食：</div>
+<div class="carb-pill" onclick="setCarbPref('bread')" id="carb-bread" data-i18n="carb_bread">全麦面包</div>
+<div class="carb-pill" onclick="setCarbPref('rice')" id="carb-rice" data-i18n="carb_rice">糙米</div>
+<div class="carb-pill" onclick="setCarbPref('potato')" id="carb-potato" data-i18n="carb_potato">红薯</div>
+<div class="carb-pill" onclick="setCarbPref('none')" id="carb-none" data-i18n="carb_none">不要</div>
+</div>
 <div id="meals-container"></div>
 <div class="snack-section">
 <div class="section-title" data-i18n="snack_title">零食（每日选 1-2 项）</div>
@@ -566,6 +579,8 @@ tap_to_track:'点击标记已吃',view_diet_detail:'查看饮食详情 →',
 meal_eaten_prefix:'已吃',
 // Protein/cal ring
 ring_eaten_hint:'标记饮食后更新',
+// Carb preference
+carb_pref_label:'主食：',carb_bread:'全麦面包',carb_rice:'糙米',carb_potato:'红薯',carb_none:'不要',
 // Shopping list
 shopping_list:'本周采购清单',
 shop_protein_section:'蛋白质类',
@@ -678,6 +693,7 @@ toast_exercise_swapped:'Swapped!',
 tap_to_track:'Tap to mark eaten',view_diet_detail:'View diet details →',
 meal_eaten_prefix:'Ate',
 ring_eaten_hint:'Updates when meals marked',
+carb_pref_label:'Carb:',carb_bread:'Bread',carb_rice:'Brown Rice',carb_potato:'Sweet Potato',carb_none:'None',
 shopping_list:'Weekly Shopping List',
 shop_protein_section:'Proteins',
 shop_carb_section:'Carbs/Grains',
@@ -882,6 +898,59 @@ var selectedDietDay=new Date().getDay();
 var selectedTrainingDay=new Date().getDay();
 var swappedMeals={};
 var swappedExercises={};
+// ===== CARB PREFERENCE =====
+var carbPref=localStorage.getItem('carb_pref')||'bread';
+function setCarbPref(pref){
+carbPref=pref;localStorage.setItem('carb_pref',pref);
+renderDiet();if(currentTab==='today')renderToday();
+}
+function applyCarbPref(text,isEn){
+// Replace carb components in meal text based on preference
+if(carbPref==='bread'){
+if(isEn){
+text=text.replace(/\+ half bowl brown rice|\+ brown rice|\+ small brown rice/gi,'+ 1 whole wheat toast');
+text=text.replace(/\+ small sweet potato|\+ sweet potato/gi,'+ 1 whole wheat toast');
+text=text.replace(/半碗糙米/g,'1片全麦面包').replace(/糙米/g,'全麦面包').replace(/红薯/g,'全麦面包');
+}else{
+text=text.replace(/\+ 半碗糙米|\+ 少量糙米/g,'+ 1片全麦面包');
+text=text.replace(/\+ 小份红薯|\+ 红薯/g,'+ 1片全麦面包');
+text=text.replace(/半碗糙米/g,'1片全麦面包').replace(/糙米/g,'全麦面包').replace(/红薯/g,'全麦面包');
+}
+}else if(carbPref==='rice'){
+if(isEn){
+text=text.replace(/\+ small sweet potato|\+ sweet potato/gi,'+ half bowl brown rice');
+text=text.replace(/\+ 1 whole wheat toast/gi,'+ half bowl brown rice');
+}else{
+text=text.replace(/\+ 小份红薯|\+ 红薯/g,'+ 半碗糙米');
+text=text.replace(/\+ 1片全麦面包/g,'+ 半碗糙米');
+text=text.replace(/红薯/g,'糙米').replace(/全麦面包/g,'糙米');
+}
+}else if(carbPref==='potato'){
+if(isEn){
+text=text.replace(/\+ half bowl brown rice|\+ brown rice|\+ small brown rice/gi,'+ small sweet potato');
+text=text.replace(/\+ 1 whole wheat toast/gi,'+ small sweet potato');
+}else{
+text=text.replace(/\+ 半碗糙米|\+ 少量糙米/g,'+ 小份红薯');
+text=text.replace(/\+ 1片全麦面包/g,'+ 小份红薯');
+text=text.replace(/糙米/g,'红薯').replace(/全麦面包/g,'红薯');
+}
+}else if(carbPref==='none'){
+if(isEn){
+text=text.replace(/\s*\+\s*(half bowl brown rice|brown rice|small brown rice|small sweet potato|sweet potato|1 whole wheat toast)/gi,'');
+}else{
+text=text.replace(/\s*\+\s*(半碗糙米|少量糙米|小份红薯|红薯|1片全麦面包)/g,'');
+}
+}
+return text;
+}
+function getCarbCalAdjust(){
+// Calorie adjustment based on carb choice vs original meal data
+// Original meals have a mix of rice (~110cal) and potato (~100cal)
+// Bread: ~70cal, None: 0cal
+if(carbPref==='bread')return -35;
+if(carbPref==='none')return -105;
+return 0; // rice and potato are close enough to original
+}
 // ===== MEAL EATEN TRACKING =====
 function getMealEatenKey(){return 'meals_eaten_'+localDateStr()}
 function getMealEatenState(){try{return JSON.parse(localStorage.getItem(getMealEatenKey())||'[false,false,false]')}catch(e){return[false,false,false]}}
@@ -1509,7 +1578,19 @@ if(tab==='collection')renderCollection();
 }
 
 // ===== TODAY =====
-function getMealName(meal){return currentLang==='en'&&meal.nameEn?meal.nameEn:meal.name;}
+function getMealName(meal){
+var isEn=currentLang==='en';
+var name=isEn&&meal.nameEn?meal.nameEn:meal.name;
+return applyCarbPref(name,isEn);
+}
+function getMealCal(meal){
+// Adjust calories for carb preference
+// Only adjust meals that originally contain a carb (rice/potato)
+var name=meal.name||'';
+var hasCarb=name.indexOf('糙米')>=0||name.indexOf('红薯')>=0;
+if(!hasCarb)return meal.cal;
+return Math.max(200,meal.cal+getCarbCalAdjust());
+}
 
 function renderToday(){
 var now=new Date();
@@ -1526,10 +1607,11 @@ var eaten=getMealEatenState();
 var bfName=getMealName(BREAKFAST);
 var lName=getMealName(meals.lunch);
 var dName=getMealName(meals.dinner);
+var lCal=getMealCal(meals.lunch),dCal=getMealCal(meals.dinner);
 var mealRows=[
 {icon:'\u{1F305}',label:t('breakfast_label'),name:bfName,p:BREAKFAST.protein,c:BREAKFAST.cal,idx:0},
-{icon:'\u{2600}\u{FE0F}',label:t('lunch_label'),name:lName,p:meals.lunch.protein,c:meals.lunch.cal,idx:1},
-{icon:'\u{1F319}',label:t('dinner_label'),name:dName,p:meals.dinner.protein,c:meals.dinner.cal,idx:2}
+{icon:'\u{2600}\u{FE0F}',label:t('lunch_label'),name:lName,p:meals.lunch.protein,c:lCal,idx:1},
+{icon:'\u{1F319}',label:t('dinner_label'),name:dName,p:meals.dinner.protein,c:dCal,idx:2}
 ];
 var mealHtml='';
 mealRows.forEach(function(m){
@@ -1569,8 +1651,8 @@ var meals=getMealsForDay(dow);
 var eaten=getMealEatenState();
 var tp=0,tc=0;
 if(eaten[0]){tp+=BREAKFAST.protein;tc+=BREAKFAST.cal;}
-if(eaten[1]){tp+=meals.lunch.protein;tc+=meals.lunch.cal;}
-if(eaten[2]){tp+=meals.dinner.protein;tc+=meals.dinner.cal;}
+if(eaten[1]){tp+=meals.lunch.protein;tc+=getMealCal(meals.lunch);}
+if(eaten[2]){tp+=meals.dinner.protein;tc+=getMealCal(meals.dinner);}
 var proteinPct=Math.min(1,tp/150);
 var calPct=Math.min(1,tc/1800);
 document.getElementById('ring-protein').setAttribute('stroke-dashoffset',RING_C*(1-proteinPct));
@@ -1642,21 +1724,27 @@ function renderDiet(){
 var day=selectedDietDay;
 renderDayPills('diet-day-pills',day,'selectDietDay');
 document.getElementById('diet-day-label').textContent=t('diet_for_day').replace('{day}',getDayCN(day));
+// Update carb pills
+['bread','rice','potato','none'].forEach(function(p){
+var el=document.getElementById('carb-'+p);
+if(el)el.classList.toggle('active',carbPref===p);
+});
 var meals=getMealsForDay(day);
+var lCal=getMealCal(meals.lunch),dCal=getMealCal(meals.dinner);
 var c=document.getElementById('meals-container');
 var h='';
 // Breakfast
 h+='<div class="meal-card breakfast"><div class="meal-type t-breakfast">\u{1F305} '+t('breakfast_label')+'</div><div class="meal-name">'+getMealName(BREAKFAST)+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+BREAKFAST.protein+'g '+t('protein_short')+'</span><span class="macro-cal">\u{1F525} '+BREAKFAST.cal+' kcal</span></div></div>';
 // Lunch
-h+='<div class="meal-card lunch"><div class="meal-type t-lunch">\u{2600}\u{FE0F} '+t('lunch_label')+'</div><div class="meal-name">'+getMealName(meals.lunch)+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+meals.lunch.protein+'g '+t('protein_short')+'</span><span class="macro-cal">\u{1F525} '+meals.lunch.cal+' kcal</span></div>';
+h+='<div class="meal-card lunch"><div class="meal-type t-lunch">\u{2600}\u{FE0F} '+t('lunch_label')+'</div><div class="meal-name">'+getMealName(meals.lunch)+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+meals.lunch.protein+'g '+t('protein_short')+'</span><span class="macro-cal">\u{1F525} '+lCal+' kcal</span></div>';
 h+='<div class="meal-actions"><button class="meal-action-btn" onclick="openSwap('+day+',\'lunch\')">&#128260; '+t('swap_btn')+'</button><button class="meal-action-btn" onclick="openRecipe('+day+',\'lunch\')">&#128203; '+t('recipe_btn')+'</button></div></div>';
 // Dinner
-h+='<div class="meal-card dinner"><div class="meal-type t-dinner">\u{1F319} '+t('dinner_label')+'</div><div class="meal-name">'+getMealName(meals.dinner)+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+meals.dinner.protein+'g '+t('protein_short')+'</span><span class="macro-cal">\u{1F525} '+meals.dinner.cal+' kcal</span></div>';
+h+='<div class="meal-card dinner"><div class="meal-type t-dinner">\u{1F319} '+t('dinner_label')+'</div><div class="meal-name">'+getMealName(meals.dinner)+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+meals.dinner.protein+'g '+t('protein_short')+'</span><span class="macro-cal">\u{1F525} '+dCal+' kcal</span></div>';
 h+='<div class="meal-actions"><button class="meal-action-btn" onclick="openSwap('+day+',\'dinner\')">&#128260; '+t('swap_btn')+'</button><button class="meal-action-btn" onclick="openRecipe('+day+',\'dinner\')">&#128203; '+t('recipe_btn')+'</button></div></div>';
 c.innerHTML=h;
 
 var tp=BREAKFAST.protein+meals.lunch.protein+meals.dinner.protein;
-var tc=BREAKFAST.cal+meals.lunch.cal+meals.dinner.cal;
+var tc=BREAKFAST.cal+lCal+dCal;
 document.getElementById('total-protein').textContent=tp+'g';
 document.getElementById('total-cal').textContent=tc+' kcal';
 }
@@ -1670,7 +1758,8 @@ var h='';
 alts.forEach(function(alt,i){
 var nm=getMealName(alt);
 var nt=currentLang==='en'&&alt.noteEn?alt.noteEn:alt.note;
-h+='<div class="swap-item" onclick="doSwap('+day+',\''+mealType+'\','+i+')"><div class="swap-name">'+nm+'</div><div class="swap-macros">\u{1F4AA} '+alt.protein+'g '+t('protein_short')+' | \u{1F525} '+alt.cal+' kcal</div><div class="swap-note">'+nt+'</div></div>';
+var altCal=getMealCal(alt);
+h+='<div class="swap-item" onclick="doSwap('+day+',\''+mealType+'\','+i+')"><div class="swap-name">'+nm+'</div><div class="swap-macros">\u{1F4AA} '+alt.protein+'g '+t('protein_short')+' | \u{1F525} '+altCal+' kcal</div><div class="swap-note">'+nt+'</div></div>';
 });
 body.innerHTML=h;
 document.getElementById('swap-modal').classList.add('show');
@@ -2085,9 +2174,11 @@ parseMealIngredients(sunMeals.dinner,items);
 
 // Always need salad bags
 addItem('salad','沙拉包(混合)','Salad Mix Bags',7,'袋');
-// Brown rice for the week
-addItem('carb','糙米','Brown Rice',1,'袋');
-addItem('carb','红薯','Sweet Potatoes',3,'个');
+// Carb based on preference
+if(carbPref==='bread'){addItem('carb','全麦面包','Whole Wheat Bread (lunch/dinner)',14,'片')}
+else if(carbPref==='rice'){addItem('carb','糙米','Brown Rice',1,'袋')}
+else if(carbPref==='potato'){addItem('carb','红薯','Sweet Potatoes',7,'个')}
+// carbPref==='none' adds nothing
 
 return Object.values(items);
 }
