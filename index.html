@@ -28,11 +28,11 @@
 --nav-height:72px;
 }
 html{scroll-behavior:smooth}
-html,body{height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-end));color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
-body{padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--safe-bottom) + 30px);overflow-x:hidden}
+html{height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-end))}
+body{min-height:100%;background:linear-gradient(180deg,var(--bg-start),var(--bg-end));color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overscroll-behavior-x:none;padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--safe-bottom) + 60px);overflow-x:hidden}
 ::-webkit-scrollbar{width:0;background:transparent}
 
-.page{display:none;padding:20px 16px 40px;animation:pageIn .4s ease;min-height:calc(100vh - var(--nav-height) - var(--safe-top) - var(--safe-bottom))}
+.page{display:none;padding:20px 16px 80px;animation:pageIn .4s ease}
 .page.active{display:block}
 @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
@@ -278,13 +278,13 @@ body{padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--s
 <div class="card-title" data-i18n="today_progress">今日进度</div>
 <div class="ring-row">
 <div class="ring-wrap">
-<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(33,150,243,.15)" stroke-width="6" fill="none"/><circle id="ring-water" cx="40" cy="40" r="34" stroke="#2196f3" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-water-text">0%</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_water">饮水</text></svg>
+<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(33,150,243,.15)" stroke-width="6" fill="none"/><circle id="ring-water" cx="40" cy="40" r="34" stroke="#2196f3" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><g transform="rotate(90,40,40)"><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-water-text">0%</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_water">饮水</text></g></svg>
 </div>
 <div class="ring-wrap">
-<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(79,195,247,.15)" stroke-width="6" fill="none"/><circle id="ring-protein" cx="40" cy="40" r="34" stroke="#4fc3f7" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-protein-text">150g</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_protein">蛋白质</text></svg>
+<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(79,195,247,.15)" stroke-width="6" fill="none"/><circle id="ring-protein" cx="40" cy="40" r="34" stroke="#4fc3f7" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><g transform="rotate(90,40,40)"><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-protein-text">150g</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_protein">蛋白质</text></g></svg>
 </div>
 <div class="ring-wrap">
-<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(255,107,107,.15)" stroke-width="6" fill="none"/><circle id="ring-cal" cx="40" cy="40" r="34" stroke="var(--coral)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-cal-text">1800</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_cal">千卡</text></svg>
+<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(255,107,107,.15)" stroke-width="6" fill="none"/><circle id="ring-cal" cx="40" cy="40" r="34" stroke="var(--coral)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><g transform="rotate(90,40,40)"><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-cal-text">1800</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_cal">千卡</text></g></svg>
 </div>
 </div>
 </div>
@@ -369,6 +369,15 @@ body{padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--s
 </div>
 <button class="btn-export" onclick="exportData()" data-i18n="export_btn">导出数据</button>
 <button class="btn-email" onclick="sendEmail()">&#128231; <span data-i18n="email_btn">发送到邮箱</span></button>
+</div>
+
+<!-- Backup/Restore -->
+<div class="card" style="margin-bottom:20px">
+<div class="card-title" data-i18n="data_backup">数据备份</div>
+<p style="font-size:13px;color:var(--text-dim);margin-bottom:12px;line-height:1.6" data-i18n="backup_desc">将所有进度数据（体重、腰围、打卡记录、贴纸收藏等）导出为 JSON 文件保存到手机。之后可以导入恢复。</p>
+<button class="btn-export" onclick="backupData()" style="background:linear-gradient(135deg,#00e676,#00bcd4)">&#128190; <span data-i18n="backup_btn">下载备份文件</span></button>
+<button class="btn-export" onclick="document.getElementById('restore-input').click()" style="background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1);margin-top:6px">&#128194; <span data-i18n="restore_btn">从备份恢复</span></button>
+<input type="file" id="restore-input" accept=".json" style="display:none" onchange="restoreData(event)">
 </div>
 </div>
 
@@ -507,7 +516,10 @@ animal_koala:'考拉',animal_frog:'青蛙',animal_chick:'小鸡',animal_hamster:
 animal_unicorn:'独角兽',animal_dragon:'小龙',animal_deer:'小鹿',
 // Accessories
 acc_hat:'小帽子',acc_bowtie:'领结',acc_glasses:'眼镜',acc_scarf:'围巾',acc_crown:'皇冠',acc_flower:'小花',acc_headband:'头带',acc_sunglasses:'墨镜',
-sticker_combo_note:'70,560 种独特组合'
+sticker_combo_note:'70,560 种独特组合',
+data_backup:'数据备份',backup_desc:'将所有进度数据（体重、腰围、打卡记录、贴纸收藏等）导出为 JSON 文件保存到手机。之后可以导入恢复。',
+backup_btn:'下载备份文件',restore_btn:'从备份恢复',
+toast_backup_done:'备份文件已下载',toast_restore_done:'已恢复 {n} 项数据，即将刷新...',toast_restore_invalid:'文件格式无效'
 },
 en: {
 nav_today: 'Today', nav_diet: 'Diet', nav_training: 'Training', nav_progress: 'Progress', nav_collection: 'Collection',
@@ -593,7 +605,10 @@ animal_panda:'Panda',animal_fox:'Fox',animal_owl:'Owl',animal_penguin:'Penguin',
 animal_koala:'Koala',animal_frog:'Frog',animal_chick:'Chick',animal_hamster:'Hamster',
 animal_unicorn:'Unicorn',animal_dragon:'Dragon',animal_deer:'Deer',
 acc_hat:'Hat',acc_bowtie:'Bow Tie',acc_glasses:'Glasses',acc_scarf:'Scarf',acc_crown:'Crown',acc_flower:'Flower',acc_headband:'Headband',acc_sunglasses:'Sunglasses',
-sticker_combo_note:'70,560 unique combinations'
+sticker_combo_note:'70,560 unique combinations',
+data_backup:'Data Backup',backup_desc:'Export all progress data (weight, waist, checklist, sticker collection, etc.) as a JSON file. You can import it later to restore.',
+backup_btn:'Download Backup',restore_btn:'Restore from Backup',
+toast_backup_done:'Backup file downloaded',toast_restore_done:'{n} items restored, refreshing...',toast_restore_invalid:'Invalid file format'
 }
 };
 
@@ -755,218 +770,429 @@ var darken=function(hex,amt){var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.sl
 var dc=darken(c,40);
 var lc=darken(c,-60);
 
-// Eyes based on expression
-var eyesSvg='';
-var ex=props.expression;
-if(ex==='happy'){
-eyesSvg='<path d="M30,36 Q33,32 36,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M44,36 Q47,32 50,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>';
-}else if(ex==='wink'){
-eyesSvg='<path d="M30,36 Q33,32 36,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="47" cy="35" r="2.5" fill="#333"/>';
-}else if(ex==='surprised'){
-eyesSvg='<circle cx="33" cy="35" r="3.5" fill="#333"/><circle cx="47" cy="35" r="3.5" fill="#333"/><circle cx="33" cy="34" r="1.2" fill="#fff"/><circle cx="47" cy="34" r="1.2" fill="#fff"/>';
-}else if(ex==='sleepy'){
-eyesSvg='<path d="M30,36 Q33,38 36,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M44,36 Q47,38 50,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><text x="54" y="28" font-size="8" fill="#4fc3f7" opacity="0.6">z</text><text x="58" y="24" font-size="6" fill="#4fc3f7" opacity="0.4">z</text>';
-}else if(ex==='smug'){
-eyesSvg='<path d="M30,35 Q33,33 36,35" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M44,34 L50,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="47" cy="35" r="2" fill="#333"/>';
-}else{
-eyesSvg='<rect x="27" y="33" width="12" height="5" rx="1" fill="#333" opacity="0.8"/><rect x="41" y="33" width="12" height="5" rx="1" fill="#333" opacity="0.8"/><rect x="29" y="33" width="8" height="5" rx="1" fill="#4fc3f7" opacity="0.6"/><rect x="43" y="33" width="8" height="5" rx="1" fill="#4fc3f7" opacity="0.6"/>';
-}
-
-// Mouth
-var mouthSvg='<path d="M37,42 Q40,46 43,42" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>';
+// Pixel art helper
+function px(x,y,color){return '<rect x="'+(x*4+2)+'" y="'+(y*4+2)+'" width="4" height="4" fill="'+color+'"/>';}
 
 var bodySvg='';
 var a=props.animal;
+var eL={x:0,y:0};var eR={x:0,y:0};
+var ex=props.expression;
 
 if(a==='cat'){
-bodySvg='<circle cx="40" cy="42" r="22" fill="'+c+'"/>'+ // head
-'<polygon points="22,22 28,38 18,36" fill="'+c+'" stroke="'+dc+'" stroke-width="0.5"/>'+ // left ear
-'<polygon points="58,22 52,38 62,36" fill="'+c+'" stroke="'+dc+'" stroke-width="0.5"/>'+ // right ear
-'<polygon points="24,25 28,36 20,34" fill="'+lc+'"/>'+ // inner ear
-'<polygon points="56,25 52,36 60,34" fill="'+lc+'"/>'+ // inner ear
-eyesSvg+mouthSvg+
-'<line x1="18" y1="40" x2="28" y2="39" stroke="#333" stroke-width="0.8" opacity="0.4"/>'+ // whisker
-'<line x1="18" y1="43" x2="28" y2="42" stroke="#333" stroke-width="0.8" opacity="0.4"/>'+
-'<line x1="52" y1="39" x2="62" y2="40" stroke="#333" stroke-width="0.8" opacity="0.4"/>'+
-'<line x1="52" y1="42" x2="62" y2="43" stroke="#333" stroke-width="0.8" opacity="0.4"/>'+
-'<polygon points="40,39 38,41 42,41" fill="#F48FB1"/>';// nose
+// Ears
+bodySvg+=px(4,2,c)+px(5,3,c)+px(5,2,dc);
+bodySvg+=px(14,2,c)+px(13,3,c)+px(13,2,dc);
+bodySvg+=px(5,4,c)+px(13,4,c);
+// Head: rows 5-13, cols 4-14
+for(var y=5;y<=13;y++)for(var x=4;x<=14;x++){
+if(y===5&&(x<6||x>12))continue;
+if(y===13&&(x<6||x>12))continue;
+bodySvg+=px(x,y,c);
+}
+// Muzzle area lighter
+bodySvg+=px(8,10,lc)+px(9,10,lc)+px(10,10,lc);
+bodySvg+=px(8,11,lc)+px(9,11,lc)+px(10,11,lc);
+// Nose
+bodySvg+=px(9,10,'#F48FB1');
+// Mouth
+bodySvg+=px(8,12,'#333')+px(10,12,'#333');
+// Whisker dots
+bodySvg+=px(3,8,'#555')+px(3,10,'#555');
+bodySvg+=px(15,8,'#555')+px(15,10,'#555');
+// Eyes
+eL={x:7,y:8};eR={x:11,y:8};
+bodySvg+=px(7,8,'#333')+px(11,8,'#333');
 }else if(a==='dog'){
-bodySvg='<circle cx="40" cy="42" r="22" fill="'+c+'"/>'+ // head
-'<ellipse cx="26" cy="38" rx="8" ry="14" fill="'+dc+'" transform="rotate(-15,26,38)"/>'+ // left ear
-'<ellipse cx="54" cy="38" rx="8" ry="14" fill="'+dc+'" transform="rotate(15,54,38)"/>'+ // right ear
-'<ellipse cx="40" cy="46" rx="10" ry="7" fill="'+lc+'"/>'+ // snout
-eyesSvg+
-'<ellipse cx="40" cy="42" rx="3" ry="2.5" fill="#333"/>'+ // nose
-'<path d="M40,44 Q40,49 44,48" stroke="#F48FB1" stroke-width="2" fill="#F48FB1" opacity="0.7"/>'; // tongue
+// Floppy ears
+for(var y=5;y<=11;y++){bodySvg+=px(3,y,dc)+px(4,y,dc);}
+for(var y=5;y<=11;y++){bodySvg+=px(14,y,dc)+px(15,y,dc);}
+// Head: rows 4-12, cols 5-13
+for(var y=4;y<=12;y++)for(var x=5;x<=13;x++){
+if(y===4&&(x<7||x>11))continue;
+if(y===12&&(x<7||x>11))continue;
+bodySvg+=px(x,y,c);
+}
+// Snout
+bodySvg+=px(8,10,lc)+px(9,10,lc)+px(10,10,lc);
+bodySvg+=px(8,11,lc)+px(9,11,lc)+px(10,11,lc);
+// Nose
+bodySvg+=px(9,9,'#333');
+// Tongue
+bodySvg+=px(10,12,'#F48FB1');
+// Eyes
+eL={x:7,y:7};eR={x:11,y:7};
+bodySvg+=px(7,7,'#333')+px(11,7,'#333');
 }else if(a==='bunny'){
-bodySvg='<ellipse cx="40" cy="44" rx="20" ry="20" fill="'+c+'"/>'+ // head
-'<ellipse cx="33" cy="18" rx="6" ry="18" fill="'+c+'"/>'+ // left ear
-'<ellipse cx="47" cy="18" rx="6" ry="18" fill="'+c+'"/>'+ // right ear
-'<ellipse cx="33" cy="18" rx="3.5" ry="13" fill="#F8BBD0"/>'+ // inner ear
-'<ellipse cx="47" cy="18" rx="3.5" ry="13" fill="#F8BBD0"/>'+
-eyesSvg+mouthSvg+
-'<polygon points="40,40 38,42 42,42" fill="#F48FB1"/>';
+// Tall ears
+for(var y=0;y<=5;y++){bodySvg+=px(6,y,c)+px(7,y,c)+px(8,y,c);}
+for(var y=0;y<=5;y++){bodySvg+=px(10,y,c)+px(11,y,c)+px(12,y,c);}
+// Inner ear pink
+for(var y=1;y<=4;y++){bodySvg+=px(7,y,'#F8BBD0');bodySvg+=px(11,y,'#F8BBD0');}
+// Head: rows 6-14, cols 5-13
+for(var y=6;y<=14;y++)for(var x=5;x<=13;x++){
+if(y===6&&(x<7||x>11))continue;
+if(y===14&&(x<7||x>11))continue;
+bodySvg+=px(x,y,c);
+}
+// Nose
+bodySvg+=px(9,11,'#F48FB1');
+// Mouth
+bodySvg+=px(8,12,'#333')+px(10,12,'#333');
+// Eyes
+eL={x:7,y:9};eR={x:11,y:9};
+bodySvg+=px(7,9,'#333')+px(11,9,'#333');
 }else if(a==='bear'){
-bodySvg='<circle cx="40" cy="42" r="22" fill="'+c+'"/>'+ // head
-'<circle cx="24" cy="24" r="8" fill="'+c+'"/>'+ // left ear
-'<circle cx="56" cy="24" r="8" fill="'+c+'"/>'+ // right ear
-'<circle cx="24" cy="24" r="5" fill="'+dc+'"/>'+ // inner ear
-'<circle cx="56" cy="24" r="5" fill="'+dc+'"/>'+
-'<ellipse cx="40" cy="46" rx="10" ry="7" fill="'+lc+'"/>'+ // snout
-eyesSvg+mouthSvg+
-'<ellipse cx="40" cy="43" rx="3" ry="2" fill="#333"/>';
+// Round ears 2x2
+bodySvg+=px(4,3,c)+px(5,3,c)+px(4,4,c)+px(5,4,c);
+bodySvg+=px(13,3,c)+px(14,3,c)+px(13,4,c)+px(14,4,c);
+// Inner ear
+bodySvg+=px(5,4,dc)+px(13,4,dc);
+// Head: rows 5-13, cols 4-14
+for(var y=5;y<=13;y++)for(var x=4;x<=14;x++){
+if(y===5&&(x<6||x>12))continue;
+if(y===13&&(x<6||x>12))continue;
+bodySvg+=px(x,y,c);
+}
+// Snout lighter
+bodySvg+=px(7,10,lc)+px(8,10,lc)+px(9,10,lc)+px(10,10,lc)+px(11,10,lc);
+bodySvg+=px(7,11,lc)+px(8,11,lc)+px(9,11,lc)+px(10,11,lc)+px(11,11,lc);
+// Nose
+bodySvg+=px(9,10,'#333');
+// Mouth
+bodySvg+=px(8,12,'#333')+px(10,12,'#333');
+// Eyes
+eL={x:7,y:8};eR={x:11,y:8};
+bodySvg+=px(7,8,'#333')+px(11,8,'#333');
 }else if(a==='panda'){
-bodySvg='<circle cx="40" cy="42" r="22" fill="#fff"/>'+ // head white
-'<circle cx="24" cy="24" r="8" fill="#333"/>'+ // ears black
-'<circle cx="56" cy="24" r="8" fill="#333"/>'+
-'<ellipse cx="32" cy="36" rx="8" ry="6" fill="#333"/>'+ // eye patches
-'<ellipse cx="48" cy="36" rx="8" ry="6" fill="#333"/>'+
-'<circle cx="32" cy="35" r="2.5" fill="#fff"/>'+ // eyes in patches
-'<circle cx="48" cy="35" r="2.5" fill="#fff"/>'+
-'<circle cx="32" cy="34.5" r="1" fill="#333"/>'+
-'<circle cx="48" cy="34.5" r="1" fill="#333"/>'+
-mouthSvg+
-'<ellipse cx="40" cy="41" rx="3" ry="2" fill="#333"/>';
+// Black ears 2x2
+bodySvg+=px(4,3,'#333')+px(5,3,'#333')+px(4,4,'#333')+px(5,4,'#333');
+bodySvg+=px(13,3,'#333')+px(14,3,'#333')+px(13,4,'#333')+px(14,4,'#333');
+// White head: rows 5-13, cols 4-14
+for(var y=5;y<=13;y++)for(var x=4;x<=14;x++){
+if(y===5&&(x<6||x>12))continue;
+if(y===13&&(x<6||x>12))continue;
+bodySvg+=px(x,y,'#fff');
+}
+// Black eye patches (2x3 each)
+bodySvg+=px(5,7,'#333')+px(6,7,'#333')+px(7,7,'#333');
+bodySvg+=px(5,8,'#333')+px(6,8,'#333')+px(7,8,'#333');
+bodySvg+=px(11,7,'#333')+px(12,7,'#333')+px(13,7,'#333');
+bodySvg+=px(11,8,'#333')+px(12,8,'#333')+px(13,8,'#333');
+// White eyes within patches
+bodySvg+=px(6,7,'#fff')+px(12,7,'#fff');
+// Pupils
+bodySvg+=px(6,8,'#333')+px(12,8,'#333');
+// Nose
+bodySvg+=px(9,10,'#333');
+// Mouth
+bodySvg+=px(8,11,'#333')+px(10,11,'#333');
+eL={x:6,y:7};eR={x:12,y:7};
 }else if(a==='fox'){
-bodySvg='<ellipse cx="40" cy="42" rx="22" ry="20" fill="'+c+'"/>'+ // head
-'<polygon points="20,26 28,38 16,38" fill="'+c+'"/>'+ // ears
-'<polygon points="60,26 52,38 64,38" fill="'+c+'"/>'+
-'<polygon points="22,28 27,36 18,36" fill="#fff"/>'+ // inner ears
-'<polygon points="58,28 53,36 62,36" fill="#fff"/>'+
-'<ellipse cx="40" cy="50" rx="12" ry="8" fill="#fff"/>'+ // white chest
-eyesSvg+mouthSvg+
-'<polygon points="40,40 38,42 42,42" fill="#333"/>';
+// Pointed ears
+bodySvg+=px(4,3,c)+px(5,4,c)+px(5,3,c);
+bodySvg+=px(14,3,c)+px(13,4,c)+px(13,3,c);
+// Inner ear white
+bodySvg+=px(5,4,'#fff')+px(13,4,'#fff');
+// Head: rows 5-12, cols 4-14
+for(var y=5;y<=12;y++)for(var x=4;x<=14;x++){
+if(y===5&&(x<5||x>13))continue;
+if(y===12&&(x<7||x>11))continue;
+if(y===11&&(x<6||x>12))continue;
+bodySvg+=px(x,y,c);
+}
+// White chin/chest
+bodySvg+=px(8,10,'#fff')+px(9,10,'#fff')+px(10,10,'#fff');
+bodySvg+=px(7,11,'#fff')+px(8,11,'#fff')+px(9,11,'#fff')+px(10,11,'#fff')+px(11,11,'#fff');
+bodySvg+=px(8,12,'#fff')+px(9,12,'#fff')+px(10,12,'#fff');
+// Nose
+bodySvg+=px(9,9,'#333');
+// Eyes
+eL={x:7,y:7};eR={x:11,y:7};
+bodySvg+=px(7,7,'#333')+px(11,7,'#333');
 }else if(a==='owl'){
-bodySvg='<ellipse cx="40" cy="44" rx="20" ry="22" fill="'+c+'"/>'+ // body
-'<polygon points="26,22 22,30 30,30" fill="'+c+'"/>'+ // ear tufts
-'<polygon points="54,22 50,30 58,30" fill="'+c+'"/>'+
-'<circle cx="32" cy="38" r="9" fill="#fff"/>'+ // big eyes
-'<circle cx="48" cy="38" r="9" fill="#fff"/>'+
-'<circle cx="32" cy="38" r="5" fill="#333"/>'+
-'<circle cx="48" cy="38" r="5" fill="#333"/>'+
-'<circle cx="33" cy="37" r="1.5" fill="#fff"/>'+
-'<circle cx="49" cy="37" r="1.5" fill="#fff"/>'+
-'<polygon points="40,43 38,47 42,47" fill="#FFB74D"/>'+ // beak
-'<ellipse cx="30" cy="55" rx="6" ry="4" fill="'+dc+'" transform="rotate(-15,30,55)"/>'+ // wings
-'<ellipse cx="50" cy="55" rx="6" ry="4" fill="'+dc+'" transform="rotate(15,50,55)"/>';
+// Ear tufts
+bodySvg+=px(5,3,c)+px(13,3,c);
+bodySvg+=px(5,4,c)+px(13,4,c);
+// Body: rows 5-15, cols 4-14
+for(var y=5;y<=15;y++)for(var x=4;x<=14;x++){
+if(y===5&&(x<6||x>12))continue;
+if(y===15&&(x<7||x>11))continue;
+if(y===14&&(x<6||x>12))continue;
+bodySvg+=px(x,y,c);
+}
+// Big eyes: 3x3 white circles
+for(var dy=0;dy<3;dy++)for(var dx=0;dx<3;dx++){bodySvg+=px(5+dx,7+dy,'#fff');}
+for(var dy=0;dy<3;dy++)for(var dx=0;dx<3;dx++){bodySvg+=px(10+dx,7+dy,'#fff');}
+// Pupils
+bodySvg+=px(6,8,'#333')+px(11,8,'#333');
+// Highlight
+bodySvg+=px(6,7,'#eee')+px(11,7,'#eee');
+// Beak
+bodySvg+=px(9,10,'#FFB74D')+px(9,11,'#FFB74D');
+// Wings
+bodySvg+=px(3,10,dc)+px(3,11,dc)+px(3,12,dc);
+bodySvg+=px(15,10,dc)+px(15,11,dc)+px(15,12,dc);
+eL={x:6,y:8};eR={x:11,y:8};
 }else if(a==='penguin'){
-bodySvg='<ellipse cx="40" cy="44" rx="18" ry="24" fill="#333"/>'+ // body black
-'<ellipse cx="40" cy="48" rx="12" ry="18" fill="#fff"/>'+ // belly white
-'<circle cx="40" cy="32" r="14" fill="#333"/>'+ // head
-'<circle cx="33" cy="31" r="2.5" fill="#fff"/>'+ // eyes
-'<circle cx="47" cy="31" r="2.5" fill="#fff"/>'+
-'<circle cx="33" cy="31" r="1.2" fill="#333"/>'+
-'<circle cx="47" cy="31" r="1.2" fill="#333"/>'+
-'<polygon points="40,34 37,38 43,38" fill="#FFB74D"/>'+ // beak
-'<ellipse cx="24" cy="46" rx="4" ry="8" fill="#333" transform="rotate(15,24,46)"/>'+ // flippers
-'<ellipse cx="56" cy="46" rx="4" ry="8" fill="#333" transform="rotate(-15,56,46)"/>'+
-'<ellipse cx="35" cy="66" rx="5" ry="2" fill="#FFB74D"/>'+ // feet
-'<ellipse cx="45" cy="66" rx="5" ry="2" fill="#FFB74D"/>';
+// Black body outline rows 4-16
+for(var y=4;y<=16;y++)for(var x=5;x<=13;x++){
+if(y===4&&(x<7||x>11))continue;
+if(y===16&&(x<7||x>11))continue;
+if(y===15&&(x<6||x>12))continue;
+bodySvg+=px(x,y,'#333');
+}
+// White belly rows 7-14, cols 7-11
+for(var y=7;y<=14;y++)for(var x=7;x<=11;x++){
+if(y===7&&(x<8||x>10))continue;
+if(y===14&&(x<8||x>10))continue;
+bodySvg+=px(x,y,'#fff');
+}
+// Eyes white then pupils
+bodySvg+=px(7,6,'#fff')+px(11,6,'#fff');
+bodySvg+=px(8,6,'#333')+px(10,6,'#333');
+// Beak orange
+bodySvg+=px(9,8,'#FFB74D')+px(8,8,'#FFB74D');
+// Flippers
+bodySvg+=px(4,8,'#333')+px(4,9,'#333')+px(4,10,'#333');
+bodySvg+=px(14,8,'#333')+px(14,9,'#333')+px(14,10,'#333');
+// Feet
+bodySvg+=px(7,17,'#FFB74D')+px(8,17,'#FFB74D');
+bodySvg+=px(10,17,'#FFB74D')+px(11,17,'#FFB74D');
+eL={x:7,y:5};eR={x:11,y:5};
 }else if(a==='koala'){
-bodySvg='<circle cx="40" cy="42" r="20" fill="'+c+'"/>'+ // head
-'<circle cx="22" cy="34" r="11" fill="'+c+'"/>'+ // ears
-'<circle cx="58" cy="34" r="11" fill="'+c+'"/>'+
-'<circle cx="22" cy="34" r="7" fill="'+lc+'"/>'+ // inner ears
-'<circle cx="58" cy="34" r="7" fill="'+lc+'"/>'+
-eyesSvg+mouthSvg+
-'<ellipse cx="40" cy="43" rx="5" ry="3.5" fill="#333"/>';// big nose
+// Large fluffy ears 3x3
+for(var dy=0;dy<3;dy++)for(var dx=0;dx<3;dx++){bodySvg+=px(2+dx,4+dy,c);}
+for(var dy=0;dy<3;dy++)for(var dx=0;dx<3;dx++){bodySvg+=px(13+dx,4+dy,c);}
+// Inner ears lighter
+bodySvg+=px(3,5,lc)+px(14,5,lc);
+// Head: rows 5-13, cols 5-13
+for(var y=5;y<=13;y++)for(var x=5;x<=13;x++){
+if(y===5&&(x<7||x>11))continue;
+if(y===13&&(x<7||x>11))continue;
+bodySvg+=px(x,y,c);
+}
+// Big nose
+bodySvg+=px(8,10,'#333')+px(9,10,'#333')+px(10,10,'#333');
+bodySvg+=px(8,11,'#333')+px(9,11,'#333')+px(10,11,'#333');
+// Mouth
+bodySvg+=px(9,12,'#333');
+// Eyes
+eL={x:7,y:8};eR={x:11,y:8};
+bodySvg+=px(7,8,'#333')+px(11,8,'#333');
 }else if(a==='frog'){
-bodySvg='<ellipse cx="40" cy="46" rx="22" ry="18" fill="'+c+'"/>'+ // head wide
-'<circle cx="28" cy="28" r="9" fill="'+c+'"/>'+ // eyes protruding
-'<circle cx="52" cy="28" r="9" fill="'+c+'"/>'+
-'<circle cx="28" cy="27" r="5" fill="#fff"/>'+
-'<circle cx="52" cy="27" r="5" fill="#fff"/>'+
-'<circle cx="28" cy="27" r="2.5" fill="#333"/>'+
-'<circle cx="52" cy="27" r="2.5" fill="#333"/>'+
-'<path d="M28,48 Q40,56 52,48" stroke="#333" stroke-width="2" fill="none"/>'+ // wide mouth
-'<circle cx="32" cy="50" r="4" fill="'+lc+'" opacity="0.4"/>'+ // cheek blush
-'<circle cx="48" cy="50" r="4" fill="'+lc+'" opacity="0.4"/>';
+// Eyes protruding above head 2x2 each
+bodySvg+=px(5,3,c)+px(6,3,c)+px(5,4,c)+px(6,4,c);
+bodySvg+=px(12,3,c)+px(13,3,c)+px(12,4,c)+px(13,4,c);
+// Eye whites
+bodySvg+=px(6,3,'#fff')+px(6,4,'#fff');
+bodySvg+=px(12,3,'#fff')+px(12,4,'#fff');
+// Pupils
+bodySvg+=px(6,4,'#333')+px(12,4,'#333');
+// Wide head: rows 5-12, cols 3-15
+for(var y=5;y<=12;y++)for(var x=3;x<=15;x++){
+if(y===5&&(x<5||x>13))continue;
+if(y===12&&(x<5||x>13))continue;
+bodySvg+=px(x,y,c);
+}
+// Smile line
+bodySvg+=px(5,11,'#333')+px(6,10,'#333')+px(7,10,'#333')+px(8,10,'#333')+px(9,10,'#333');
+bodySvg+=px(10,10,'#333')+px(11,10,'#333')+px(12,10,'#333')+px(13,11,'#333');
+// Blush
+bodySvg+=px(5,9,lc)+px(13,9,lc);
+eL={x:6,y:4};eR={x:12,y:4};
 }else if(a==='chick'){
-bodySvg='<circle cx="40" cy="44" r="18" fill="'+c+'"/>'+ // body
-'<circle cx="40" cy="32" r="13" fill="'+c+'"/>'+ // head
-'<circle cx="35" cy="30" r="2" fill="#333"/>'+ // eyes
-'<circle cx="45" cy="30" r="2" fill="#333"/>'+
-'<polygon points="40,33 37,37 43,37" fill="#FF8A65"/>'+ // beak
-'<ellipse cx="28" cy="46" rx="5" ry="3" fill="'+dc+'" transform="rotate(-20,28,46)"/>'+ // wings
-'<ellipse cx="52" cy="46" rx="5" ry="3" fill="'+dc+'" transform="rotate(20,52,46)"/>'+
-'<line x1="38" y1="22" x2="36" y2="18" stroke="'+dc+'" stroke-width="1.5" stroke-linecap="round"/>'+ // hair tuft
-'<line x1="40" y1="21" x2="40" y2="16" stroke="'+dc+'" stroke-width="1.5" stroke-linecap="round"/>'+
-'<line x1="42" y1="22" x2="44" y2="18" stroke="'+dc+'" stroke-width="1.5" stroke-linecap="round"/>';
+// Hair tuft
+bodySvg+=px(8,2,dc)+px(9,1,dc)+px(10,2,dc);
+// Head/body round: rows 3-14, cols 5-13
+for(var y=3;y<=14;y++)for(var x=5;x<=13;x++){
+if(y===3&&(x<7||x>11))continue;
+if(y===4&&(x<6||x>12))continue;
+if(y===14&&(x<7||x>11))continue;
+if(y===13&&(x<6||x>12))continue;
+bodySvg+=px(x,y,c);
+}
+// Small beak
+bodySvg+=px(9,8,'#FF8A65')+px(10,8,'#FF8A65');
+// Wings
+bodySvg+=px(4,9,dc)+px(4,10,dc);
+bodySvg+=px(14,9,dc)+px(14,10,dc);
+// Eyes
+eL={x:7,y:6};eR={x:11,y:6};
+bodySvg+=px(7,6,'#333')+px(11,6,'#333');
 }else if(a==='hamster'){
-bodySvg='<circle cx="40" cy="44" r="22" fill="'+c+'"/>'+ // chubby body
-'<circle cx="24" cy="28" r="5" fill="'+c+'"/>'+ // tiny ears
-'<circle cx="56" cy="28" r="5" fill="'+c+'"/>'+
-'<circle cx="24" cy="28" r="3" fill="'+lc+'"/>'+
-'<circle cx="56" cy="28" r="3" fill="'+lc+'"/>'+
-'<circle cx="26" cy="46" r="8" fill="'+lc+'" opacity="0.5"/>'+ // big cheeks
-'<circle cx="54" cy="46" r="8" fill="'+lc+'" opacity="0.5"/>'+
-eyesSvg+mouthSvg+
-'<ellipse cx="40" cy="42" rx="2.5" ry="2" fill="#F48FB1"/>'+ // nose
-'<ellipse cx="34" cy="60" rx="3" ry="2" fill="'+dc+'"/>'+ // tiny paws
-'<ellipse cx="46" cy="60" rx="3" ry="2" fill="'+dc+'"/>';
+// Tiny ears
+bodySvg+=px(5,4,c)+px(6,4,c)+px(6,3,lc);
+bodySvg+=px(13,4,c)+px(12,4,c)+px(12,3,lc);
+// Head: rows 5-12, cols 5-13
+for(var y=5;y<=12;y++)for(var x=5;x<=13;x++){
+if(y===5&&(x<7||x>11))continue;
+if(y===12&&(x<7||x>11))continue;
+bodySvg+=px(x,y,c);
+}
+// Big cheeks (extend wider, lighter color)
+bodySvg+=px(4,9,lc)+px(4,10,lc)+px(4,11,lc);
+bodySvg+=px(14,9,lc)+px(14,10,lc)+px(14,11,lc);
+bodySvg+=px(3,10,lc)+px(15,10,lc);
+// Nose
+bodySvg+=px(9,9,'#F48FB1');
+// Mouth
+bodySvg+=px(9,10,'#333');
+// Tiny paws
+bodySvg+=px(7,13,dc)+px(8,13,dc)+px(10,13,dc)+px(11,13,dc);
+// Eyes
+eL={x:7,y:7};eR={x:11,y:7};
+bodySvg+=px(7,7,'#333')+px(11,7,'#333');
 }else if(a==='unicorn'){
-bodySvg='<circle cx="40" cy="44" r="22" fill="#fff"/>'+ // white head
-'<ellipse cx="26" cy="30" rx="5" ry="10" fill="#fff"/>'+ // ears
-'<ellipse cx="54" cy="30" rx="5" ry="10" fill="#fff"/>'+
-'<ellipse cx="26" cy="30" rx="3" ry="7" fill="#F8BBD0"/>'+ // inner ears
-'<ellipse cx="54" cy="30" rx="3" ry="7" fill="#F8BBD0"/>'+
-'<polygon points="40,4 36,22 44,22" fill="'+c+'"/>'+ // horn
-'<line x1="38" y1="10" x2="42" y2="12" stroke="#FFD700" stroke-width="1"/>'+ // horn stripes
-'<line x1="37" y1="14" x2="43" y2="16" stroke="#FFD700" stroke-width="1"/>'+
-'<path d="M18,26 Q10,20 14,14 Q18,18 22,16" stroke="'+c+'" stroke-width="2" fill="none" stroke-linecap="round"/>'+ // mane curls
-'<path d="M20,22 Q12,16 16,10" stroke="'+lc+'" stroke-width="2" fill="none" stroke-linecap="round"/>'+
-eyesSvg+mouthSvg+
-'<circle cx="28" cy="46" r="4" fill="#F8BBD0" opacity="0.4"/>'+ // blush
-'<circle cx="52" cy="46" r="4" fill="#F8BBD0" opacity="0.4"/>';
+// Horn
+bodySvg+=px(9,1,c)+px(9,2,c)+px(9,3,c);
+bodySvg+=px(10,2,'#FFD700'); // horn stripe
+// Ears
+bodySvg+=px(5,4,'#fff')+px(5,5,'#fff');
+bodySvg+=px(13,4,'#fff')+px(13,5,'#fff');
+bodySvg+=px(5,5,'#F8BBD0')+px(13,5,'#F8BBD0');
+// Head: rows 5-13, cols 5-13 white
+for(var y=5;y<=13;y++)for(var x=5;x<=13;x++){
+if(y===5&&(x<7||x>11))continue;
+if(y===13&&(x<7||x>11))continue;
+bodySvg+=px(x,y,'#fff');
+}
+// Mane on left side (colored)
+bodySvg+=px(4,6,c)+px(4,7,lc)+px(4,8,c)+px(4,9,lc);
+// Nose
+bodySvg+=px(9,10,'#F8BBD0');
+// Mouth
+bodySvg+=px(8,11,'#333')+px(10,11,'#333');
+// Blush spots
+bodySvg+=px(6,10,'#F8BBD0')+px(12,10,'#F8BBD0');
+// Eyes
+eL={x:7,y:8};eR={x:11,y:8};
+bodySvg+=px(7,8,'#333')+px(11,8,'#333');
 }else if(a==='dragon'){
-bodySvg='<ellipse cx="40" cy="44" rx="20" ry="20" fill="'+c+'"/>'+ // head
-'<polygon points="20,20 16,30 24,32" fill="'+c+'"/>'+ // left horn
-'<polygon points="60,20 64,30 56,32" fill="'+c+'"/>'+
-'<polygon points="22,22 18,30 24,30" fill="'+dc+'"/>'+ // horn detail
-'<polygon points="58,22 62,30 56,30" fill="'+dc+'"/>'+
-'<ellipse cx="40" cy="50" rx="10" ry="7" fill="'+lc+'"/>'+ // belly
-'<path d="M26,24 L22,18 L28,22" fill="'+dc+'"/>'+ // small spikes
-'<path d="M34,20 L32,14 L36,18" fill="'+dc+'"/>'+
-'<path d="M46,20 L48,14 L44,18" fill="'+dc+'"/>'+
-'<path d="M54,24 L58,18 L52,22" fill="'+dc+'"/>'+
-eyesSvg+mouthSvg+
-'<circle cx="36" cy="47" r="1" fill="#FFD700"/>'+ // nostrils
-'<circle cx="44" cy="47" r="1" fill="#FFD700"/>'+
-'<path d="M62,42 Q68,38 64,34" stroke="#FF6B6B" stroke-width="2" fill="none" opacity="0.6"/>'+ // fire wisp
-'<path d="M64,40 Q70,36 66,32" stroke="#FFB74D" stroke-width="1.5" fill="none" opacity="0.4"/>';
+// Small horns
+bodySvg+=px(5,2,dc)+px(6,3,dc);
+bodySvg+=px(13,2,dc)+px(12,3,dc);
+// Spiky back
+bodySvg+=px(7,3,dc)+px(9,2,dc)+px(11,3,dc);
+// Head: rows 4-13, cols 4-14
+for(var y=4;y<=13;y++)for(var x=4;x<=14;x++){
+if(y===4&&(x<6||x>12))continue;
+if(y===13&&(x<6||x>12))continue;
+bodySvg+=px(x,y,c);
+}
+// Belly lighter
+bodySvg+=px(7,10,lc)+px(8,10,lc)+px(9,10,lc)+px(10,10,lc)+px(11,10,lc);
+bodySvg+=px(7,11,lc)+px(8,11,lc)+px(9,11,lc)+px(10,11,lc)+px(11,11,lc);
+// Nostrils
+bodySvg+=px(8,9,'#FFD700')+px(10,9,'#FFD700');
+// Mouth
+bodySvg+=px(8,10,'#333')+px(10,10,'#333');
+// Tiny flame
+bodySvg+=px(15,8,'#FF6B6B')+px(16,7,'#FFB74D');
+// Eyes
+eL={x:7,y:7};eR={x:11,y:7};
+bodySvg+=px(7,7,'#333')+px(11,7,'#333');
 }else if(a==='deer'){
-bodySvg='<ellipse cx="40" cy="46" rx="18" ry="18" fill="'+c+'"/>'+ // head
-'<ellipse cx="28" cy="34" rx="5" ry="9" fill="'+c+'" transform="rotate(-10,28,34)"/>'+ // ears
-'<ellipse cx="52" cy="34" rx="5" ry="9" fill="'+c+'" transform="rotate(10,52,34)"/>'+
-'<ellipse cx="28" cy="34" rx="3" ry="6" fill="'+lc+'" transform="rotate(-10,28,34)"/>'+ // inner ears
-'<ellipse cx="52" cy="34" rx="3" ry="6" fill="'+lc+'" transform="rotate(10,52,34)"/>'+
-'<path d="M30,22 L28,12 L24,16 L26,8 L30,14 L32,18" stroke="'+dc+'" stroke-width="2" fill="none" stroke-linecap="round"/>'+ // left antler
-'<path d="M50,22 L52,12 L56,16 L54,8 L50,14 L48,18" stroke="'+dc+'" stroke-width="2" fill="none" stroke-linecap="round"/>'+ // right antler
-eyesSvg+mouthSvg+
-'<ellipse cx="40" cy="48" rx="3" ry="2" fill="#333"/>'+ // nose
-'<circle cx="30" cy="50" r="4" fill="#F8BBD0" opacity="0.3"/>'+ // cheek blush
-'<circle cx="50" cy="50" r="4" fill="#F8BBD0" opacity="0.3"/>';
+// Antlers (branching, dark color)
+bodySvg+=px(5,1,dc)+px(4,0,dc)+px(6,2,dc)+px(7,3,dc);
+bodySvg+=px(5,3,dc)+px(4,2,dc);
+bodySvg+=px(13,1,dc)+px(14,0,dc)+px(12,2,dc)+px(11,3,dc);
+bodySvg+=px(13,3,dc)+px(14,2,dc);
+// Ears
+bodySvg+=px(4,5,c)+px(5,5,c)+px(4,6,c);
+bodySvg+=px(14,5,c)+px(13,5,c)+px(14,6,c);
+bodySvg+=px(5,5,lc)+px(13,5,lc);
+// Head: rows 5-13, cols 5-13
+for(var y=5;y<=13;y++)for(var x=5;x<=13;x++){
+if(y===5&&(x<7||x>11))continue;
+if(y===13&&(x<7||x>11))continue;
+bodySvg+=px(x,y,c);
+}
+// Pink nose
+bodySvg+=px(9,11,'#F48FB1');
+// Mouth
+bodySvg+=px(8,12,'#333')+px(10,12,'#333');
+// Blush spots
+bodySvg+=px(6,10,'#F8BBD0')+px(12,10,'#F8BBD0');
+// Eyes
+eL={x:7,y:8};eR={x:11,y:8};
+bodySvg+=px(7,8,'#333')+px(11,8,'#333');
 }
 
-// Accessory overlay
+// Expression overlay (override default eyes)
+var exSvg='';
+if(ex==='happy'){
+exSvg+=px(eL.x-1,eL.y,'#333')+px(eL.x,eL.y-1,'#333')+px(eL.x+1,eL.y,'#333');
+exSvg+=px(eR.x-1,eR.y,'#333')+px(eR.x,eR.y-1,'#333')+px(eR.x+1,eR.y,'#333');
+}else if(ex==='wink'){
+exSvg+=px(eL.x-1,eL.y,'#333')+px(eL.x,eL.y-1,'#333')+px(eL.x+1,eL.y,'#333');
+exSvg+=px(eR.x,eR.y,'#333');
+}else if(ex==='surprised'){
+exSvg+=px(eL.x-1,eL.y-1,'#333')+px(eL.x,eL.y-1,'#333')+px(eL.x-1,eL.y,'#333')+px(eL.x,eL.y,'#333');
+exSvg+=px(eL.x-1,eL.y-1,'#fff')+px(eL.x,eL.y-1,'#fff');
+exSvg+=px(eL.x,eL.y,'#333');
+exSvg+=px(eR.x-1,eR.y-1,'#333')+px(eR.x,eR.y-1,'#333')+px(eR.x-1,eR.y,'#333')+px(eR.x,eR.y,'#333');
+exSvg+=px(eR.x-1,eR.y-1,'#fff')+px(eR.x,eR.y-1,'#fff');
+exSvg+=px(eR.x,eR.y,'#333');
+}else if(ex==='cool'){
+for(var sx=eL.x-1;sx<=eR.x+1;sx++){exSvg+=px(sx,eL.y,'#333');}
+exSvg+=px(eL.x,eL.y,'#4fc3f7')+px(eR.x,eR.y,'#4fc3f7');
+}else if(ex==='sleepy'){
+exSvg+=px(eL.x-1,eL.y,'#333')+px(eL.x,eL.y+1,'#333')+px(eL.x+1,eL.y,'#333');
+exSvg+=px(eR.x-1,eR.y,'#333')+px(eR.x,eR.y+1,'#333')+px(eR.x+1,eR.y,'#333');
+exSvg+=px(eR.x+2,eR.y-2,'#4fc3f7')+px(eR.x+3,eR.y-3,'#4fc3f7');
+}else if(ex==='smug'){
+exSvg+=px(eL.x-1,eL.y,'#333')+px(eL.x,eL.y-1,'#333')+px(eL.x+1,eL.y,'#333');
+exSvg+=px(eR.x,eR.y,'#333')+px(eR.x+1,eR.y,'#333');
+}
+bodySvg+=exSvg;
+
+// Accessory overlay (pixel art)
 var accSvg='';
 var acc=props.accessory;
 if(acc==='hat'){
-accSvg='<rect x="32" y="14" width="16" height="10" rx="2" fill="#333"/><rect x="28" y="22" width="24" height="3" rx="1" fill="#333"/><rect x="36" y="14" width="8" height="2" rx="1" fill="'+c+'"/>';
+var hatY=eL.y-4;if(hatY<0)hatY=0;
+for(var hx=7;hx<=11;hx++){accSvg+=px(hx,hatY,'#333');accSvg+=px(hx,hatY+1,'#333');accSvg+=px(hx,hatY+2,'#333');}
+for(var hx=6;hx<=12;hx++){accSvg+=px(hx,hatY+3,'#333');}
+accSvg+=px(8,hatY+1,c)+px(9,hatY+1,c)+px(10,hatY+1,c);
 }else if(acc==='bowtie'){
-accSvg='<polygon points="34,56 40,60 34,64" fill="#E53935"/><polygon points="46,56 40,60 46,64" fill="#E53935"/><circle cx="40" cy="60" r="2" fill="#C62828"/>';
+var bowY=eL.y+5;
+accSvg+=px(7,bowY,'#E53935')+px(8,bowY,'#E53935')+px(9,bowY,'#C62828')+px(10,bowY,'#E53935')+px(11,bowY,'#E53935');
+accSvg+=px(7,bowY-1,'#E53935')+px(11,bowY-1,'#E53935');
+accSvg+=px(7,bowY+1,'#E53935')+px(11,bowY+1,'#E53935');
 }else if(acc==='glasses'){
-accSvg='<circle cx="32" cy="35" r="6" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="48" cy="35" r="6" fill="none" stroke="#333" stroke-width="1.5"/><line x1="38" y1="35" x2="42" y2="35" stroke="#333" stroke-width="1.5"/>';
+accSvg+=px(eL.x-1,eL.y-1,'#555')+px(eL.x,eL.y-1,'#555')+px(eL.x+1,eL.y-1,'#555');
+accSvg+=px(eL.x-1,eL.y,'#555')+px(eL.x+1,eL.y,'#555');
+accSvg+=px(eL.x-1,eL.y+1,'#555')+px(eL.x,eL.y+1,'#555')+px(eL.x+1,eL.y+1,'#555');
+accSvg+=px(eR.x-1,eR.y-1,'#555')+px(eR.x,eR.y-1,'#555')+px(eR.x+1,eR.y-1,'#555');
+accSvg+=px(eR.x-1,eR.y,'#555')+px(eR.x+1,eR.y,'#555');
+accSvg+=px(eR.x-1,eR.y+1,'#555')+px(eR.x,eR.y+1,'#555')+px(eR.x+1,eR.y+1,'#555');
+var bx=Math.floor((eL.x+eR.x)/2);
+accSvg+=px(bx,eL.y,'#555');
 }else if(acc==='scarf'){
-accSvg='<path d="M22,54 Q30,58 40,56 Q50,54 58,58" stroke="#E53935" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M22,54 Q30,62 40,60 Q50,58 58,62" stroke="#E53935" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>';
+var scfY=eL.y+4;
+for(var sx=5;sx<=13;sx++){accSvg+=px(sx,scfY,'#E53935');}
+accSvg+=px(6,scfY+1,'#C62828')+px(8,scfY+1,'#C62828')+px(10,scfY+1,'#C62828')+px(12,scfY+1,'#C62828');
 }else if(acc==='crown'){
-accSvg='<polygon points="28,20 32,12 36,18 40,8 44,18 48,12 52,20" fill="#FFD700" stroke="#FFA000" stroke-width="0.5"/><rect x="28" y="20" width="24" height="4" rx="1" fill="#FFD700"/>';
+var crY=eL.y-5;if(crY<0)crY=0;
+accSvg+=px(7,crY+2,'#FFD700')+px(8,crY+2,'#FFD700')+px(9,crY+2,'#FFD700')+px(10,crY+2,'#FFD700')+px(11,crY+2,'#FFD700');
+accSvg+=px(7,crY+1,'#FFD700')+px(9,crY+1,'#FFD700')+px(11,crY+1,'#FFD700');
+accSvg+=px(7,crY,'#FFD700')+px(9,crY,'#FFD700')+px(11,crY,'#FFD700');
+accSvg+=px(8,crY+2,'#E53935')+px(10,crY+2,'#E53935');
 }else if(acc==='flower'){
-accSvg='<circle cx="56" cy="26" r="3" fill="#E91E63"/><circle cx="60" cy="22" r="3" fill="#F48FB1"/><circle cx="54" cy="22" r="3" fill="#F48FB1"/><circle cx="52" cy="26" r="3" fill="#F48FB1"/><circle cx="60" cy="26" r="3" fill="#F48FB1"/><circle cx="57" cy="24" r="2" fill="#FFEB3B"/>';
+var flX=eR.x+2;var flY=eR.y-3;
+accSvg+=px(flX,flY-1,'#F48FB1')+px(flX-1,flY,'#F48FB1')+px(flX+1,flY,'#F48FB1')+px(flX,flY+1,'#F48FB1');
+accSvg+=px(flX,flY,'#FFEB3B');
 }else if(acc==='headband'){
-accSvg='<path d="M20,28 Q30,18 40,20 Q50,18 60,28" stroke="#E53935" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="40" cy="19" r="3" fill="#E53935"/>';
+var hbY=eL.y-2;
+for(var hx=5;hx<=13;hx++){accSvg+=px(hx,hbY,'#E53935');}
+accSvg+=px(9,hbY-1,'#E53935');
 }else if(acc==='sunglasses'){
-accSvg='<rect x="24" y="32" width="14" height="9" rx="3" fill="#333" opacity="0.85"/><rect x="42" y="32" width="14" height="9" rx="3" fill="#333" opacity="0.85"/><line x1="38" y1="36" x2="42" y2="36" stroke="#333" stroke-width="2"/><line x1="24" y1="36" x2="18" y2="34" stroke="#333" stroke-width="1.5"/><line x1="56" y1="36" x2="62" y2="34" stroke="#333" stroke-width="1.5"/><rect x="25" y="33" width="12" height="3" rx="1" fill="#4fc3f7" opacity="0.3"/><rect x="43" y="33" width="12" height="3" rx="1" fill="#4fc3f7" opacity="0.3"/>';
+for(var sx=eL.x-1;sx<=eR.x+1;sx++){
+accSvg+=px(sx,eL.y,'#333');
+accSvg+=px(sx,eL.y-1,'#222');
+}
+accSvg+=px(eL.x,eL.y,'#4fc3f7')+px(eR.x,eR.y,'#4fc3f7');
+accSvg+=px(eL.x-2,eL.y,'#333')+px(eR.x+2,eR.y,'#333');
 }
 
 // Background pattern
@@ -986,7 +1212,7 @@ bgSvg='<text x="6" y="14" font-size="7" opacity="0.12">✦</text><text x="68" y=
 bgSvg='<line x1="0" y1="10" x2="10" y2="0" stroke="'+c+'" stroke-width="0.5" opacity="0.06"/><line x1="0" y1="20" x2="20" y2="0" stroke="'+c+'" stroke-width="0.5" opacity="0.06"/><line x1="60" y1="80" x2="80" y2="60" stroke="'+c+'" stroke-width="0.5" opacity="0.06"/><line x1="70" y1="80" x2="80" y2="70" stroke="'+c+'" stroke-width="0.5" opacity="0.06"/>';
 }
 
-var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="'+size+'" height="'+size+'">'+bgSvg+bodySvg+accSvg+'</svg>';
+var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="'+size+'" height="'+size+'" style="image-rendering:pixelated">'+bgSvg+bodySvg+accSvg+'</svg>';
 return svg;
 }
 
@@ -1523,6 +1749,56 @@ body=body.substring(0,1800)+t('export_email_truncated');
 var mailtoUrl='mailto:'+encodeURIComponent(email)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
 showToast(t('toast_email_sent'));
 setTimeout(function(){window.location.href=mailtoUrl},300);
+}
+
+// ===== BACKUP / RESTORE =====
+function backupData(){
+var backup={};
+var keys=['fitness_stickers','fitness_lang','fitness_export_email','reminder_settings','fitness_program_start'];
+keys.forEach(function(k){var v=localStorage.getItem(k);if(v)backup[k]=v});
+// Also grab all date-keyed items (checklist, water)
+for(var i=0;i<localStorage.length;i++){
+var k=localStorage.key(i);
+if(k&&(k.startsWith('checklist_')||k.startsWith('water_')||k.startsWith('weight_')||k.startsWith('waist_')))backup[k]=localStorage.getItem(k);
+}
+// Grab weight and waist arrays
+['fitness_weights','fitness_waists'].forEach(function(k){var v=localStorage.getItem(k);if(v)backup[k]=v});
+backup._exportDate=new Date().toISOString();
+backup._appVersion='fitness-plan-v3';
+var blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
+var url=URL.createObjectURL(blob);
+var a=document.createElement('a');
+a.href=url;
+a.download='fitness-backup-'+new Date().toISOString().split('T')[0]+'.json';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+showToast(t('toast_backup_done'));
+}
+
+function restoreData(event){
+var file=event.target.files[0];
+if(!file)return;
+var reader=new FileReader();
+reader.onload=function(e){
+try{
+var data=JSON.parse(e.target.result);
+if(!data._appVersion){showToast(t('toast_restore_invalid'));return}
+var count=0;
+Object.keys(data).forEach(function(k){
+if(k.startsWith('_'))return;
+localStorage.setItem(k,data[k]);
+count++;
+});
+showToast(t('toast_restore_done').replace('{n}',count));
+setTimeout(function(){location.reload()},1000);
+}catch(err){
+showToast(t('toast_restore_invalid'));
+}
+};
+reader.readAsText(file);
+event.target.value='';
 }
 
 // ===== REMINDER SETTINGS =====
