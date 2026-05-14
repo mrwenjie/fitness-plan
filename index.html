@@ -45,14 +45,13 @@ body{padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--s
 .card:active{transform:scale(.98)}
 .card-title{font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px;font-weight:600}
 .card-value{font-size:22px;font-weight:700}
-
 .card-glow{box-shadow:0 0 30px rgba(0,230,118,.06)}
 
 /* NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-height) + var(--safe-bottom));padding-bottom:var(--safe-bottom);background:rgba(14,14,22,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-around;align-items:center;z-index:100}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 18px;cursor:pointer;transition:all .2s;border-radius:14px;-webkit-tap-highlight-color:transparent;position:relative}
-.nav-item .nav-icon{font-size:24px;transition:transform .25s}
-.nav-item .nav-label{font-size:11px;color:var(--text-muted);transition:color .2s;font-weight:500}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;cursor:pointer;transition:all .2s;border-radius:14px;-webkit-tap-highlight-color:transparent;position:relative}
+.nav-item .nav-icon{font-size:22px;transition:transform .25s}
+.nav-item .nav-label{font-size:10px;color:var(--text-muted);transition:color .2s;font-weight:500}
 .nav-item .nav-dot{width:4px;height:4px;border-radius:50%;background:transparent;transition:all .25s;position:absolute;bottom:2px}
 .nav-item.active .nav-icon{transform:scale(1.2)}
 .nav-item.active .nav-label{color:var(--accent);font-weight:700}
@@ -135,6 +134,8 @@ body{padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--s
 .btn-secondary{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1)}
 .btn-export{background:linear-gradient(135deg,var(--accent2),#7c4dff);color:#fff;border:none;border-radius:var(--radius-sm);padding:14px 24px;font-size:15px;font-weight:600;cursor:pointer;width:100%;margin-top:8px;transition:all .2s}
 .btn-export:active{transform:scale(.97);opacity:.9}
+.btn-email{background:linear-gradient(135deg,#ff6b6b,#ee5a24);color:#fff;border:none;border-radius:var(--radius-sm);padding:14px 24px;font-size:15px;font-weight:600;cursor:pointer;width:100%;margin-top:8px;transition:all .2s}
+.btn-email:active{transform:scale(.97);opacity:.9}
 
 .chart-container{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:var(--radius);padding:16px;margin-bottom:14px;border:1px solid var(--bg-card-border)}
 .chart-container canvas{width:100%;height:180px}
@@ -216,9 +217,50 @@ body{padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--s
 
 .gear-btn{position:absolute;top:0;right:0;background:none;border:none;font-size:22px;cursor:pointer;padding:4px;opacity:.6;transition:opacity .2s}
 .gear-btn:active{opacity:1}
+
+/* LANGUAGE TOGGLE */
+.lang-toggle{position:fixed;top:calc(12px + var(--safe-top));right:16px;z-index:150;background:rgba(42,42,62,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.lang-toggle:active{transform:scale(.95);background:rgba(42,42,62,1)}
+.lang-toggle .lang-icon{font-size:16px}
+
+/* STICKER / COLLECTION */
+.sticker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.sticker-cell{background:var(--bg-card);border-radius:var(--radius-sm);border:1px solid var(--bg-card-border);padding:8px;display:flex;align-items:center;justify-content:center;aspect-ratio:1;cursor:pointer;transition:all .2s;position:relative}
+.sticker-cell:active{transform:scale(.95)}
+.sticker-cell.rare{border-color:rgba(255,215,0,.4);box-shadow:0 0 15px rgba(255,215,0,.15)}
+.sticker-cell.rare::after{content:'\2B50';position:absolute;top:4px;right:4px;font-size:10px}
+.sticker-cell svg{width:100%;height:100%}
+
+.collection-stats{display:flex;gap:12px;margin-bottom:16px}
+.stat-box{flex:1;background:var(--bg-card);border-radius:var(--radius-sm);padding:14px;text-align:center;border:1px solid var(--bg-card-border)}
+.stat-box .stat-num{font-size:24px;font-weight:800}
+.stat-box .stat-label{font-size:11px;color:var(--text-dim);margin-top:4px}
+.stat-box.gold .stat-num{color:#ffd700}
+
+.empty-collection{text-align:center;padding:60px 20px;color:var(--text-dim)}
+.empty-collection .empty-icon{font-size:60px;margin-bottom:16px}
+.empty-collection .empty-text{font-size:15px;line-height:1.6}
+
+@keyframes stickerPop{0%{transform:scale(0) rotate(-15deg);opacity:0}60%{transform:scale(1.2) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0deg);opacity:1}}
+.sticker-pop{animation:stickerPop .5s ease forwards}
+
+@keyframes wobble{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
+.sticker-newest{animation:wobble .6s ease infinite}
+
+.sticker-toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);z-index:400;background:rgba(20,20,32,.95);backdrop-filter:blur(30px);border:2px solid var(--accent);border-radius:var(--radius);padding:30px;text-align:center;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 0 60px rgba(0,230,118,.2)}
+.sticker-toast.show{transform:translate(-50%,-50%) scale(1)}
+.sticker-toast .sticker-toast-title{font-size:18px;font-weight:700;margin-top:12px;color:var(--accent)}
+.sticker-toast .sticker-toast-sub{font-size:13px;color:var(--text-dim);margin-top:6px}
+
+.email-input-row{display:flex;gap:10px;margin-bottom:8px}
+.email-input-row input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-sm);padding:12px 14px;color:var(--text);font-size:14px;outline:none;transition:border .2s}
+.email-input-row input:focus{border-color:var(--accent)}
+.email-input-row input::placeholder{color:var(--text-muted)}
 </style>
 </head>
 <body>
+<!-- LANGUAGE TOGGLE -->
+<button class="lang-toggle" id="lang-toggle" onclick="toggleLang()"><span class="lang-icon">&#127760;</span><span id="lang-toggle-text">EN</span></button>
 
 <!-- PAGE: TODAY -->
 <div id="page-today" class="page active">
@@ -227,74 +269,74 @@ body{padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--s
 <div class="date-sub" id="today-week"></div>
 </div>
 <div class="summary-row">
-<div class="mini-card"><div class="mini-label">今日训练</div><div class="mini-value" id="today-workout-name"></div><div class="mini-sub" id="today-workout-time"></div></div>
-<div class="mini-card"><div class="mini-label">今日目标</div><div class="mini-value" style="color:var(--accent)">~1800</div><div class="mini-sub">千卡</div></div>
+<div class="mini-card"><div class="mini-label" data-i18n="today_training">今日训练</div><div class="mini-value" id="today-workout-name"></div><div class="mini-sub" id="today-workout-time"></div></div>
+<div class="mini-card"><div class="mini-label" data-i18n="today_goal">今日目标</div><div class="mini-value" style="color:var(--accent)">~1800</div><div class="mini-sub" data-i18n="kcal_unit">千卡</div></div>
 </div>
 
 <!-- Progress Rings -->
 <div class="card card-glow">
-<div class="card-title">今日进度</div>
+<div class="card-title" data-i18n="today_progress">今日进度</div>
 <div class="ring-row">
 <div class="ring-wrap">
-<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(33,150,243,.15)" stroke-width="6" fill="none"/><circle id="ring-water" cx="40" cy="40" r="34" stroke="#2196f3" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-water-text">0%</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0">饮水</text></svg>
+<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(33,150,243,.15)" stroke-width="6" fill="none"/><circle id="ring-water" cx="40" cy="40" r="34" stroke="#2196f3" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-water-text">0%</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_water">饮水</text></svg>
 </div>
 <div class="ring-wrap">
-<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(79,195,247,.15)" stroke-width="6" fill="none"/><circle id="ring-protein" cx="40" cy="40" r="34" stroke="#4fc3f7" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-protein-text">150g</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0">蛋白质</text></svg>
+<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(79,195,247,.15)" stroke-width="6" fill="none"/><circle id="ring-protein" cx="40" cy="40" r="34" stroke="#4fc3f7" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-protein-text">150g</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_protein">蛋白质</text></svg>
 </div>
 <div class="ring-wrap">
-<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(255,107,107,.15)" stroke-width="6" fill="none"/><circle id="ring-cal" cx="40" cy="40" r="34" stroke="var(--coral)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-cal-text">1800</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0">千卡</text></svg>
+<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="rgba(255,107,107,.15)" stroke-width="6" fill="none"/><circle id="ring-cal" cx="40" cy="40" r="34" stroke="var(--coral)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6"/><text x="40" y="38" text-anchor="middle" class="ring-value" id="ring-cal-text">1800</text><text x="40" y="50" text-anchor="middle" font-size="9" fill="#8888a0" data-i18n="ring_cal">千卡</text></svg>
 </div>
 </div>
 </div>
 
 <!-- Water Tracker -->
 <div class="card">
-<div class="card-title">饮水追踪</div>
+<div class="card-title" data-i18n="water_tracking">饮水追踪</div>
 <div class="water-info" id="water-display">0 / 3.5L</div>
 <div class="water-controls">
 <div class="water-bar-container"><div class="water-bar" id="water-bar" style="width:0%"></div></div>
-<button class="water-btn" onclick="addWater()">+ 1杯</button>
+<button class="water-btn" onclick="addWater()" data-i18n="water_add_btn">+ 1杯</button>
 </div>
-<div class="water-hint">每杯约 250ml | 目标 3.5L (14杯)</div>
+<div class="water-hint" data-i18n="water_hint">每杯约 250ml | 目标 3.5L (14杯)</div>
 </div>
 
 <!-- Today Meal Summary -->
 <div class="card" onclick="switchTab('diet')" style="cursor:pointer">
-<div class="card-title">今日饮食</div>
+<div class="card-title" data-i18n="today_diet">今日饮食</div>
 <div id="today-meal-summary" style="font-size:14px;color:var(--text-dim);line-height:1.6"></div>
 </div>
 
 <!-- Daily Checklist -->
 <div class="card" style="margin-bottom:20px">
-<div class="card-title">每日清单</div>
+<div class="card-title" data-i18n="daily_checklist">每日清单</div>
 <div id="checklist-container"></div>
 </div>
 </div>
 
 <!-- PAGE: DIET -->
 <div id="page-diet" class="page">
-<div class="page-header"><h1>饮食计划</h1><div class="subtitle" id="diet-day-label"></div></div>
+<div class="page-header"><h1 data-i18n="diet_plan">饮食计划</h1><div class="subtitle" id="diet-day-label"></div></div>
 <div class="day-pills" id="diet-day-pills"></div>
 <div id="meals-container"></div>
 <div class="snack-section">
-<div class="section-title">零食（每日选 1-2 项）</div>
-<div class="snack-item"><span>希腊酸奶 + 蓝莓</span><span class="snack-macros">P:17g | 150kcal</span></div>
-<div class="snack-item"><span>苹果 + 杏仁 15 颗</span><span class="snack-macros">P:5g | 200kcal</span></div>
-<div class="snack-item"><span>水煮蛋 2 个</span><span class="snack-macros">P:12g | 140kcal</span></div>
-<div class="snack-item"><span>蛋白粉 1 勺</span><span class="snack-macros">P:25g | 120kcal</span></div>
+<div class="section-title" data-i18n="snack_title">零食（每日选 1-2 项）</div>
+<div class="snack-item"><span data-i18n="snack1">希腊酸奶 + 蓝莓</span><span class="snack-macros">P:17g | 150kcal</span></div>
+<div class="snack-item"><span data-i18n="snack2">苹果 + 杏仁 15 颗</span><span class="snack-macros">P:5g | 200kcal</span></div>
+<div class="snack-item"><span data-i18n="snack3">水煮蛋 2 个</span><span class="snack-macros">P:12g | 140kcal</span></div>
+<div class="snack-item"><span data-i18n="snack4">蛋白粉 1 勺</span><span class="snack-macros">P:25g | 120kcal</span></div>
 </div>
 <div class="daily-total" id="daily-total-container">
-<div class="total-label">每日总计（不含零食）</div>
+<div class="total-label" data-i18n="daily_total_label">每日总计（不含零食）</div>
 <div class="total-values">
-<div><div class="total-num macro-protein" id="total-protein"></div><div style="font-size:12px;color:var(--text-dim)">蛋白质</div></div>
-<div><div class="total-num macro-cal" id="total-cal"></div><div style="font-size:12px;color:var(--text-dim)">千卡</div></div>
+<div><div class="total-num macro-protein" id="total-protein"></div><div style="font-size:12px;color:var(--text-dim)" data-i18n="protein_label">蛋白质</div></div>
+<div><div class="total-num macro-cal" id="total-cal"></div><div style="font-size:12px;color:var(--text-dim)" data-i18n="kcal_label">千卡</div></div>
 </div>
 </div>
 </div>
 
 <!-- PAGE: TRAINING -->
 <div id="page-training" class="page">
-<div class="page-header"><h1>训练计划</h1><div class="subtitle" id="training-day-label"></div></div>
+<div class="page-header"><h1 data-i18n="training_plan">训练计划</h1><div class="subtitle" id="training-day-label"></div></div>
 <div class="day-pills" id="training-day-pills"></div>
 <div id="training-container" style="margin-bottom:20px"></div>
 </div>
@@ -302,95 +344,345 @@ body{padding-top:var(--safe-top);padding-bottom:calc(var(--nav-height) + var(--s
 <!-- PAGE: PROGRESS -->
 <div id="page-progress" class="page">
 <div class="page-header" style="position:relative">
-<h1>进度追踪</h1>
-<div class="subtitle">记录你的变化</div>
+<h1 data-i18n="progress_tracking">进度追踪</h1>
+<div class="subtitle" data-i18n="progress_subtitle">记录你的变化</div>
 <button class="gear-btn" onclick="openSettings()" title="设置">&#9881;</button>
 </div>
-<div class="streak-card"><div class="streak-number" id="streak-count">0</div><div class="streak-label">天连续打卡</div></div>
+<div class="streak-card"><div class="streak-number" id="streak-count">0</div><div class="streak-label" data-i18n="streak_label">天连续打卡</div></div>
 
 <!-- Weight -->
-<div class="card"><div class="card-title">体重记录</div><div class="latest-entry" id="weight-latest"></div><div class="input-group"><input type="number" id="weight-input" placeholder="输入体重 (lbs)" step="0.1" inputmode="decimal"><button class="btn" onclick="saveWeight()">记录</button></div></div>
-<div class="chart-container"><div class="chart-label">体重趋势</div><canvas id="weight-chart" height="180"></canvas></div>
+<div class="card"><div class="card-title" data-i18n="weight_record">体重记录</div><div class="latest-entry" id="weight-latest"></div><div class="input-group"><input type="number" id="weight-input" placeholder="输入体重 (lbs)" data-i18n-placeholder="weight_placeholder" step="0.1" inputmode="decimal"><button class="btn" onclick="saveWeight()" data-i18n="record_btn">记录</button></div></div>
+<div class="chart-container"><div class="chart-label" data-i18n="weight_trend">体重趋势</div><canvas id="weight-chart" height="180"></canvas></div>
 
 <!-- Waist -->
-<div class="card"><div class="card-title">腰围记录</div><div class="latest-entry" id="waist-latest"></div><div class="input-group"><input type="number" id="waist-input" placeholder="输入腰围 (cm)" step="0.1" inputmode="decimal"><button class="btn" onclick="saveWaist()">记录</button></div></div>
-<div class="chart-container"><div class="chart-label">腰围趋势</div><canvas id="waist-chart" height="180"></canvas></div>
+<div class="card"><div class="card-title" data-i18n="waist_record">腰围记录</div><div class="latest-entry" id="waist-latest"></div><div class="input-group"><input type="number" id="waist-input" placeholder="输入腰围 (cm)" data-i18n-placeholder="waist_placeholder" step="0.1" inputmode="decimal"><button class="btn" onclick="saveWaist()" data-i18n="record_btn">记录</button></div></div>
+<div class="chart-container"><div class="chart-label" data-i18n="waist_trend">腰围趋势</div><canvas id="waist-chart" height="180"></canvas></div>
 
 <!-- Photo Reminder -->
-<div class="photo-reminder"><div class="card-title">拍照提醒</div><div class="reminder-text">每 2 周拍一次对比照：<br>- 正面、侧面、背面各一张<br>- 固定时间（建议早上空腹）<br>- 固定姿势和光线<br><br><span id="next-photo-date" style="color:var(--accent);font-weight:600"></span></div></div>
+<div class="photo-reminder"><div class="card-title" data-i18n="photo_reminder">拍照提醒</div><div class="reminder-text" id="photo-reminder-text"></div></div>
 
 <!-- Export -->
 <div class="card" style="margin-bottom:20px">
-<div class="card-title">数据导出</div>
-<button class="btn-export" onclick="exportData()">导出数据</button>
+<div class="card-title" data-i18n="data_export">数据导出</div>
+<div class="email-input-row">
+<input type="email" id="export-email" placeholder="目标邮箱地址" data-i18n-placeholder="email_placeholder">
 </div>
+<button class="btn-export" onclick="exportData()" data-i18n="export_btn">导出数据</button>
+<button class="btn-email" onclick="sendEmail()">&#128231; <span data-i18n="email_btn">发送到邮箱</span></button>
+</div>
+</div>
+
+<!-- PAGE: COLLECTION -->
+<div id="page-collection" class="page">
+<div class="page-header"><h1 data-i18n="collection_title">贴纸收藏</h1><div class="subtitle" data-i18n="collection_subtitle">完成任务收集可爱小动物</div></div>
+<div class="collection-stats" id="collection-stats"></div>
+<div id="collection-grid-container"></div>
 </div>
 
 <!-- NAV -->
 <nav class="bottom-nav">
-<div class="nav-item active" onclick="switchTab('today')"><span class="nav-icon">&#128203;</span><span class="nav-label">今日</span><span class="nav-dot"></span></div>
-<div class="nav-item" onclick="switchTab('diet')"><span class="nav-icon">&#127860;</span><span class="nav-label">饮食</span><span class="nav-dot"></span></div>
-<div class="nav-item" onclick="switchTab('training')"><span class="nav-icon">&#128170;</span><span class="nav-label">训练</span><span class="nav-dot"></span></div>
-<div class="nav-item" onclick="switchTab('progress')"><span class="nav-icon">&#128200;</span><span class="nav-label">进度</span><span class="nav-dot"></span></div>
+<div class="nav-item active" onclick="switchTab('today')"><span class="nav-icon">&#128203;</span><span class="nav-label" data-i18n="nav_today">今日</span><span class="nav-dot"></span></div>
+<div class="nav-item" onclick="switchTab('diet')"><span class="nav-icon">&#127860;</span><span class="nav-label" data-i18n="nav_diet">饮食</span><span class="nav-dot"></span></div>
+<div class="nav-item" onclick="switchTab('training')"><span class="nav-icon">&#128170;</span><span class="nav-label" data-i18n="nav_training">训练</span><span class="nav-dot"></span></div>
+<div class="nav-item" onclick="switchTab('progress')"><span class="nav-icon">&#128200;</span><span class="nav-label" data-i18n="nav_progress">进度</span><span class="nav-dot"></span></div>
+<div class="nav-item" onclick="switchTab('collection')"><span class="nav-icon">&#127912;</span><span class="nav-label" data-i18n="nav_collection">收藏</span><span class="nav-dot"></span></div>
 </nav>
 
 <!-- MODALS -->
 <div class="modal-overlay" id="exercise-modal"><div class="modal-content"><div class="modal-header"><h3 id="modal-exercise-name"></h3><button class="modal-close" onclick="closeModal('exercise-modal')">&times;</button></div><div class="modal-body" id="modal-exercise-body"></div></div></div>
 <div class="modal-overlay" id="swap-modal"><div class="modal-content"><div class="modal-header"><h3 id="swap-modal-title">替换餐食</h3><button class="modal-close" onclick="closeModal('swap-modal')">&times;</button></div><div class="modal-body" id="swap-modal-body"></div></div></div>
 <div class="modal-overlay" id="recipe-modal"><div class="modal-content"><div class="modal-header"><h3 id="recipe-modal-title">食谱</h3><button class="modal-close" onclick="closeModal('recipe-modal')">&times;</button></div><div class="modal-body" id="recipe-modal-body"></div></div></div>
-<div class="modal-overlay" id="settings-modal"><div class="modal-content"><div class="modal-header"><h3>提醒设置</h3><button class="modal-close" onclick="closeModal('settings-modal')">&times;</button></div><div class="modal-body" id="settings-modal-body"></div></div></div>
+<div class="modal-overlay" id="settings-modal"><div class="modal-content"><div class="modal-header"><h3 data-i18n="reminder_settings">提醒设置</h3><button class="modal-close" onclick="closeModal('settings-modal')">&times;</button></div><div class="modal-body" id="settings-modal-body"></div></div></div>
+<div class="modal-overlay" id="sticker-detail-modal"><div class="modal-content"><div class="modal-header"><h3 data-i18n="sticker_detail">贴纸详情</h3><button class="modal-close" onclick="closeModal('sticker-detail-modal')">&times;</button></div><div class="modal-body" id="sticker-detail-body"></div></div></div>
+
+<!-- Sticker earn toast -->
+<div class="sticker-toast" id="sticker-toast">
+<div id="sticker-toast-svg"></div>
+<div class="sticker-toast-title" id="sticker-toast-title"></div>
+<div class="sticker-toast-sub" id="sticker-toast-sub"></div>
+</div>
 
 <div class="toast" id="toast"></div>
-
 <script>
-// ===== CONSTANTS =====
-var DAYS_CN=['周日','周一','周二','周三','周四','周五','周六'];
-var DAYS_SHORT=['日','一','二','三','四','五','六'];
-var RING_C=2*Math.PI*34; // ~213.6
-var PROGRAM_START=getStartDate();
+// ===== I18N TRANSLATION SYSTEM =====
+var currentLang = localStorage.getItem('fitness_lang') || 'zh';
 
-function getStartDate(){
-var s=localStorage.getItem('programStart');
-if(!s){var n=new Date(),d=n.getDay(),diff=d===0?6:d-1,m=new Date(n);m.setDate(n.getDate()-diff);m.setHours(0,0,0,0);s=m.toISOString().split('T')[0];localStorage.setItem('programStart',s)}
-return new Date(s+'T00:00:00');
+var translations = {
+zh: {
+// Nav
+nav_today: '今日', nav_diet: '饮食', nav_training: '训练', nav_progress: '进度', nav_collection: '收藏',
+// Today page
+today_training: '今日训练', today_goal: '今日目标', kcal_unit: '千卡',
+today_progress: '今日进度', ring_water: '饮水', ring_protein: '蛋白质', ring_cal: '千卡',
+water_tracking: '饮水追踪', water_add_btn: '+ 1杯', water_hint: '每杯约 250ml | 目标 3.5L (14杯)',
+today_diet: '今日饮食', daily_checklist: '每日清单',
+// Checklist items
+chk_bike: '早上骑车 25 分钟', chk_training: '今日训练完成', chk_protein: '蛋白质达标 (150g+)',
+chk_water: '喝水 3.5L', chk_sleep: '睡眠 7 小时+',
+// Diet page
+diet_plan: '饮食计划', snack_title: '零食（每日选 1-2 项）',
+snack1: '希腊酸奶 + 蓝莓', snack2: '苹果 + 杏仁 15 颗', snack3: '水煮蛋 2 个', snack4: '蛋白粉 1 勺',
+daily_total_label: '每日总计（不含零食）', protein_label: '蛋白质', kcal_label: '千卡',
+breakfast_label: '早餐', lunch_label: '午餐', dinner_label: '晚餐',
+swap_btn: '换一换', recipe_btn: '食谱', protein_short: '蛋白质',
+swap_lunch: '替换午餐', swap_dinner: '替换晚餐',
+recipe_title: '食谱', ingredients_title: '食材', steps_title: '步骤',
+no_recipe: '暂无食谱',
+// Training page
+training_plan: '训练计划',
+watch_video: '观看 YouTube 教学视频', watch_video_hint: '点击上方链接打开 YouTube 观看正确动作示范',
+// Progress page
+progress_tracking: '进度追踪', progress_subtitle: '记录你的变化',
+streak_label: '天连续打卡', weight_record: '体重记录', waist_record: '腰围记录',
+weight_placeholder: '输入体重 (lbs)', waist_placeholder: '输入腰围 (cm)',
+record_btn: '记录', weight_trend: '体重趋势', waist_trend: '腰围趋势',
+photo_reminder: '拍照提醒',
+photo_text: '每 2 周拍一次对比照：<br>- 正面、侧面、背面各一张<br>- 固定时间（建议早上空腹）<br>- 固定姿势和光线',
+photo_today: '今天该拍对比照了！',
+photo_next: '下次拍照日: {date} ({days} 天后)',
+data_export: '数据导出', export_btn: '导出数据', email_btn: '发送到邮箱',
+email_placeholder: '目标邮箱地址',
+no_record: '暂无记录', latest_record: '最近记录: {value} {unit} ({date})',
+no_chart_data: '暂无数据，开始记录吧',
+// Settings
+reminder_settings: '提醒设置', workout_reminder: '训练提醒',
+water_reminder: '喝水提醒', water_reminder_note: '(每2小时)',
+meal_reminder: '饮食提醒', save_settings: '保存设置',
+settings_note: '提醒功能需要在浏览器/Safari 中授予通知权限。水提醒在页面打开时每2小时提醒一次。',
+// Collection
+collection_title: '贴纸收藏', collection_subtitle: '完成任务收集可爱小动物',
+sticker_total: '总计', sticker_normal: '普通', sticker_rare: '稀有',
+sticker_collected: '已收集 {n} 张贴纸',
+empty_collection: '完成今日任务来收集可爱的小动物贴纸吧！',
+sticker_detail: '贴纸详情', sticker_date: '获得日期', sticker_task: '完成任务',
+sticker_seed: '种子编号', sticker_type: '类型',
+sticker_type_normal: '普通贴纸', sticker_type_rare: '稀有金色贴纸',
+sticker_earned: '获得新贴纸！', sticker_rare_earned: '获得稀有金色贴纸！',
+sticker_earned_sub: '完成了 "{task}"', sticker_all_done: '今日全部完成！',
+// Toast messages
+toast_water: '+1杯 (250ml) 已记录',
+toast_swapped: '已替换!', toast_copied: '已复制到剪贴板',
+toast_copy_fail: '复制失败，请手动复制',
+toast_weight_saved: '体重 {v} lbs 已记录', toast_waist_saved: '腰围 {v} cm 已记录',
+toast_invalid_weight: '请输入有效体重', toast_invalid_waist: '请输入有效腰围',
+toast_settings_saved: '提醒设置已保存',
+toast_email_empty: '请输入邮箱地址',
+toast_email_sent: '正在打开邮件客户端...',
+toast_email_truncated: '（数据较多，完整数据请使用导出功能复制）',
+// Export text
+export_header: '===== 健身计划数据导出 =====',
+export_time: '导出时间',
+export_start: '计划开始日期',
+export_week: '当前周: 第 {w} 周',
+export_streak: '--- 连续打卡: {n} 天 ---',
+export_weight_header: '--- 体重记录 (lbs) ---',
+export_waist_header: '--- 腰围记录 (cm) ---',
+export_checklist_header: '--- 每日清单 (最近14天) ---',
+export_done: '完成', export_water_header: '--- 饮水记录 (最近14天) ---',
+export_footer: '===== 导出结束 =====',
+export_email_subject: '健身计划进度报告 - ',
+export_email_truncated: '\n\n（完整数据请使用导出功能复制）',
+// Days
+day_sun: '周日', day_mon: '周一', day_tue: '周二', day_wed: '周三',
+day_thu: '周四', day_fri: '周五', day_sat: '周六',
+day_short_sun: '日', day_short_mon: '一', day_short_tue: '二', day_short_wed: '三',
+day_short_thu: '四', day_short_fri: '五', day_short_sat: '六',
+// Months
+month_1:'一月',month_2:'二月',month_3:'三月',month_4:'四月',month_5:'五月',month_6:'六月',
+month_7:'七月',month_8:'八月',month_9:'九月',month_10:'十月',month_11:'十一月',month_12:'十二月',
+week_plan: '第 {w} 周 / 8 周计划',
+day_suffix: ' 日',
+diet_for_day: '{day} 的饮食安排',
+training_for_day: '{day} 的训练',
+excl_snack: '（不含零食）',
+// Notification
+notif_title: '健身计划',
+notif_water: '该喝水了！保持水分摄入。',
+notif_workout: '训练时间到！今天的训练：',
+notif_meal: '该准备饮食了！注意蛋白质摄入。',
+// Animals
+animal_cat:'猫咪',animal_dog:'小狗',animal_bunny:'兔子',animal_bear:'小熊',
+animal_panda:'熊猫',animal_fox:'狐狸',animal_owl:'猫头鹰',animal_penguin:'企鹅',
+animal_koala:'考拉',animal_frog:'青蛙',animal_chick:'小鸡',animal_hamster:'仓鼠',
+animal_unicorn:'独角兽',animal_dragon:'小龙',animal_deer:'小鹿',
+// Accessories
+acc_hat:'小帽子',acc_bowtie:'领结',acc_glasses:'眼镜',acc_scarf:'围巾',acc_crown:'皇冠',acc_flower:'小花',acc_headband:'头带',acc_sunglasses:'墨镜',
+sticker_combo_note:'70,560 种独特组合'
+},
+en: {
+nav_today: 'Today', nav_diet: 'Diet', nav_training: 'Training', nav_progress: 'Progress', nav_collection: 'Collection',
+today_training: 'Today\'s Workout', today_goal: 'Daily Goal', kcal_unit: 'kcal',
+today_progress: 'Today\'s Progress', ring_water: 'Water', ring_protein: 'Protein', ring_cal: 'kcal',
+water_tracking: 'Water Tracking', water_add_btn: '+ 1 Cup', water_hint: '~250ml per cup | Goal: 3.5L (14 cups)',
+today_diet: 'Today\'s Diet', daily_checklist: 'Daily Checklist',
+chk_bike: 'Morning bike 25 min', chk_training: 'Workout completed', chk_protein: 'Protein goal (150g+)',
+chk_water: 'Water 3.5L', chk_sleep: 'Sleep 7 hrs+',
+diet_plan: 'Diet Plan', snack_title: 'Snacks (Pick 1-2 daily)',
+snack1: 'Greek yogurt + blueberries', snack2: 'Apple + 15 almonds', snack3: '2 boiled eggs', snack4: '1 scoop protein powder',
+daily_total_label: 'Daily Total (excl. snacks)', protein_label: 'Protein', kcal_label: 'kcal',
+breakfast_label: 'Breakfast', lunch_label: 'Lunch', dinner_label: 'Dinner',
+swap_btn: 'Swap', recipe_btn: 'Recipe', protein_short: 'Protein',
+swap_lunch: 'Swap Lunch', swap_dinner: 'Swap Dinner',
+recipe_title: 'Recipe', ingredients_title: 'Ingredients', steps_title: 'Steps',
+no_recipe: 'No recipe available',
+training_plan: 'Training Plan',
+watch_video: 'Watch YouTube Tutorial', watch_video_hint: 'Click above to watch proper form demonstration',
+progress_tracking: 'Progress', progress_subtitle: 'Track your changes',
+streak_label: 'day streak', weight_record: 'Weight Log', waist_record: 'Waist Log',
+weight_placeholder: 'Enter weight (lbs)', waist_placeholder: 'Enter waist (cm)',
+record_btn: 'Log', weight_trend: 'Weight Trend', waist_trend: 'Waist Trend',
+photo_reminder: 'Photo Reminder',
+photo_text: 'Take comparison photos every 2 weeks:<br>- Front, side, and back<br>- Same time (morning, fasted)<br>- Same pose and lighting',
+photo_today: 'Time to take comparison photos today!',
+photo_next: 'Next photo day: {date} ({days} days)',
+data_export: 'Data Export', export_btn: 'Export Data', email_btn: 'Send to Email',
+email_placeholder: 'Target email address',
+no_record: 'No records yet', latest_record: 'Latest: {value} {unit} ({date})',
+no_chart_data: 'No data yet, start recording!',
+reminder_settings: 'Reminder Settings', workout_reminder: 'Workout Reminder',
+water_reminder: 'Water Reminder', water_reminder_note: '(every 2 hrs)',
+meal_reminder: 'Meal Reminder', save_settings: 'Save Settings',
+settings_note: 'Reminder requires notification permission in browser/Safari. Water reminders run every 2 hours while page is open.',
+collection_title: 'Sticker Collection', collection_subtitle: 'Collect cute animals by completing tasks',
+sticker_total: 'Total', sticker_normal: 'Normal', sticker_rare: 'Rare',
+sticker_collected: '{n} Stickers Collected',
+empty_collection: 'Complete daily tasks to collect cute animal stickers!',
+sticker_detail: 'Sticker Details', sticker_date: 'Date Earned', sticker_task: 'Task Completed',
+sticker_seed: 'Seed ID', sticker_type: 'Type',
+sticker_type_normal: 'Normal Sticker', sticker_type_rare: 'Rare Gold Sticker',
+sticker_earned: 'New Sticker Earned!', sticker_rare_earned: 'Rare Gold Sticker!',
+sticker_earned_sub: 'Completed "{task}"', sticker_all_done: 'All tasks done today!',
+toast_water: '+1 cup (250ml) logged',
+toast_swapped: 'Swapped!', toast_copied: 'Copied to clipboard',
+toast_copy_fail: 'Copy failed, please copy manually',
+toast_weight_saved: 'Weight {v} lbs logged', toast_waist_saved: 'Waist {v} cm logged',
+toast_invalid_weight: 'Please enter valid weight', toast_invalid_waist: 'Please enter valid waist',
+toast_settings_saved: 'Reminder settings saved',
+toast_email_empty: 'Please enter email address',
+toast_email_sent: 'Opening email client...',
+toast_email_truncated: '(Data truncated, use export for full data)',
+export_header: '===== Fitness Plan Data Export =====',
+export_time: 'Export Time',
+export_start: 'Plan Start Date',
+export_week: 'Current Week: Week {w}',
+export_streak: '--- Streak: {n} days ---',
+export_weight_header: '--- Weight Log (lbs) ---',
+export_waist_header: '--- Waist Log (cm) ---',
+export_checklist_header: '--- Daily Checklist (last 14 days) ---',
+export_done: 'done', export_water_header: '--- Water Log (last 14 days) ---',
+export_footer: '===== End of Export =====',
+export_email_subject: 'Fitness Plan Progress Report - ',
+export_email_truncated: '\n\n(Full data available via export/copy function)',
+day_sun:'Sun',day_mon:'Mon',day_tue:'Tue',day_wed:'Wed',
+day_thu:'Thu',day_fri:'Fri',day_sat:'Sat',
+day_short_sun:'Su',day_short_mon:'Mo',day_short_tue:'Tu',day_short_wed:'We',
+day_short_thu:'Th',day_short_fri:'Fr',day_short_sat:'Sa',
+month_1:'Jan',month_2:'Feb',month_3:'Mar',month_4:'Apr',month_5:'May',month_6:'Jun',
+month_7:'Jul',month_8:'Aug',month_9:'Sep',month_10:'Oct',month_11:'Nov',month_12:'Dec',
+week_plan: 'Week {w} / 8-Week Plan',
+day_suffix: '',
+diet_for_day: '{day} Diet',
+training_for_day: '{day} Training',
+excl_snack: '(excl. snacks)',
+notif_title: 'Fitness Plan',
+notif_water: 'Time to drink water! Stay hydrated.',
+notif_workout: 'Workout time! Today: ',
+notif_meal: 'Time to prepare your meal! Mind your protein.',
+animal_cat:'Cat',animal_dog:'Dog',animal_bunny:'Bunny',animal_bear:'Bear',
+animal_panda:'Panda',animal_fox:'Fox',animal_owl:'Owl',animal_penguin:'Penguin',
+animal_koala:'Koala',animal_frog:'Frog',animal_chick:'Chick',animal_hamster:'Hamster',
+animal_unicorn:'Unicorn',animal_dragon:'Dragon',animal_deer:'Deer',
+acc_hat:'Hat',acc_bowtie:'Bow Tie',acc_glasses:'Glasses',acc_scarf:'Scarf',acc_crown:'Crown',acc_flower:'Flower',acc_headband:'Headband',acc_sunglasses:'Sunglasses',
+sticker_combo_note:'70,560 unique combinations'
 }
-function getCurrentWeek(){var n=new Date(),d=Math.floor((n-PROGRAM_START)/(864e5));return Math.min(8,Math.max(1,Math.floor(d/7)+1))}
-
-var BREAKFAST={name:'3 个全蛋炒/煎 + 1 片全麦面包 + 希腊酸奶配蓝莓',protein:30,cal:380};
-
-var MEALS={
-1:{lunch:{name:'空气炸锅韩式辣鸡胸肉 180g + 沙拉包 + 半碗糙米',protein:45,cal:500},dinner:{name:'蒜蓉虾 200g + 沙拉包 + 小份红薯',protein:40,cal:420}},
-2:{lunch:{name:'西冷牛排 180g（空气炸锅黑椒）+ 沙拉包 + 半碗糙米',protein:47,cal:550},dinner:{name:'三文鱼 150g（空气炸锅蜜汁酱油味）+ 沙拉包',protein:38,cal:400}},
-3:{lunch:{name:'鸡胸肉 180g（空气炸锅墨西哥风味）+ 沙拉包 + 半碗糙米',protein:45,cal:480},dinner:{name:'牛肉片配 Power Greens 沙拉 + 少量糙米',protein:45,cal:400}},
-4:{lunch:{name:'鸡腿（去皮）2个 空气炸锅 + 沙拉包 + 红薯',protein:45,cal:550},dinner:{name:'蒜蓉虾 250g + Spring Mix 沙拉',protein:60,cal:300}},
-5:{lunch:{name:'空气炸锅蒜蓉虾 250g + 沙拉包 + 半碗糙米',protein:55,cal:450},dinner:{name:'西冷牛排 200g（空气炸锅）+ Asian Chopped Salad',protein:50,cal:480}},
-6:{lunch:{name:'鸡胸肉沙拉碗（预煮鸡肉条+沙拉包+牛油果+柠檬汁）',protein:40,cal:420},dinner:{name:'空气炸锅鸡胸肉 180g + Caesar Salad Kit',protein:42,cal:400}},
-0:{lunch:{name:'Costco 烤鸡（去皮）+ Caesar Salad Kit',protein:45,cal:500},dinner:{name:'蒜蓉虾 250g + 沙拉包',protein:60,cal:300}}
 };
 
+function t(key) { return (translations[currentLang] && translations[currentLang][key]) || (translations.zh[key]) || key; }
+
+function getDayCN(idx) {
+var keys = ['day_sun','day_mon','day_tue','day_wed','day_thu','day_fri','day_sat'];
+return t(keys[idx]);
+}
+function getDayShort(idx) {
+var keys = ['day_short_sun','day_short_mon','day_short_tue','day_short_wed','day_short_thu','day_short_fri','day_short_sat'];
+return t(keys[idx]);
+}
+
+function updateLanguage() {
+// Update data-i18n elements
+document.querySelectorAll('[data-i18n]').forEach(function(el) {
+var key = el.getAttribute('data-i18n');
+var val = t(key);
+if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+// skip, handled by data-i18n-placeholder
+} else {
+el.textContent = val;
+}
+});
+// Update placeholders
+document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+});
+// Update toggle button
+document.getElementById('lang-toggle-text').textContent = currentLang === 'zh' ? 'EN' : '中';
+// Re-render current page
+if (currentTab === 'today') renderToday();
+else if (currentTab === 'diet') renderDiet();
+else if (currentTab === 'training') renderTraining();
+else if (currentTab === 'progress') renderProgress();
+else if (currentTab === 'collection') renderCollection();
+}
+
+function toggleLang() {
+currentLang = currentLang === 'zh' ? 'en' : 'zh';
+localStorage.setItem('fitness_lang', currentLang);
+updateLanguage();
+}
+
+// ===== CONSTANTS =====
+var RING_C = 2 * Math.PI * 34; // ~213.6
+var PROGRAM_START = getStartDate();
+
+function getStartDate() {
+var s = localStorage.getItem('programStart');
+if (!s) { var n = new Date(), d = n.getDay(), diff = d === 0 ? 6 : d - 1, m = new Date(n); m.setDate(n.getDate() - diff); m.setHours(0,0,0,0); s = m.toISOString().split('T')[0]; localStorage.setItem('programStart', s); }
+return new Date(s + 'T00:00:00');
+}
+function getCurrentWeek() { var n = new Date(), d = Math.floor((n - PROGRAM_START) / (864e5)); return Math.min(8, Math.max(1, Math.floor(d / 7) + 1)); }
+
+var BREAKFAST = {name: '3 个全蛋炒/煎 + 1 片全麦面包 + 希腊酸奶配蓝莓', nameEn: '3 eggs scrambled + 1 whole wheat toast + Greek yogurt w/ blueberries', protein: 30, cal: 380};
+
+var MEALS = {
+1:{lunch:{name:'空气炸锅韩式辣鸡胸肉 180g + 沙拉包 + 半碗糙米',nameEn:'Air fryer Korean spicy chicken 180g + salad + half bowl brown rice',protein:45,cal:500},dinner:{name:'蒜蓉虾 200g + 沙拉包 + 小份红薯',nameEn:'Garlic shrimp 200g + salad + small sweet potato',protein:40,cal:420}},
+2:{lunch:{name:'西冷牛排 180g（空气炸锅黑椒）+ 沙拉包 + 半碗糙米',nameEn:'Sirloin steak 180g (air fryer black pepper) + salad + brown rice',protein:47,cal:550},dinner:{name:'三文鱼 150g（空气炸锅蜜汁酱油味）+ 沙拉包',nameEn:'Salmon 150g (air fryer honey soy) + salad',protein:38,cal:400}},
+3:{lunch:{name:'鸡胸肉 180g（空气炸锅墨西哥风味）+ 沙拉包 + 半碗糙米',nameEn:'Chicken breast 180g (air fryer Mexican style) + salad + brown rice',protein:45,cal:480},dinner:{name:'牛肉片配 Power Greens 沙拉 + 少量糙米',nameEn:'Beef slices w/ Power Greens salad + small brown rice',protein:45,cal:400}},
+4:{lunch:{name:'鸡腿（去皮）2个 空气炸锅 + 沙拉包 + 红薯',nameEn:'2 chicken legs (skinless) air fryer + salad + sweet potato',protein:45,cal:550},dinner:{name:'蒜蓉虾 250g + Spring Mix 沙拉',nameEn:'Garlic shrimp 250g + Spring Mix salad',protein:60,cal:300}},
+5:{lunch:{name:'空气炸锅蒜蓉虾 250g + 沙拉包 + 半碗糙米',nameEn:'Air fryer garlic shrimp 250g + salad + brown rice',protein:55,cal:450},dinner:{name:'西冷牛排 200g（空气炸锅）+ Asian Chopped Salad',nameEn:'Sirloin steak 200g (air fryer) + Asian Chopped Salad',protein:50,cal:480}},
+6:{lunch:{name:'鸡胸肉沙拉碗（预煮鸡肉条+沙拉包+牛油果+柠檬汁）',nameEn:'Chicken salad bowl (precooked chicken + salad + avocado + lemon)',protein:40,cal:420},dinner:{name:'空气炸锅鸡胸肉 180g + Caesar Salad Kit',nameEn:'Air fryer chicken breast 180g + Caesar Salad Kit',protein:42,cal:400}},
+0:{lunch:{name:'Costco 烤鸡（去皮）+ Caesar Salad Kit',nameEn:'Costco rotisserie chicken (skinless) + Caesar Salad Kit',protein:45,cal:500},dinner:{name:'蒜蓉虾 250g + 沙拉包',nameEn:'Garlic shrimp 250g + salad mix',protein:60,cal:300}}
+};
 var LUNCH_ALTS=[
-{name:'空气炸锅韩式辣鸡胸肉 180g + 沙拉包 + 半碗糙米',protein:45,cal:500,note:'空气炸锅200°C 12分钟，翻面一次',recipe:{ingredients:['鸡胸肉 180g','韩式辣酱 1大勺','蒜末 1茶勺','酱油 1茶勺','蜂蜜 1茶勺','沙拉包 1袋','糙米 半碗'],steps:['鸡胸肉用韩式辣酱、蒜末、酱油、蜂蜜腌制30分钟','空气炸锅预热200°C','放入鸡胸肉，200°C炸12分钟，中途翻面','配沙拉包和提前煮好的半碗糙米'],time:'12分钟',temp:'200°C'}},
-{name:'西冷牛排 180g（空气炸锅黑椒）+ 沙拉包 + 半碗糙米',protein:47,cal:550,note:'空气炸锅200°C 8-10分钟，五分熟',recipe:{ingredients:['西冷牛排 180g','黑胡椒 适量','海盐 适量','橄榄油 少许','沙拉包 1袋','糙米 半碗'],steps:['牛排提前30分钟取出回温','两面撒海盐和黑胡椒','空气炸锅预热200°C','放入牛排，200°C炸8-10分钟（五分熟）','静置3分钟后切片，配沙拉包和糙米'],time:'8-10分钟',temp:'200°C'}},
-{name:'空气炸锅蒜蓉虾 250g + 沙拉包 + 半碗糙米',protein:55,cal:450,note:'空气炸锅180°C 8分钟',recipe:{ingredients:['大虾 250g（去壳去虾线）','蒜末 2大勺','橄榄油 1茶勺','盐 适量','柠檬汁 少许','沙拉包 1袋','糙米 半碗'],steps:['虾去壳去虾线，用蒜末、橄榄油、盐拌匀','空气炸锅预热180°C','放入虾，180°C炸8分钟','挤上柠檬汁，配沙拉包和糙米'],time:'8分钟',temp:'180°C'}},
-{name:'鸡腿（去皮）2个 空气炸锅 + 沙拉包 + 红薯',protein:45,cal:550,note:'空气炸锅190°C 20分钟',recipe:{ingredients:['鸡腿 2个（去皮）','蒜粉 1茶勺','烟熏辣椒粉 1茶勺','盐 适量','沙拉包 1袋','红薯 1个（中等）'],steps:['鸡腿去皮，用蒜粉、烟熏辣椒粉、盐调味','空气炸锅预热190°C','放入鸡腿，190°C炸20分钟，中途翻面','红薯另外空气炸锅200°C 30分钟','配沙拉包食用'],time:'20分钟',temp:'190°C'}},
-{name:'空气炸锅墨西哥风味鸡胸肉 180g + 沙拉包 + 半碗糙米',protein:45,cal:480,note:'空气炸锅200°C 12分钟',recipe:{ingredients:['鸡胸肉 180g','墨西哥调味粉 1大勺','青柠汁 1个','蒜末 1茶勺','橄榄油 1茶勺','沙拉包 1袋','糙米 半碗'],steps:['鸡胸肉用墨西哥调味粉、青柠汁、蒜末、橄榄油腌制20分钟','空气炸锅预热200°C','放入鸡胸肉，200°C炸12分钟，中途翻面','切片配沙拉包和糙米'],time:'12分钟',temp:'200°C'}},
-{name:'空气炸锅三文鱼 150g + 沙拉包 + 红薯',protein:38,cal:450,note:'空气炸锅190°C 10分钟',recipe:{ingredients:['三文鱼 150g','盐 适量','黑胡椒 适量','柠檬 半个','沙拉包 1袋','红薯 1个'],steps:['三文鱼撒盐和黑胡椒','空气炸锅预热190°C','放入三文鱼皮面朝下，190°C炸10分钟','挤上柠檬汁，配沙拉包和烤红薯'],time:'10分钟',temp:'190°C'}},
-{name:'鸡胸肉沙拉碗（预煮鸡肉条+沙拉包+牛油果+柠檬汁）',protein:40,cal:420,note:'提前准备鸡肉条，方便快速',recipe:{ingredients:['预煮鸡胸肉 180g','沙拉包 1袋','牛油果 半个','柠檬汁 1大勺','橄榄油 1茶勺','盐和黑胡椒 适量'],steps:['鸡胸肉提前煮熟切条（或用空气炸锅200°C 12分钟）','沙拉包倒入碗中','放上鸡肉条和切片的牛油果','淋上柠檬汁和橄榄油，撒盐和胡椒'],time:'5分钟（不含预煮）',temp:'免烹饪'}},
-{name:'Costco 烤鸡（去皮）+ Caesar Salad Kit',protein:45,cal:500,note:'最方便快速的选择',recipe:{ingredients:['Costco 烤鸡 适量（去皮）','Caesar Salad Kit 1袋'],steps:['Costco 烤鸡撕成条，去掉鸡皮','打开 Caesar Salad Kit，倒入碗中','加入鸡肉条，拌匀即可'],time:'3分钟',temp:'免烹饪'}}
+{name:'空气炸锅韩式辣鸡胸肉 180g + 沙拉包 + 半碗糙米',nameEn:'Air fryer Korean spicy chicken 180g + salad + brown rice',protein:45,cal:500,note:'空气炸锅200°C 12分钟，翻面一次',noteEn:'Air fryer 200C 12min, flip once',recipe:{ingredients:['鸡胸肉 180g','韩式辣酱 1大勺','蒜末 1茶勺','酱油 1茶勺','蜂蜜 1茶勺','沙拉包 1袋','糙米 半碗'],steps:['鸡胸肉用韩式辣酱、蒜末、酱油、蜂蜜腌制30分钟','空气炸锅预热200°C','放入鸡胸肉，200°C炸12分钟，中途翻面','配沙拉包和提前煮好的半碗糙米'],time:'12分钟',temp:'200°C'}},
+{name:'西冷牛排 180g（空气炸锅黑椒）+ 沙拉包 + 半碗糙米',nameEn:'Sirloin steak 180g (black pepper) + salad + brown rice',protein:47,cal:550,note:'空气炸锅200°C 8-10分钟，五分熟',noteEn:'Air fryer 200C 8-10min, medium',recipe:{ingredients:['西冷牛排 180g','黑胡椒 适量','海盐 适量','橄榄油 少许','沙拉包 1袋','糙米 半碗'],steps:['牛排提前30分钟取出回温','两面撒海盐和黑胡椒','空气炸锅预热200°C','放入牛排，200°C炸8-10分钟（五分熟）','静置3分钟后切片，配沙拉包和糙米'],time:'8-10分钟',temp:'200°C'}},
+{name:'空气炸锅蒜蓉虾 250g + 沙拉包 + 半碗糙米',nameEn:'Air fryer garlic shrimp 250g + salad + brown rice',protein:55,cal:450,note:'空气炸锅180°C 8分钟',noteEn:'Air fryer 180C 8min',recipe:{ingredients:['大虾 250g（去壳去虾线）','蒜末 2大勺','橄榄油 1茶勺','盐 适量','柠檬汁 少许','沙拉包 1袋','糙米 半碗'],steps:['虾去壳去虾线，用蒜末、橄榄油、盐拌匀','空气炸锅预热180°C','放入虾，180°C炸8分钟','挤上柠檬汁，配沙拉包和糙米'],time:'8分钟',temp:'180°C'}},
+{name:'鸡腿（去皮）2个 空气炸锅 + 沙拉包 + 红薯',nameEn:'2 chicken legs (skinless) air fryer + salad + sweet potato',protein:45,cal:550,note:'空气炸锅190°C 20分钟',noteEn:'Air fryer 190C 20min',recipe:{ingredients:['鸡腿 2个（去皮）','蒜粉 1茶勺','烟熏辣椒粉 1茶勺','盐 适量','沙拉包 1袋','红薯 1个（中等）'],steps:['鸡腿去皮，用蒜粉、烟熏辣椒粉、盐调味','空气炸锅预热190°C','放入鸡腿，190°C炸20分钟，中途翻面','红薯另外空气炸锅200°C 30分钟','配沙拉包食用'],time:'20分钟',temp:'190°C'}},
+{name:'空气炸锅墨西哥风味鸡胸肉 180g + 沙拉包 + 半碗糙米',nameEn:'Air fryer Mexican chicken 180g + salad + brown rice',protein:45,cal:480,note:'空气炸锅200°C 12分钟',noteEn:'Air fryer 200C 12min',recipe:{ingredients:['鸡胸肉 180g','墨西哥调味粉 1大勺','青柠汁 1个','蒜末 1茶勺','橄榄油 1茶勺','沙拉包 1袋','糙米 半碗'],steps:['鸡胸肉用墨西哥调味粉、青柠汁、蒜末、橄榄油腌制20分钟','空气炸锅预热200°C','放入鸡胸肉，200°C炸12分钟，中途翻面','切片配沙拉包和糙米'],time:'12分钟',temp:'200°C'}},
+{name:'空气炸锅三文鱼 150g + 沙拉包 + 红薯',nameEn:'Air fryer salmon 150g + salad + sweet potato',protein:38,cal:450,note:'空气炸锅190°C 10分钟',noteEn:'Air fryer 190C 10min',recipe:{ingredients:['三文鱼 150g','盐 适量','黑胡椒 适量','柠檬 半个','沙拉包 1袋','红薯 1个'],steps:['三文鱼撒盐和黑胡椒','空气炸锅预热190°C','放入三文鱼皮面朝下，190°C炸10分钟','挤上柠檬汁，配沙拉包和烤红薯'],time:'10分钟',temp:'190°C'}},
+{name:'鸡胸肉沙拉碗（预煮鸡肉条+沙拉包+牛油果+柠檬汁）',nameEn:'Chicken salad bowl (precooked + avocado + lemon)',protein:40,cal:420,note:'提前准备鸡肉条，方便快速',noteEn:'Pre-cook chicken, quick prep',recipe:{ingredients:['预煮鸡胸肉 180g','沙拉包 1袋','牛油果 半个','柠檬汁 1大勺','橄榄油 1茶勺','盐和黑胡椒 适量'],steps:['鸡胸肉提前煮熟切条（或用空气炸锅200°C 12分钟）','沙拉包倒入碗中','放上鸡肉条和切片的牛油果','淋上柠檬汁和橄榄油，撒盐和胡椒'],time:'5分钟（不含预煮）',temp:'免烹饪'}},
+{name:'Costco 烤鸡（去皮）+ Caesar Salad Kit',nameEn:'Costco rotisserie chicken (skinless) + Caesar Salad Kit',protein:45,cal:500,note:'最方便快速的选择',noteEn:'Fastest option',recipe:{ingredients:['Costco 烤鸡 适量（去皮）','Caesar Salad Kit 1袋'],steps:['Costco 烤鸡撕成条，去掉鸡皮','打开 Caesar Salad Kit，倒入碗中','加入鸡肉条，拌匀即可'],time:'3分钟',temp:'免烹饪'}}
 ];
 
 var DINNER_ALTS=[
-{name:'蒜蓉虾 200g + 沙拉包 + 小份红薯',protein:40,cal:420,note:'空气炸锅180°C 8分钟',recipe:{ingredients:['大虾 200g','蒜末 2大勺','橄榄油 1茶勺','盐 适量','沙拉包 1袋','红薯 1小个'],steps:['虾去壳去虾线，拌入蒜末和橄榄油','空气炸锅预热180°C','虾180°C炸8分钟','红薯微波炉5分钟或空气炸锅200°C 25分钟','配沙拉包食用'],time:'8分钟',temp:'180°C'}},
-{name:'空气炸锅三文鱼 150g（蜜汁酱油味）+ 沙拉包',protein:38,cal:400,note:'空气炸锅190°C 10分钟',recipe:{ingredients:['三文鱼 150g','酱油 1大勺','蜂蜜 1茶勺','蒜末 1茶勺','姜末 少许','沙拉包 1袋'],steps:['酱油、蜂蜜、蒜末、姜末混合做酱汁','三文鱼刷上酱汁腌制10分钟','空气炸锅预热190°C','190°C炸10分钟','配沙拉包食用'],time:'10分钟',temp:'190°C'}},
-{name:'牛肉片配 Power Greens 沙拉 + 少量糙米',protein:45,cal:400,note:'快炒牛肉片，配沙拉',recipe:{ingredients:['牛肉片 200g','酱油 1大勺','蒜末 1茶勺','Power Greens 沙拉 1袋','糙米 少量','橄榄油 1茶勺'],steps:['牛肉片用酱油和蒜末腌制10分钟','平底锅大火快炒2-3分钟至熟','Power Greens 沙拉铺底','放上牛肉片，配少量糙米'],time:'5分钟',temp:'大火快炒'}},
-{name:'西冷牛排 200g（空气炸锅）+ Asian Chopped Salad',protein:50,cal:480,note:'空气炸锅200°C 10分钟',recipe:{ingredients:['西冷牛排 200g','海盐 适量','黑胡椒 适量','Asian Chopped Salad Kit 1袋'],steps:['牛排回温30分钟，撒盐和胡椒','空气炸锅预热200°C','200°C炸10分钟（中等熟度）','静置3分钟切片','配 Asian Chopped Salad'],time:'10分钟',temp:'200°C'}},
-{name:'空气炸锅鸡胸肉 180g + Caesar Salad Kit',protein:42,cal:400,note:'空气炸锅200°C 12分钟',recipe:{ingredients:['鸡胸肉 180g','蒜粉 1茶勺','意大利调味料 1茶勺','盐 适量','Caesar Salad Kit 1袋'],steps:['鸡胸肉用蒜粉、意大利调味料、盐腌制','空气炸锅预热200°C','200°C炸12分钟，中途翻面','切片放在 Caesar Salad 上'],time:'12分钟',temp:'200°C'}},
-{name:'蒜蓉虾 250g + Spring Mix 沙拉',protein:60,cal:300,note:'低卡高蛋白之选',recipe:{ingredients:['大虾 250g','蒜末 3大勺','橄榄油 1茶勺','盐 适量','Spring Mix 沙拉 1袋','柠檬 半个'],steps:['虾去壳去虾线','拌入蒜末、橄榄油和盐','空气炸锅预热180°C','180°C炸8分钟','挤柠檬汁配 Spring Mix 沙拉'],time:'8分钟',temp:'180°C'}},
-{name:'空气炸锅 Cajun 虾 200g + 沙拉包',protein:48,cal:350,note:'空气炸锅190°C 8分钟',recipe:{ingredients:['大虾 200g','Cajun 调味粉 1大勺','橄榄油 1茶勺','盐 适量','沙拉包 1袋'],steps:['虾去壳去虾线','拌入 Cajun 调味粉和橄榄油','空气炸锅预热190°C','190°C炸8分钟','配沙拉包食用'],time:'8分钟',temp:'190°C'}},
-{name:'鸡腿（去皮）空气炸锅蒜香 + 沙拉包',protein:40,cal:420,note:'空气炸锅190°C 20分钟',recipe:{ingredients:['鸡腿 2个（去皮）','蒜末 2大勺','橄榄油 1茶勺','盐 适量','黑胡椒 适量','沙拉包 1袋'],steps:['鸡腿去皮，用蒜末、橄榄油、盐、胡椒腌制','空气炸锅预热190°C','190°C炸20分钟，中途翻面','配沙拉包食用'],time:'20分钟',temp:'190°C'}}
+{name:'蒜蓉虾 200g + 沙拉包 + 小份红薯',nameEn:'Garlic shrimp 200g + salad + small sweet potato',protein:40,cal:420,note:'空气炸锅180°C 8分钟',noteEn:'Air fryer 180C 8min',recipe:{ingredients:['大虾 200g','蒜末 2大勺','橄榄油 1茶勺','盐 适量','沙拉包 1袋','红薯 1小个'],steps:['虾去壳去虾线，拌入蒜末和橄榄油','空气炸锅预热180°C','虾180°C炸8分钟','红薯微波炉5分钟或空气炸锅200°C 25分钟','配沙拉包食用'],time:'8分钟',temp:'180°C'}},
+{name:'空气炸锅三文鱼 150g（蜜汁酱油味）+ 沙拉包',nameEn:'Air fryer salmon 150g (honey soy) + salad',protein:38,cal:400,note:'空气炸锅190°C 10分钟',noteEn:'Air fryer 190C 10min',recipe:{ingredients:['三文鱼 150g','酱油 1大勺','蜂蜜 1茶勺','蒜末 1茶勺','姜末 少许','沙拉包 1袋'],steps:['酱油、蜂蜜、蒜末、姜末混合做酱汁','三文鱼刷上酱汁腌制10分钟','空气炸锅预热190°C','190°C炸10分钟','配沙拉包食用'],time:'10分钟',temp:'190°C'}},
+{name:'牛肉片配 Power Greens 沙拉 + 少量糙米',nameEn:'Beef slices w/ Power Greens + small brown rice',protein:45,cal:400,note:'快炒牛肉片，配沙拉',noteEn:'Quick stir-fry beef, with salad',recipe:{ingredients:['牛肉片 200g','酱油 1大勺','蒜末 1茶勺','Power Greens 沙拉 1袋','糙米 少量','橄榄油 1茶勺'],steps:['牛肉片用酱油和蒜末腌制10分钟','平底锅大火快炒2-3分钟至熟','Power Greens 沙拉铺底','放上牛肉片，配少量糙米'],time:'5分钟',temp:'大火快炒'}},
+{name:'西冷牛排 200g（空气炸锅）+ Asian Chopped Salad',nameEn:'Sirloin steak 200g (air fryer) + Asian Chopped Salad',protein:50,cal:480,note:'空气炸锅200°C 10分钟',noteEn:'Air fryer 200C 10min',recipe:{ingredients:['西冷牛排 200g','海盐 适量','黑胡椒 适量','Asian Chopped Salad Kit 1袋'],steps:['牛排回温30分钟，撒盐和胡椒','空气炸锅预热200°C','200°C炸10分钟（中等熟度）','静置3分钟切片','配 Asian Chopped Salad'],time:'10分钟',temp:'200°C'}},
+{name:'空气炸锅鸡胸肉 180g + Caesar Salad Kit',nameEn:'Air fryer chicken breast 180g + Caesar Salad Kit',protein:42,cal:400,note:'空气炸锅200°C 12分钟',noteEn:'Air fryer 200C 12min',recipe:{ingredients:['鸡胸肉 180g','蒜粉 1茶勺','意大利调味料 1茶勺','盐 适量','Caesar Salad Kit 1袋'],steps:['鸡胸肉用蒜粉、意大利调味料、盐腌制','空气炸锅预热200°C','200°C炸12分钟，中途翻面','切片放在 Caesar Salad 上'],time:'12分钟',temp:'200°C'}},
+{name:'蒜蓉虾 250g + Spring Mix 沙拉',nameEn:'Garlic shrimp 250g + Spring Mix salad',protein:60,cal:300,note:'低卡高蛋白之选',noteEn:'Low cal high protein',recipe:{ingredients:['大虾 250g','蒜末 3大勺','橄榄油 1茶勺','盐 适量','Spring Mix 沙拉 1袋','柠檬 半个'],steps:['虾去壳去虾线','拌入蒜末、橄榄油和盐','空气炸锅预热180°C','180°C炸8分钟','挤柠檬汁配 Spring Mix 沙拉'],time:'8分钟',temp:'180°C'}},
+{name:'空气炸锅 Cajun 虾 200g + 沙拉包',nameEn:'Air fryer Cajun shrimp 200g + salad',protein:48,cal:350,note:'空气炸锅190°C 8分钟',noteEn:'Air fryer 190C 8min',recipe:{ingredients:['大虾 200g','Cajun 调味粉 1大勺','橄榄油 1茶勺','盐 适量','沙拉包 1袋'],steps:['虾去壳去虾线','拌入 Cajun 调味粉和橄榄油','空气炸锅预热190°C','190°C炸8分钟','配沙拉包食用'],time:'8分钟',temp:'190°C'}},
+{name:'鸡腿（去皮）空气炸锅蒜香 + 沙拉包',nameEn:'Chicken legs (skinless) garlic air fryer + salad',protein:40,cal:420,note:'空气炸锅190°C 20分钟',noteEn:'Air fryer 190C 20min',recipe:{ingredients:['鸡腿 2个（去皮）','蒜末 2大勺','橄榄油 1茶勺','盐 适量','黑胡椒 适量','沙拉包 1袋'],steps:['鸡腿去皮，用蒜末、橄榄油、盐、胡椒腌制','空气炸锅预热190°C','190°C炸20分钟，中途翻面','配沙拉包食用'],time:'20分钟',temp:'190°C'}}
 ];
 
-// Build recipe data for default meals too
 var DEFAULT_RECIPES={
 lunch:{
 1:{ingredients:['鸡胸肉 180g','韩式辣酱 1大勺','蒜末、酱油、蜂蜜','沙拉包 1袋','糙米 半碗'],steps:['鸡胸肉腌制韩式辣酱30分钟','空气炸锅200°C 12分钟翻面','配沙拉包和糙米'],time:'12分钟',temp:'200°C'},
@@ -413,55 +705,453 @@ dinner:{
 };
 
 var WORKOUTS={
-1:{title:'核心 + 全身',time:'15 分钟',subtitle:'3 轮循环 | 动作间休息 20 秒 | 轮间休息 60 秒',exercises:[{name:'平板支撑',detail:'30-45 秒',url:'https://www.youtube.com/watch?v=BQu26ABuVS0'},{name:'死虫式',detail:'每边 10 次',url:'https://www.youtube.com/watch?v=XcYtWYMz39w'},{name:'哑铃高脚杯深蹲',detail:'12 次',url:'https://www.youtube.com/watch?v=9KzZD_n2r64'},{name:'登山跑',detail:'30 秒',url:'https://www.youtube.com/watch?v=T_BvreyYL0w'}]},
-2:{title:'上肢力量',time:'20 分钟',subtitle:'3 组 | 每组 10-12 次',exercises:[{name:'哑铃卧推',detail:'10-12 次',url:'https://www.youtube.com/watch?v=pKZMNVbfUzQ'},{name:'坐姿划船',detail:'10-12 次',url:'https://www.youtube.com/watch?v=vwHG9Jfu4sw'},{name:'哑铃肩推',detail:'10-12 次',url:'https://www.youtube.com/watch?v=qEwKCR5JCog'},{name:'二头弯举',detail:'10-12 次',url:'https://www.youtube.com/watch?v=XE_pHwbst04'},{name:'三头下压',detail:'10-12 次',url:'https://www.youtube.com/watch?v=nMqQNGo4Jtg'}]},
-3:{title:'单车 + 核心',time:'25+10 分钟',subtitle:'3 轮',exercises:[{name:'仰卧抬腿',detail:'12 次',url:'https://www.youtube.com/watch?v=sY2ZgV2Sj_s'},{name:'自行车卷腹',detail:'每边 15 次',url:'https://www.youtube.com/watch?v=PAEo-zRSanM'},{name:'俄罗斯转体',detail:'20 次',url:'https://www.youtube.com/watch?v=NrBUdmJSTXk'},{name:'鸟狗式',detail:'每边 10 次',url:'https://www.youtube.com/watch?v=ZdAHe9_HeEw'}]},
-4:{title:'下肢力量',time:'20 分钟',subtitle:'3 组 | 每组 10-12 次',exercises:[{name:'哑铃罗马尼亚硬拉',detail:'10-12 次',url:'https://www.youtube.com/watch?v=hQgFixeXdZo'},{name:'哑铃箭步蹲',detail:'每腿 10 次',url:'https://www.youtube.com/watch?v=qQyCK_rxzN0'},{name:'腿举/高脚杯深蹲',detail:'10-12 次',url:'https://www.youtube.com/watch?v=UYdx6ammdwU'},{name:'站姿提踵',detail:'15 次',url:'https://www.youtube.com/watch?v=KRJIKsY02nE'}]},
-5:{title:'HIIT',time:'15 分钟',subtitle:'热身 5 分钟 → 20秒高强度/40秒慢走 x8 → 放松 2 分钟',exercises:[{name:'HIIT 间歇训练',detail:'20秒冲刺 / 40秒慢走 x 8 轮',url:'https://www.youtube.com/watch?v=qVlXj1t1i6g'}]},
-6:{title:'主动恢复',time:'40-60 分钟',subtitle:'带娃散步，早上或傍晚，避开正午',exercises:[],isRest:true,restEmoji:'\u{1F6B6}',restDesc:'带娃散步 40-60 分钟\n早上或傍晚，避开正午\n享受户外时光'},
-0:{title:'完全休息',time:'休息日',subtitle:'恢复日 — 让身体充分恢复',exercises:[],isRest:true,restEmoji:'\u{1F634}',restDesc:'今天是恢复日\n好好休息，让肌肉恢复\n明天继续加油'}
+1:{title:'核心 + 全身',titleEn:'Core + Full Body',time:'15 分钟',timeEn:'15 min',subtitle:'3 轮循环 | 动作间休息 20 秒 | 轮间休息 60 秒',subtitleEn:'3 rounds | 20s rest between | 60s rest between rounds',exercises:[{name:'平板支撑',nameEn:'Plank',detail:'30-45 秒',detailEn:'30-45 sec',url:'https://www.youtube.com/watch?v=BQu26ABuVS0'},{name:'死虫式',nameEn:'Dead Bug',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=XcYtWYMz39w'},{name:'哑铃高脚杯深蹲',nameEn:'Dumbbell Goblet Squat',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=9KzZD_n2r64'},{name:'登山跑',nameEn:'Mountain Climbers',detail:'30 秒',detailEn:'30 sec',url:'https://www.youtube.com/watch?v=T_BvreyYL0w'}]},
+2:{title:'上肢力量',titleEn:'Upper Body',time:'20 分钟',timeEn:'20 min',subtitle:'3 组 | 每组 10-12 次',subtitleEn:'3 sets | 10-12 reps each',exercises:[{name:'哑铃卧推',nameEn:'Dumbbell Bench Press',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=pKZMNVbfUzQ'},{name:'坐姿划船',nameEn:'Seated Row',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=vwHG9Jfu4sw'},{name:'哑铃肩推',nameEn:'Dumbbell Shoulder Press',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=qEwKCR5JCog'},{name:'二头弯举',nameEn:'Bicep Curl',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=XE_pHwbst04'},{name:'三头下压',nameEn:'Tricep Pushdown',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=nMqQNGo4Jtg'}]},
+3:{title:'单车 + 核心',titleEn:'Bike + Core',time:'25+10 分钟',timeEn:'25+10 min',subtitle:'3 轮',subtitleEn:'3 rounds',exercises:[{name:'仰卧抬腿',nameEn:'Leg Raise',detail:'12 次',detailEn:'12 reps',url:'https://www.youtube.com/watch?v=sY2ZgV2Sj_s'},{name:'自行车卷腹',nameEn:'Bicycle Crunch',detail:'每边 15 次',detailEn:'15 each side',url:'https://www.youtube.com/watch?v=PAEo-zRSanM'},{name:'俄罗斯转体',nameEn:'Russian Twist',detail:'20 次',detailEn:'20 reps',url:'https://www.youtube.com/watch?v=NrBUdmJSTXk'},{name:'鸟狗式',nameEn:'Bird Dog',detail:'每边 10 次',detailEn:'10 each side',url:'https://www.youtube.com/watch?v=ZdAHe9_HeEw'}]},
+4:{title:'下肢力量',titleEn:'Lower Body',time:'20 分钟',timeEn:'20 min',subtitle:'3 组 | 每组 10-12 次',subtitleEn:'3 sets | 10-12 reps each',exercises:[{name:'哑铃罗马尼亚硬拉',nameEn:'Dumbbell Romanian Deadlift',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=hQgFixeXdZo'},{name:'哑铃箭步蹲',nameEn:'Dumbbell Lunge',detail:'每腿 10 次',detailEn:'10 each leg',url:'https://www.youtube.com/watch?v=qQyCK_rxzN0'},{name:'腿举/高脚杯深蹲',nameEn:'Leg Press/Goblet Squat',detail:'10-12 次',detailEn:'10-12 reps',url:'https://www.youtube.com/watch?v=UYdx6ammdwU'},{name:'站姿提踵',nameEn:'Standing Calf Raise',detail:'15 次',detailEn:'15 reps',url:'https://www.youtube.com/watch?v=KRJIKsY02nE'}]},
+5:{title:'HIIT',titleEn:'HIIT',time:'15 分钟',timeEn:'15 min',subtitle:'热身 5 分钟 → 20秒高强度/40秒慢走 x8 → 放松 2 分钟',subtitleEn:'5min warmup - 20s sprint/40s walk x8 - 2min cooldown',exercises:[{name:'HIIT 间歇训练',nameEn:'HIIT Interval Training',detail:'20秒冲刺 / 40秒慢走 x 8 轮',detailEn:'20s sprint / 40s walk x 8 rounds',url:'https://www.youtube.com/watch?v=qVlXj1t1i6g'}]},
+6:{title:'主动恢复',titleEn:'Active Recovery',time:'40-60 分钟',timeEn:'40-60 min',subtitle:'带娃散步，早上或傍晚，避开正午',subtitleEn:'Walk with kids, morning or evening',exercises:[],isRest:true,restEmoji:'\u{1F6B6}',restDesc:'带娃散步 40-60 分钟\n早上或傍晚，避开正午\n享受户外时光',restDescEn:'Walk with kids 40-60 min\nMorning or evening\nEnjoy the outdoors'},
+0:{title:'完全休息',titleEn:'Full Rest',time:'休息日',timeEn:'Rest Day',subtitle:'恢复日 — 让身体充分恢复',subtitleEn:'Recovery day - let your body recover',exercises:[],isRest:true,restEmoji:'\u{1F634}',restDesc:'今天是恢复日\n好好休息，让肌肉恢复\n明天继续加油',restDescEn:'Today is recovery day\nRest well, let muscles recover\nKeep going tomorrow'}
 };
 
-var CHECKLIST_ITEMS=['早上骑车 25 分钟','今日训练完成','蛋白质达标 (150g+)','喝水 3.5L','睡眠 7 小时+'];
+var CHECKLIST_KEYS=['chk_bike','chk_training','chk_protein','chk_water','chk_sleep'];
 
 // ===== STATE =====
 var currentTab='today';
 var selectedDietDay=new Date().getDay();
 var selectedTrainingDay=new Date().getDay();
-var swappedMeals={};// {dayIndex_mealType: altIndex}
+var swappedMeals={};
+// ===== STICKER SYSTEM =====
+var ANIMAL_TYPES=['cat','dog','bunny','bear','panda','fox','owl','penguin','koala','frog','chick','hamster','unicorn','dragon','deer'];
+var ANIMAL_COLORS=['#FF6B6B','#4FC3F7','#81C784','#FFB74D','#BA68C8','#F06292','#4DD0E1','#FFD54F','#E0E0E0','#A1887F','#90CAF9','#F48FB1','#80DEEA','#FFAB91'];
+var EXPRESSIONS=['happy','wink','surprised','cool','sleepy','smug'];
+var ACCESSORIES=['hat','bowtie','glasses','scarf','crown','flower','headband','sunglasses'];
+var BG_PATTERNS=['none','stars','hearts','dots','waves','sparkle','stripes'];
+var ANIMAL_NAME_KEYS=['animal_cat','animal_dog','animal_bunny','animal_bear','animal_panda','animal_fox','animal_owl','animal_penguin','animal_koala','animal_frog','animal_chick','animal_hamster','animal_unicorn','animal_dragon','animal_deer'];
+var ACC_NAME_KEYS=['acc_hat','acc_bowtie','acc_glasses','acc_scarf','acc_crown','acc_flower','acc_headband','acc_sunglasses'];
 
+function hashSeed(seed){
+var h=0;for(var i=0;i<seed.length;i++){h=((h<<5)-h)+seed.charCodeAt(i);h|=0;}
+return Math.abs(h);
+}
+
+function getStickerProps(seed){
+var h=hashSeed(seed);
+var h2=hashSeed(seed+'salt2');
+var animal=ANIMAL_TYPES[h%15];
+var color=ANIMAL_COLORS[(h>>4)%14];
+var expression=EXPRESSIONS[(h>>8)%6];
+var accessory=ACCESSORIES[(h>>12)%8];
+var bgPattern=BG_PATTERNS[h2%7];
+return{animal:animal,color:color,expression:expression,accessory:accessory,bgPattern:bgPattern};
+}
+// Total combinations: 15 x 14 x 6 x 8 x 7 = 70,560 unique stickers
+
+function generateAnimalSVG(seed,size){
+size=size||80;
+var props=getStickerProps(seed);
+var c=props.color;
+var darken=function(hex,amt){var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);r=Math.max(0,r-amt);g=Math.max(0,g-amt);b=Math.max(0,b-amt);return '#'+[r,g,b].map(function(v){return v.toString(16).padStart(2,'0')}).join('')};
+var dc=darken(c,40);
+var lc=darken(c,-60);
+
+// Eyes based on expression
+var eyesSvg='';
+var ex=props.expression;
+if(ex==='happy'){
+eyesSvg='<path d="M30,36 Q33,32 36,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M44,36 Q47,32 50,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>';
+}else if(ex==='wink'){
+eyesSvg='<path d="M30,36 Q33,32 36,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="47" cy="35" r="2.5" fill="#333"/>';
+}else if(ex==='surprised'){
+eyesSvg='<circle cx="33" cy="35" r="3.5" fill="#333"/><circle cx="47" cy="35" r="3.5" fill="#333"/><circle cx="33" cy="34" r="1.2" fill="#fff"/><circle cx="47" cy="34" r="1.2" fill="#fff"/>';
+}else if(ex==='sleepy'){
+eyesSvg='<path d="M30,36 Q33,38 36,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M44,36 Q47,38 50,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><text x="54" y="28" font-size="8" fill="#4fc3f7" opacity="0.6">z</text><text x="58" y="24" font-size="6" fill="#4fc3f7" opacity="0.4">z</text>';
+}else if(ex==='smug'){
+eyesSvg='<path d="M30,35 Q33,33 36,35" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M44,34 L50,36" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="47" cy="35" r="2" fill="#333"/>';
+}else{
+eyesSvg='<rect x="27" y="33" width="12" height="5" rx="1" fill="#333" opacity="0.8"/><rect x="41" y="33" width="12" height="5" rx="1" fill="#333" opacity="0.8"/><rect x="29" y="33" width="8" height="5" rx="1" fill="#4fc3f7" opacity="0.6"/><rect x="43" y="33" width="8" height="5" rx="1" fill="#4fc3f7" opacity="0.6"/>';
+}
+
+// Mouth
+var mouthSvg='<path d="M37,42 Q40,46 43,42" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>';
+
+var bodySvg='';
+var a=props.animal;
+
+if(a==='cat'){
+bodySvg='<circle cx="40" cy="42" r="22" fill="'+c+'"/>'+ // head
+'<polygon points="22,22 28,38 18,36" fill="'+c+'" stroke="'+dc+'" stroke-width="0.5"/>'+ // left ear
+'<polygon points="58,22 52,38 62,36" fill="'+c+'" stroke="'+dc+'" stroke-width="0.5"/>'+ // right ear
+'<polygon points="24,25 28,36 20,34" fill="'+lc+'"/>'+ // inner ear
+'<polygon points="56,25 52,36 60,34" fill="'+lc+'"/>'+ // inner ear
+eyesSvg+mouthSvg+
+'<line x1="18" y1="40" x2="28" y2="39" stroke="#333" stroke-width="0.8" opacity="0.4"/>'+ // whisker
+'<line x1="18" y1="43" x2="28" y2="42" stroke="#333" stroke-width="0.8" opacity="0.4"/>'+
+'<line x1="52" y1="39" x2="62" y2="40" stroke="#333" stroke-width="0.8" opacity="0.4"/>'+
+'<line x1="52" y1="42" x2="62" y2="43" stroke="#333" stroke-width="0.8" opacity="0.4"/>'+
+'<polygon points="40,39 38,41 42,41" fill="#F48FB1"/>';// nose
+}else if(a==='dog'){
+bodySvg='<circle cx="40" cy="42" r="22" fill="'+c+'"/>'+ // head
+'<ellipse cx="26" cy="38" rx="8" ry="14" fill="'+dc+'" transform="rotate(-15,26,38)"/>'+ // left ear
+'<ellipse cx="54" cy="38" rx="8" ry="14" fill="'+dc+'" transform="rotate(15,54,38)"/>'+ // right ear
+'<ellipse cx="40" cy="46" rx="10" ry="7" fill="'+lc+'"/>'+ // snout
+eyesSvg+
+'<ellipse cx="40" cy="42" rx="3" ry="2.5" fill="#333"/>'+ // nose
+'<path d="M40,44 Q40,49 44,48" stroke="#F48FB1" stroke-width="2" fill="#F48FB1" opacity="0.7"/>'; // tongue
+}else if(a==='bunny'){
+bodySvg='<ellipse cx="40" cy="44" rx="20" ry="20" fill="'+c+'"/>'+ // head
+'<ellipse cx="33" cy="18" rx="6" ry="18" fill="'+c+'"/>'+ // left ear
+'<ellipse cx="47" cy="18" rx="6" ry="18" fill="'+c+'"/>'+ // right ear
+'<ellipse cx="33" cy="18" rx="3.5" ry="13" fill="#F8BBD0"/>'+ // inner ear
+'<ellipse cx="47" cy="18" rx="3.5" ry="13" fill="#F8BBD0"/>'+
+eyesSvg+mouthSvg+
+'<polygon points="40,40 38,42 42,42" fill="#F48FB1"/>';
+}else if(a==='bear'){
+bodySvg='<circle cx="40" cy="42" r="22" fill="'+c+'"/>'+ // head
+'<circle cx="24" cy="24" r="8" fill="'+c+'"/>'+ // left ear
+'<circle cx="56" cy="24" r="8" fill="'+c+'"/>'+ // right ear
+'<circle cx="24" cy="24" r="5" fill="'+dc+'"/>'+ // inner ear
+'<circle cx="56" cy="24" r="5" fill="'+dc+'"/>'+
+'<ellipse cx="40" cy="46" rx="10" ry="7" fill="'+lc+'"/>'+ // snout
+eyesSvg+mouthSvg+
+'<ellipse cx="40" cy="43" rx="3" ry="2" fill="#333"/>';
+}else if(a==='panda'){
+bodySvg='<circle cx="40" cy="42" r="22" fill="#fff"/>'+ // head white
+'<circle cx="24" cy="24" r="8" fill="#333"/>'+ // ears black
+'<circle cx="56" cy="24" r="8" fill="#333"/>'+
+'<ellipse cx="32" cy="36" rx="8" ry="6" fill="#333"/>'+ // eye patches
+'<ellipse cx="48" cy="36" rx="8" ry="6" fill="#333"/>'+
+'<circle cx="32" cy="35" r="2.5" fill="#fff"/>'+ // eyes in patches
+'<circle cx="48" cy="35" r="2.5" fill="#fff"/>'+
+'<circle cx="32" cy="34.5" r="1" fill="#333"/>'+
+'<circle cx="48" cy="34.5" r="1" fill="#333"/>'+
+mouthSvg+
+'<ellipse cx="40" cy="41" rx="3" ry="2" fill="#333"/>';
+}else if(a==='fox'){
+bodySvg='<ellipse cx="40" cy="42" rx="22" ry="20" fill="'+c+'"/>'+ // head
+'<polygon points="20,26 28,38 16,38" fill="'+c+'"/>'+ // ears
+'<polygon points="60,26 52,38 64,38" fill="'+c+'"/>'+
+'<polygon points="22,28 27,36 18,36" fill="#fff"/>'+ // inner ears
+'<polygon points="58,28 53,36 62,36" fill="#fff"/>'+
+'<ellipse cx="40" cy="50" rx="12" ry="8" fill="#fff"/>'+ // white chest
+eyesSvg+mouthSvg+
+'<polygon points="40,40 38,42 42,42" fill="#333"/>';
+}else if(a==='owl'){
+bodySvg='<ellipse cx="40" cy="44" rx="20" ry="22" fill="'+c+'"/>'+ // body
+'<polygon points="26,22 22,30 30,30" fill="'+c+'"/>'+ // ear tufts
+'<polygon points="54,22 50,30 58,30" fill="'+c+'"/>'+
+'<circle cx="32" cy="38" r="9" fill="#fff"/>'+ // big eyes
+'<circle cx="48" cy="38" r="9" fill="#fff"/>'+
+'<circle cx="32" cy="38" r="5" fill="#333"/>'+
+'<circle cx="48" cy="38" r="5" fill="#333"/>'+
+'<circle cx="33" cy="37" r="1.5" fill="#fff"/>'+
+'<circle cx="49" cy="37" r="1.5" fill="#fff"/>'+
+'<polygon points="40,43 38,47 42,47" fill="#FFB74D"/>'+ // beak
+'<ellipse cx="30" cy="55" rx="6" ry="4" fill="'+dc+'" transform="rotate(-15,30,55)"/>'+ // wings
+'<ellipse cx="50" cy="55" rx="6" ry="4" fill="'+dc+'" transform="rotate(15,50,55)"/>';
+}else if(a==='penguin'){
+bodySvg='<ellipse cx="40" cy="44" rx="18" ry="24" fill="#333"/>'+ // body black
+'<ellipse cx="40" cy="48" rx="12" ry="18" fill="#fff"/>'+ // belly white
+'<circle cx="40" cy="32" r="14" fill="#333"/>'+ // head
+'<circle cx="33" cy="31" r="2.5" fill="#fff"/>'+ // eyes
+'<circle cx="47" cy="31" r="2.5" fill="#fff"/>'+
+'<circle cx="33" cy="31" r="1.2" fill="#333"/>'+
+'<circle cx="47" cy="31" r="1.2" fill="#333"/>'+
+'<polygon points="40,34 37,38 43,38" fill="#FFB74D"/>'+ // beak
+'<ellipse cx="24" cy="46" rx="4" ry="8" fill="#333" transform="rotate(15,24,46)"/>'+ // flippers
+'<ellipse cx="56" cy="46" rx="4" ry="8" fill="#333" transform="rotate(-15,56,46)"/>'+
+'<ellipse cx="35" cy="66" rx="5" ry="2" fill="#FFB74D"/>'+ // feet
+'<ellipse cx="45" cy="66" rx="5" ry="2" fill="#FFB74D"/>';
+}else if(a==='koala'){
+bodySvg='<circle cx="40" cy="42" r="20" fill="'+c+'"/>'+ // head
+'<circle cx="22" cy="34" r="11" fill="'+c+'"/>'+ // ears
+'<circle cx="58" cy="34" r="11" fill="'+c+'"/>'+
+'<circle cx="22" cy="34" r="7" fill="'+lc+'"/>'+ // inner ears
+'<circle cx="58" cy="34" r="7" fill="'+lc+'"/>'+
+eyesSvg+mouthSvg+
+'<ellipse cx="40" cy="43" rx="5" ry="3.5" fill="#333"/>';// big nose
+}else if(a==='frog'){
+bodySvg='<ellipse cx="40" cy="46" rx="22" ry="18" fill="'+c+'"/>'+ // head wide
+'<circle cx="28" cy="28" r="9" fill="'+c+'"/>'+ // eyes protruding
+'<circle cx="52" cy="28" r="9" fill="'+c+'"/>'+
+'<circle cx="28" cy="27" r="5" fill="#fff"/>'+
+'<circle cx="52" cy="27" r="5" fill="#fff"/>'+
+'<circle cx="28" cy="27" r="2.5" fill="#333"/>'+
+'<circle cx="52" cy="27" r="2.5" fill="#333"/>'+
+'<path d="M28,48 Q40,56 52,48" stroke="#333" stroke-width="2" fill="none"/>'+ // wide mouth
+'<circle cx="32" cy="50" r="4" fill="'+lc+'" opacity="0.4"/>'+ // cheek blush
+'<circle cx="48" cy="50" r="4" fill="'+lc+'" opacity="0.4"/>';
+}else if(a==='chick'){
+bodySvg='<circle cx="40" cy="44" r="18" fill="'+c+'"/>'+ // body
+'<circle cx="40" cy="32" r="13" fill="'+c+'"/>'+ // head
+'<circle cx="35" cy="30" r="2" fill="#333"/>'+ // eyes
+'<circle cx="45" cy="30" r="2" fill="#333"/>'+
+'<polygon points="40,33 37,37 43,37" fill="#FF8A65"/>'+ // beak
+'<ellipse cx="28" cy="46" rx="5" ry="3" fill="'+dc+'" transform="rotate(-20,28,46)"/>'+ // wings
+'<ellipse cx="52" cy="46" rx="5" ry="3" fill="'+dc+'" transform="rotate(20,52,46)"/>'+
+'<line x1="38" y1="22" x2="36" y2="18" stroke="'+dc+'" stroke-width="1.5" stroke-linecap="round"/>'+ // hair tuft
+'<line x1="40" y1="21" x2="40" y2="16" stroke="'+dc+'" stroke-width="1.5" stroke-linecap="round"/>'+
+'<line x1="42" y1="22" x2="44" y2="18" stroke="'+dc+'" stroke-width="1.5" stroke-linecap="round"/>';
+}else if(a==='hamster'){
+bodySvg='<circle cx="40" cy="44" r="22" fill="'+c+'"/>'+ // chubby body
+'<circle cx="24" cy="28" r="5" fill="'+c+'"/>'+ // tiny ears
+'<circle cx="56" cy="28" r="5" fill="'+c+'"/>'+
+'<circle cx="24" cy="28" r="3" fill="'+lc+'"/>'+
+'<circle cx="56" cy="28" r="3" fill="'+lc+'"/>'+
+'<circle cx="26" cy="46" r="8" fill="'+lc+'" opacity="0.5"/>'+ // big cheeks
+'<circle cx="54" cy="46" r="8" fill="'+lc+'" opacity="0.5"/>'+
+eyesSvg+mouthSvg+
+'<ellipse cx="40" cy="42" rx="2.5" ry="2" fill="#F48FB1"/>'+ // nose
+'<ellipse cx="34" cy="60" rx="3" ry="2" fill="'+dc+'"/>'+ // tiny paws
+'<ellipse cx="46" cy="60" rx="3" ry="2" fill="'+dc+'"/>';
+}else if(a==='unicorn'){
+bodySvg='<circle cx="40" cy="44" r="22" fill="#fff"/>'+ // white head
+'<ellipse cx="26" cy="30" rx="5" ry="10" fill="#fff"/>'+ // ears
+'<ellipse cx="54" cy="30" rx="5" ry="10" fill="#fff"/>'+
+'<ellipse cx="26" cy="30" rx="3" ry="7" fill="#F8BBD0"/>'+ // inner ears
+'<ellipse cx="54" cy="30" rx="3" ry="7" fill="#F8BBD0"/>'+
+'<polygon points="40,4 36,22 44,22" fill="'+c+'"/>'+ // horn
+'<line x1="38" y1="10" x2="42" y2="12" stroke="#FFD700" stroke-width="1"/>'+ // horn stripes
+'<line x1="37" y1="14" x2="43" y2="16" stroke="#FFD700" stroke-width="1"/>'+
+'<path d="M18,26 Q10,20 14,14 Q18,18 22,16" stroke="'+c+'" stroke-width="2" fill="none" stroke-linecap="round"/>'+ // mane curls
+'<path d="M20,22 Q12,16 16,10" stroke="'+lc+'" stroke-width="2" fill="none" stroke-linecap="round"/>'+
+eyesSvg+mouthSvg+
+'<circle cx="28" cy="46" r="4" fill="#F8BBD0" opacity="0.4"/>'+ // blush
+'<circle cx="52" cy="46" r="4" fill="#F8BBD0" opacity="0.4"/>';
+}else if(a==='dragon'){
+bodySvg='<ellipse cx="40" cy="44" rx="20" ry="20" fill="'+c+'"/>'+ // head
+'<polygon points="20,20 16,30 24,32" fill="'+c+'"/>'+ // left horn
+'<polygon points="60,20 64,30 56,32" fill="'+c+'"/>'+
+'<polygon points="22,22 18,30 24,30" fill="'+dc+'"/>'+ // horn detail
+'<polygon points="58,22 62,30 56,30" fill="'+dc+'"/>'+
+'<ellipse cx="40" cy="50" rx="10" ry="7" fill="'+lc+'"/>'+ // belly
+'<path d="M26,24 L22,18 L28,22" fill="'+dc+'"/>'+ // small spikes
+'<path d="M34,20 L32,14 L36,18" fill="'+dc+'"/>'+
+'<path d="M46,20 L48,14 L44,18" fill="'+dc+'"/>'+
+'<path d="M54,24 L58,18 L52,22" fill="'+dc+'"/>'+
+eyesSvg+mouthSvg+
+'<circle cx="36" cy="47" r="1" fill="#FFD700"/>'+ // nostrils
+'<circle cx="44" cy="47" r="1" fill="#FFD700"/>'+
+'<path d="M62,42 Q68,38 64,34" stroke="#FF6B6B" stroke-width="2" fill="none" opacity="0.6"/>'+ // fire wisp
+'<path d="M64,40 Q70,36 66,32" stroke="#FFB74D" stroke-width="1.5" fill="none" opacity="0.4"/>';
+}else if(a==='deer'){
+bodySvg='<ellipse cx="40" cy="46" rx="18" ry="18" fill="'+c+'"/>'+ // head
+'<ellipse cx="28" cy="34" rx="5" ry="9" fill="'+c+'" transform="rotate(-10,28,34)"/>'+ // ears
+'<ellipse cx="52" cy="34" rx="5" ry="9" fill="'+c+'" transform="rotate(10,52,34)"/>'+
+'<ellipse cx="28" cy="34" rx="3" ry="6" fill="'+lc+'" transform="rotate(-10,28,34)"/>'+ // inner ears
+'<ellipse cx="52" cy="34" rx="3" ry="6" fill="'+lc+'" transform="rotate(10,52,34)"/>'+
+'<path d="M30,22 L28,12 L24,16 L26,8 L30,14 L32,18" stroke="'+dc+'" stroke-width="2" fill="none" stroke-linecap="round"/>'+ // left antler
+'<path d="M50,22 L52,12 L56,16 L54,8 L50,14 L48,18" stroke="'+dc+'" stroke-width="2" fill="none" stroke-linecap="round"/>'+ // right antler
+eyesSvg+mouthSvg+
+'<ellipse cx="40" cy="48" rx="3" ry="2" fill="#333"/>'+ // nose
+'<circle cx="30" cy="50" r="4" fill="#F8BBD0" opacity="0.3"/>'+ // cheek blush
+'<circle cx="50" cy="50" r="4" fill="#F8BBD0" opacity="0.3"/>';
+}
+
+// Accessory overlay
+var accSvg='';
+var acc=props.accessory;
+if(acc==='hat'){
+accSvg='<rect x="32" y="14" width="16" height="10" rx="2" fill="#333"/><rect x="28" y="22" width="24" height="3" rx="1" fill="#333"/><rect x="36" y="14" width="8" height="2" rx="1" fill="'+c+'"/>';
+}else if(acc==='bowtie'){
+accSvg='<polygon points="34,56 40,60 34,64" fill="#E53935"/><polygon points="46,56 40,60 46,64" fill="#E53935"/><circle cx="40" cy="60" r="2" fill="#C62828"/>';
+}else if(acc==='glasses'){
+accSvg='<circle cx="32" cy="35" r="6" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="48" cy="35" r="6" fill="none" stroke="#333" stroke-width="1.5"/><line x1="38" y1="35" x2="42" y2="35" stroke="#333" stroke-width="1.5"/>';
+}else if(acc==='scarf'){
+accSvg='<path d="M22,54 Q30,58 40,56 Q50,54 58,58" stroke="#E53935" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M22,54 Q30,62 40,60 Q50,58 58,62" stroke="#E53935" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>';
+}else if(acc==='crown'){
+accSvg='<polygon points="28,20 32,12 36,18 40,8 44,18 48,12 52,20" fill="#FFD700" stroke="#FFA000" stroke-width="0.5"/><rect x="28" y="20" width="24" height="4" rx="1" fill="#FFD700"/>';
+}else if(acc==='flower'){
+accSvg='<circle cx="56" cy="26" r="3" fill="#E91E63"/><circle cx="60" cy="22" r="3" fill="#F48FB1"/><circle cx="54" cy="22" r="3" fill="#F48FB1"/><circle cx="52" cy="26" r="3" fill="#F48FB1"/><circle cx="60" cy="26" r="3" fill="#F48FB1"/><circle cx="57" cy="24" r="2" fill="#FFEB3B"/>';
+}else if(acc==='headband'){
+accSvg='<path d="M20,28 Q30,18 40,20 Q50,18 60,28" stroke="#E53935" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="40" cy="19" r="3" fill="#E53935"/>';
+}else if(acc==='sunglasses'){
+accSvg='<rect x="24" y="32" width="14" height="9" rx="3" fill="#333" opacity="0.85"/><rect x="42" y="32" width="14" height="9" rx="3" fill="#333" opacity="0.85"/><line x1="38" y1="36" x2="42" y2="36" stroke="#333" stroke-width="2"/><line x1="24" y1="36" x2="18" y2="34" stroke="#333" stroke-width="1.5"/><line x1="56" y1="36" x2="62" y2="34" stroke="#333" stroke-width="1.5"/><rect x="25" y="33" width="12" height="3" rx="1" fill="#4fc3f7" opacity="0.3"/><rect x="43" y="33" width="12" height="3" rx="1" fill="#4fc3f7" opacity="0.3"/>';
+}
+
+// Background pattern
+var bgSvg='';
+var bp=props.bgPattern;
+if(bp==='stars'){
+bgSvg='<text x="8" y="14" font-size="7" opacity="0.15">★</text><text x="65" y="10" font-size="5" opacity="0.12">★</text><text x="4" y="68" font-size="6" opacity="0.12">★</text><text x="70" y="72" font-size="7" opacity="0.15">★</text><text x="12" y="40" font-size="4" opacity="0.1">★</text>';
+}else if(bp==='hearts'){
+bgSvg='<text x="6" y="12" font-size="6" opacity="0.12">♥</text><text x="68" y="16" font-size="5" opacity="0.1">♥</text><text x="8" y="70" font-size="5" opacity="0.1">♥</text><text x="66" y="68" font-size="6" opacity="0.12">♥</text>';
+}else if(bp==='dots'){
+bgSvg='<circle cx="8" cy="8" r="2" fill="'+c+'" opacity="0.1"/><circle cx="72" cy="12" r="1.5" fill="'+c+'" opacity="0.08"/><circle cx="6" cy="72" r="1.5" fill="'+c+'" opacity="0.08"/><circle cx="74" cy="70" r="2" fill="'+c+'" opacity="0.1"/><circle cx="14" cy="40" r="1" fill="'+c+'" opacity="0.06"/><circle cx="68" cy="44" r="1" fill="'+c+'" opacity="0.06"/>';
+}else if(bp==='waves'){
+bgSvg='<path d="M0,72 Q10,68 20,72 Q30,76 40,72 Q50,68 60,72 Q70,76 80,72" stroke="'+c+'" stroke-width="1" fill="none" opacity="0.08"/><path d="M0,76 Q10,72 20,76 Q30,80 40,76 Q50,72 60,76 Q70,80 80,76" stroke="'+c+'" stroke-width="1" fill="none" opacity="0.06"/>';
+}else if(bp==='sparkle'){
+bgSvg='<text x="6" y="14" font-size="7" opacity="0.12">✦</text><text x="68" y="10" font-size="5" opacity="0.1">✧</text><text x="4" y="70" font-size="5" opacity="0.1">✧</text><text x="70" y="72" font-size="7" opacity="0.12">✦</text>';
+}else if(bp==='stripes'){
+bgSvg='<line x1="0" y1="10" x2="10" y2="0" stroke="'+c+'" stroke-width="0.5" opacity="0.06"/><line x1="0" y1="20" x2="20" y2="0" stroke="'+c+'" stroke-width="0.5" opacity="0.06"/><line x1="60" y1="80" x2="80" y2="60" stroke="'+c+'" stroke-width="0.5" opacity="0.06"/><line x1="70" y1="80" x2="80" y2="70" stroke="'+c+'" stroke-width="0.5" opacity="0.06"/>';
+}
+
+var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="'+size+'" height="'+size+'">'+bgSvg+bodySvg+accSvg+'</svg>';
+return svg;
+}
+
+function getStickers(){
+try{return JSON.parse(localStorage.getItem('fitness_stickers')||'[]')}catch(e){return[]}
+}
+function saveStickers(stickers){localStorage.setItem('fitness_stickers',JSON.stringify(stickers))}
+
+function earnSticker(taskIndex){
+var now=new Date();
+var dateStr=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
+var timeStr=String(now.getHours()).padStart(2,'0')+String(now.getMinutes()).padStart(2,'0')+String(now.getSeconds()).padStart(2,'0');
+var seed=dateStr+'-'+taskIndex+'-'+timeStr;
+var props=getStickerProps(seed);
+
+var sticker={
+id:Date.now().toString(36)+Math.random().toString(36).substr(2,4),
+seed:seed,type:'normal',
+date:now.toISOString().split('T')[0],
+task:t(CHECKLIST_KEYS[taskIndex]),
+animal:props.animal,color:props.color,
+accessory:props.accessory,expression:props.expression
+};
+var stickers=getStickers();
+stickers.push(sticker);
+saveStickers(stickers);
+showStickerToast(sticker);
+return sticker;
+}
+
+function earnRareSticker(){
+var now=new Date();
+var dateStr=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
+var seed=dateStr+'-RARE-'+Date.now().toString(36);
+var props=getStickerProps(seed);
+
+var sticker={
+id:Date.now().toString(36)+Math.random().toString(36).substr(2,4),
+seed:seed,type:'rare',
+date:now.toISOString().split('T')[0],
+task:t('sticker_all_done'),
+animal:props.animal,color:props.color,
+accessory:props.accessory,expression:props.expression
+};
+var stickers=getStickers();
+// Check if rare already earned today
+var alreadyRare=stickers.some(function(s){return s.type==='rare'&&s.date===sticker.date});
+if(!alreadyRare){
+stickers.push(sticker);
+saveStickers(stickers);
+showStickerToast(sticker);
+}
+}
+
+function showStickerToast(sticker){
+var el=document.getElementById('sticker-toast');
+var svgEl=document.getElementById('sticker-toast-svg');
+var titleEl=document.getElementById('sticker-toast-title');
+var subEl=document.getElementById('sticker-toast-sub');
+
+svgEl.innerHTML=generateAnimalSVG(sticker.seed,100);
+if(sticker.type==='rare'){
+titleEl.textContent=t('sticker_rare_earned');
+titleEl.style.color='#FFD700';
+el.style.borderColor='#FFD700';
+el.style.boxShadow='0 0 60px rgba(255,215,0,.3)';
+}else{
+titleEl.textContent=t('sticker_earned');
+titleEl.style.color='var(--accent)';
+el.style.borderColor='var(--accent)';
+el.style.boxShadow='0 0 60px rgba(0,230,118,.2)';
+}
+subEl.textContent=sticker.task;
+el.classList.add('show');
+setTimeout(function(){el.classList.remove('show')},2500);
+}
+
+function renderCollection(){
+var stickers=getStickers();
+var normal=stickers.filter(function(s){return s.type==='normal'}).length;
+var rare=stickers.filter(function(s){return s.type==='rare'}).length;
+var total=stickers.length;
+
+var statsHtml='<div class="stat-box"><div class="stat-num">'+total+'</div><div class="stat-label">'+t('sticker_total')+'</div></div>';
+statsHtml+='<div class="stat-box"><div class="stat-num">'+normal+'</div><div class="stat-label">'+t('sticker_normal')+'</div></div>';
+statsHtml+='<div class="stat-box gold"><div class="stat-num">'+rare+'</div><div class="stat-label">'+t('sticker_rare')+'</div></div>';
+document.getElementById('collection-stats').innerHTML=statsHtml;
+
+var container=document.getElementById('collection-grid-container');
+if(total===0){
+container.innerHTML='<div class="empty-collection"><div class="empty-icon">&#127912;</div><div class="empty-text">'+t('empty_collection')+'</div></div>';
+return;
+}
+
+var sorted=stickers.slice().reverse();
+var gridHtml='<div class="sticker-grid">';
+sorted.forEach(function(s,i){
+var cls=s.type==='rare'?'sticker-cell rare':'sticker-cell';
+if(i===0)cls+=' sticker-newest';
+gridHtml+='<div class="'+cls+'" onclick="showStickerDetail(\''+s.id+'\')" style="animation-delay:'+Math.min(i*0.05,0.5)+'s">'+generateAnimalSVG(s.seed,60)+'</div>';
+});
+gridHtml+='</div>';
+container.innerHTML=gridHtml;
+}
+
+function showStickerDetail(id){
+var stickers=getStickers();
+var s=stickers.find(function(st){return st.id===id});
+if(!s)return;
+
+var animalKey='animal_'+s.animal;
+var accKey='acc_'+s.accessory;
+var typeTxt=s.type==='rare'?t('sticker_type_rare'):t('sticker_type_normal');
+
+var h='<div style="text-align:center;margin-bottom:16px">'+generateAnimalSVG(s.seed,140)+'</div>';
+h+='<div style="padding:12px;background:var(--bg-card);border-radius:var(--radius-sm);border:1px solid var(--bg-card-border)">';
+h+='<div style="margin-bottom:8px"><span style="color:var(--text-dim);font-size:13px">'+t('sticker_type')+': </span><span style="font-weight:600;color:'+(s.type==='rare'?'#FFD700':'var(--accent)')+'">'+typeTxt+'</span></div>';
+h+='<div style="margin-bottom:8px"><span style="color:var(--text-dim);font-size:13px">'+t('animal_'+s.animal)+' </span><span style="font-size:13px;color:var(--text-muted)">'+t(accKey)+'</span></div>';
+h+='<div style="margin-bottom:8px"><span style="color:var(--text-dim);font-size:13px">'+t('sticker_date')+': </span><span>'+s.date+'</span></div>';
+h+='<div style="margin-bottom:8px"><span style="color:var(--text-dim);font-size:13px">'+t('sticker_task')+': </span><span>'+s.task+'</span></div>';
+h+='<div><span style="color:var(--text-dim);font-size:13px">'+t('sticker_seed')+': </span><span style="font-size:11px;color:var(--text-muted)">'+s.seed+'</span></div>';
+h+='</div>';
+
+document.getElementById('sticker-detail-body').innerHTML=h;
+document.getElementById('sticker-detail-modal').classList.add('show');
+}
 // ===== TAB SWITCHING =====
 function switchTab(tab){
 currentTab=tab;
 document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
 document.getElementById('page-'+tab).classList.add('active');
-document.querySelectorAll('.nav-item').forEach(function(n,i){n.classList.toggle('active',['today','diet','training','progress'][i]===tab)});
+var tabs=['today','diet','training','progress','collection'];
+document.querySelectorAll('.nav-item').forEach(function(n,i){n.classList.toggle('active',tabs[i]===tab)});
 window.scrollTo(0,0);
 if(tab==='diet')renderDiet();
 if(tab==='training')renderTraining();
 if(tab==='progress')renderProgress();
 if(tab==='today')renderToday();
+if(tab==='collection')renderCollection();
 }
 
 // ===== TODAY =====
+function getMealName(meal){return currentLang==='en'&&meal.nameEn?meal.nameEn:meal.name;}
+
 function renderToday(){
 var now=new Date();
-var months=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
-document.getElementById('today-date').textContent=months[now.getMonth()]+' '+now.getDate()+' 日';
-document.getElementById('today-week').textContent='第 '+getCurrentWeek()+' 周 / 8 周计划 \u00B7 '+DAYS_CN[now.getDay()];
+var monthKey='month_'+(now.getMonth()+1);
+document.getElementById('today-date').textContent=t(monthKey)+' '+now.getDate()+t('day_suffix');
+document.getElementById('today-week').textContent=t('week_plan').replace('{w}',getCurrentWeek())+' \u00B7 '+getDayCN(now.getDay());
 var dow=now.getDay();
 var workout=WORKOUTS[dow];
-document.getElementById('today-workout-name').textContent=workout.title;
-document.getElementById('today-workout-time').textContent=workout.time;
+document.getElementById('today-workout-name').textContent=currentLang==='en'&&workout.titleEn?workout.titleEn:workout.title;
+document.getElementById('today-workout-time').textContent=currentLang==='en'&&workout.timeEn?workout.timeEn:workout.time;
 
 var meals=getMealsForDay(dow);
 var bp=BREAKFAST.protein+meals.lunch.protein+meals.dinner.protein;
 var bc=BREAKFAST.cal+meals.lunch.cal+meals.dinner.cal;
+var bfName=getMealName(BREAKFAST);
+var lName=getMealName(meals.lunch);
+var dName=getMealName(meals.dinner);
 document.getElementById('today-meal-summary').innerHTML=
-'<div>\u{1F305} 早餐: '+BREAKFAST.name.substring(0,22)+'...</div>'+
-'<div>\u{2600}\u{FE0F} 午餐: '+meals.lunch.name.substring(0,22)+'...</div>'+
-'<div>\u{1F319} 晚餐: '+meals.dinner.name.substring(0,22)+'...</div>'+
-'<div style="margin-top:6px;color:var(--text)">蛋白质 '+bp+'g | '+bc+' kcal <span style="color:var(--text-muted);font-size:12px">（不含零食）</span></div>';
+'<div>\u{1F305} '+t('breakfast_label')+': '+bfName.substring(0,22)+'...</div>'+
+'<div>\u{2600}\u{FE0F} '+t('lunch_label')+': '+lName.substring(0,22)+'...</div>'+
+'<div>\u{1F319} '+t('dinner_label')+': '+dName.substring(0,22)+'...</div>'+
+'<div style="margin-top:6px;color:var(--text)">'+t('protein_short')+' '+bp+'g | '+bc+' kcal <span style="color:var(--text-muted);font-size:12px">'+t('excl_snack')+'</span></div>';
 
 renderWater();
 renderChecklist();
@@ -486,7 +1176,6 @@ var waterOffset=RING_C*(1-waterPct);
 document.getElementById('ring-water').setAttribute('stroke-dashoffset',waterOffset);
 document.getElementById('ring-water-text').textContent=Math.round(waterPct*100)+'%';
 
-// Protein/cal rings are static targets from diet
 var dow=new Date().getDay();
 var meals=getMealsForDay(dow);
 var tp=BREAKFAST.protein+meals.lunch.protein+meals.dinner.protein;
@@ -507,30 +1196,45 @@ var c=getWaterAmount();
 var n=c+250;
 localStorage.setItem(getWaterKey(),n);
 renderWater();renderRings();
-showToast('+1杯 (250ml) 已记录');
+showToast(t('toast_water'));
 var bar=document.getElementById('water-bar');
 bar.classList.add('pulse');setTimeout(function(){bar.classList.remove('pulse')},300);
 }
 function renderWater(){
-var a=getWaterAmount(),t=3500,p=Math.min(100,(a/t)*100);
-document.getElementById('water-display').textContent=(a/1000).toFixed(1)+' / 3.5L ('+Math.round(a/250)+'杯)';
+var a=getWaterAmount(),tgt=3500,p=Math.min(100,(a/tgt)*100);
+var cupWord=currentLang==='en'?' cups':'\u676F';
+document.getElementById('water-display').textContent=(a/1000).toFixed(1)+' / 3.5L ('+Math.round(a/250)+cupWord+')';
 document.getElementById('water-bar').style.width=p+'%';
 }
 
 // ===== CHECKLIST =====
 function getChecklistKey(){return 'checklist_'+new Date().toISOString().split('T')[0]}
 function getChecklistState(){try{return JSON.parse(localStorage.getItem(getChecklistKey())||'[]')}catch(e){return[]}}
+
 function toggleChecklist(i){
-var s=getChecklistState();while(s.length<CHECKLIST_ITEMS.length)s.push(false);
+var s=getChecklistState();while(s.length<CHECKLIST_KEYS.length)s.push(false);
+var wasChecked=s[i];
 s[i]=!s[i];localStorage.setItem(getChecklistKey(),JSON.stringify(s));
+
+// Earn sticker when checking (not unchecking)
+if(!wasChecked&&s[i]){
+earnSticker(i);
+// Check if all 5 done for rare sticker
+var allDone=s.length>=CHECKLIST_KEYS.length&&s.slice(0,CHECKLIST_KEYS.length).every(function(v){return v});
+if(allDone){
+setTimeout(function(){earnRareSticker()},2800);
+}
+}
+
 renderChecklist();updateStreak();
 }
+
 function renderChecklist(){
 var s=getChecklistState();
 var c=document.getElementById('checklist-container');
-c.innerHTML=CHECKLIST_ITEMS.map(function(item,i){
+c.innerHTML=CHECKLIST_KEYS.map(function(key,i){
 var ch=s[i]?'checked':'';
-return '<div class="checklist-item '+ch+'" onclick="toggleChecklist('+i+')"><div class="check-box"></div><span class="check-label">'+item+'</span></div>';
+return '<div class="checklist-item '+ch+'" onclick="toggleChecklist('+i+')"><div class="check-box"></div><span class="check-label">'+t(key)+'</span></div>';
 }).join('');
 }
 
@@ -538,26 +1242,26 @@ return '<div class="checklist-item '+ch+'" onclick="toggleChecklist('+i+')"><div
 function renderDayPills(cid,sel,fn){
 var c=document.getElementById(cid);var td=new Date().getDay();
 c.innerHTML=[1,2,3,4,5,6,0].map(function(d){
-var a=d===sel?'active':'';var t=d===td?'today':'';
-return '<div class="day-pill '+a+' '+t+'" onclick="'+fn+'('+d+')">'+DAYS_SHORT[d]+'</div>';
+var a=d===sel?'active':'';var tt=d===td?'today':'';
+return '<div class="day-pill '+a+' '+tt+'" onclick="'+fn+'('+d+')">'+getDayShort(d)+'</div>';
 }).join('');
 }
 function selectDietDay(d){selectedDietDay=d;renderDiet()}
 function renderDiet(){
 var day=selectedDietDay;
 renderDayPills('diet-day-pills',day,'selectDietDay');
-document.getElementById('diet-day-label').textContent=DAYS_CN[day]+' 的饮食安排';
+document.getElementById('diet-day-label').textContent=t('diet_for_day').replace('{day}',getDayCN(day));
 var meals=getMealsForDay(day);
 var c=document.getElementById('meals-container');
 var h='';
 // Breakfast
-h+='<div class="meal-card breakfast"><div class="meal-type t-breakfast">\u{1F305} 早餐</div><div class="meal-name">'+BREAKFAST.name+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+BREAKFAST.protein+'g 蛋白质</span><span class="macro-cal">\u{1F525} '+BREAKFAST.cal+' kcal</span></div></div>';
+h+='<div class="meal-card breakfast"><div class="meal-type t-breakfast">\u{1F305} '+t('breakfast_label')+'</div><div class="meal-name">'+getMealName(BREAKFAST)+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+BREAKFAST.protein+'g '+t('protein_short')+'</span><span class="macro-cal">\u{1F525} '+BREAKFAST.cal+' kcal</span></div></div>';
 // Lunch
-h+='<div class="meal-card lunch"><div class="meal-type t-lunch">\u{2600}\u{FE0F} 午餐</div><div class="meal-name">'+meals.lunch.name+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+meals.lunch.protein+'g 蛋白质</span><span class="macro-cal">\u{1F525} '+meals.lunch.cal+' kcal</span></div>';
-h+='<div class="meal-actions"><button class="meal-action-btn" onclick="openSwap('+day+',\'lunch\')">&#128260; 换一换</button><button class="meal-action-btn" onclick="openRecipe('+day+',\'lunch\')">&#128203; 食谱</button></div></div>';
+h+='<div class="meal-card lunch"><div class="meal-type t-lunch">\u{2600}\u{FE0F} '+t('lunch_label')+'</div><div class="meal-name">'+getMealName(meals.lunch)+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+meals.lunch.protein+'g '+t('protein_short')+'</span><span class="macro-cal">\u{1F525} '+meals.lunch.cal+' kcal</span></div>';
+h+='<div class="meal-actions"><button class="meal-action-btn" onclick="openSwap('+day+',\'lunch\')">&#128260; '+t('swap_btn')+'</button><button class="meal-action-btn" onclick="openRecipe('+day+',\'lunch\')">&#128203; '+t('recipe_btn')+'</button></div></div>';
 // Dinner
-h+='<div class="meal-card dinner"><div class="meal-type t-dinner">\u{1F319} 晚餐</div><div class="meal-name">'+meals.dinner.name+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+meals.dinner.protein+'g 蛋白质</span><span class="macro-cal">\u{1F525} '+meals.dinner.cal+' kcal</span></div>';
-h+='<div class="meal-actions"><button class="meal-action-btn" onclick="openSwap('+day+',\'dinner\')">&#128260; 换一换</button><button class="meal-action-btn" onclick="openRecipe('+day+',\'dinner\')">&#128203; 食谱</button></div></div>';
+h+='<div class="meal-card dinner"><div class="meal-type t-dinner">\u{1F319} '+t('dinner_label')+'</div><div class="meal-name">'+getMealName(meals.dinner)+'</div><div class="meal-macros"><span class="macro-protein">\u{1F4AA} '+meals.dinner.protein+'g '+t('protein_short')+'</span><span class="macro-cal">\u{1F525} '+meals.dinner.cal+' kcal</span></div>';
+h+='<div class="meal-actions"><button class="meal-action-btn" onclick="openSwap('+day+',\'dinner\')">&#128260; '+t('swap_btn')+'</button><button class="meal-action-btn" onclick="openRecipe('+day+',\'dinner\')">&#128203; '+t('recipe_btn')+'</button></div></div>';
 c.innerHTML=h;
 
 var tp=BREAKFAST.protein+meals.lunch.protein+meals.dinner.protein;
@@ -569,11 +1273,13 @@ document.getElementById('total-cal').textContent=tc+' kcal';
 // ===== SWAP MEALS =====
 function openSwap(day,mealType){
 var alts=mealType==='lunch'?LUNCH_ALTS:DINNER_ALTS;
-document.getElementById('swap-modal-title').textContent='替换'+(mealType==='lunch'?'午餐':'晚餐');
+document.getElementById('swap-modal-title').textContent=mealType==='lunch'?t('swap_lunch'):t('swap_dinner');
 var body=document.getElementById('swap-modal-body');
 var h='';
 alts.forEach(function(alt,i){
-h+='<div class="swap-item" onclick="doSwap('+day+',\''+mealType+'\','+i+')"><div class="swap-name">'+alt.name+'</div><div class="swap-macros">\u{1F4AA} '+alt.protein+'g 蛋白质 | \u{1F525} '+alt.cal+' kcal</div><div class="swap-note">'+alt.note+'</div></div>';
+var nm=getMealName(alt);
+var nt=currentLang==='en'&&alt.noteEn?alt.noteEn:alt.note;
+h+='<div class="swap-item" onclick="doSwap('+day+',\''+mealType+'\','+i+')"><div class="swap-name">'+nm+'</div><div class="swap-macros">\u{1F4AA} '+alt.protein+'g '+t('protein_short')+' | \u{1F525} '+alt.cal+' kcal</div><div class="swap-note">'+nt+'</div></div>';
 });
 body.innerHTML=h;
 document.getElementById('swap-modal').classList.add('show');
@@ -582,7 +1288,7 @@ function doSwap(day,mealType,idx){
 swappedMeals[day+'_'+mealType]=idx;
 closeModal('swap-modal');
 renderDiet();
-showToast('已替换!');
+showToast(t('toast_swapped'));
 }
 
 // ===== RECIPE =====
@@ -593,18 +1299,18 @@ if(swappedMeals[key]!==undefined){
 var alts=mealType==='lunch'?LUNCH_ALTS:DINNER_ALTS;
 var alt=alts[swappedMeals[key]];
 recipe=alt.recipe;
-document.getElementById('recipe-modal-title').textContent=alt.name;
+document.getElementById('recipe-modal-title').textContent=getMealName(alt);
 }else{
 recipe=DEFAULT_RECIPES[mealType][day];
 var meals=MEALS[day];
-document.getElementById('recipe-modal-title').textContent=meals[mealType].name;
+document.getElementById('recipe-modal-title').textContent=getMealName(meals[mealType]);
 }
-if(!recipe){showToast('暂无食谱');return}
+if(!recipe){showToast(t('no_recipe'));return}
 var h='<div class="recipe-section">';
 h+='<div class="recipe-meta"><span>\u{23F1} '+recipe.time+'</span><span>\u{1F321}\u{FE0F} '+recipe.temp+'</span></div>';
-h+='<h4>食材</h4><ul>';
+h+='<h4>'+t('ingredients_title')+'</h4><ul>';
 recipe.ingredients.forEach(function(ing){h+='<li>'+ing+'</li>'});
-h+='</ul><h4>步骤</h4><ol>';
+h+='</ul><h4>'+t('steps_title')+'</h4><ol>';
 recipe.steps.forEach(function(s){h+='<li>'+s+'</li>'});
 h+='</ol></div>';
 document.getElementById('recipe-modal-body').innerHTML=h;
@@ -616,19 +1322,26 @@ function selectTrainingDay(d){selectedTrainingDay=d;renderTraining()}
 function renderTraining(){
 var day=selectedTrainingDay;
 renderDayPills('training-day-pills',day,'selectTrainingDay');
-document.getElementById('training-day-label').textContent=DAYS_CN[day]+' 的训练';
+document.getElementById('training-day-label').textContent=t('training_for_day').replace('{day}',getDayCN(day));
 var w=WORKOUTS[day];var c=document.getElementById('training-container');
-if(w.isRest){c.innerHTML='<div class="card rest-day-card"><div class="rest-emoji">'+w.restEmoji+'</div><div class="rest-title">'+w.title+'</div><div class="rest-desc">'+w.restDesc.replace(/\n/g,'<br>')+'</div></div>';return}
-var h='<div class="card"><div class="workout-header">'+w.title+'</div><div class="workout-subtitle">'+w.subtitle+'</div></div>';
+var wTitle=currentLang==='en'&&w.titleEn?w.titleEn:w.title;
+var wSub=currentLang==='en'&&w.subtitleEn?w.subtitleEn:w.subtitle;
+if(w.isRest){
+var rd=currentLang==='en'&&w.restDescEn?w.restDescEn:w.restDesc;
+c.innerHTML='<div class="card rest-day-card"><div class="rest-emoji">'+w.restEmoji+'</div><div class="rest-title">'+wTitle+'</div><div class="rest-desc">'+rd.replace(/\n/g,'<br>')+'</div></div>';return;
+}
+var h='<div class="card"><div class="workout-header">'+wTitle+'</div><div class="workout-subtitle">'+wSub+'</div></div>';
 w.exercises.forEach(function(ex){
-h+='<div class="exercise-item" onclick="showExercise(\''+ex.name.replace(/'/g,"\\'")+'\',\''+ex.url+'\')"><div><div class="exercise-name">'+ex.name+'</div><div class="exercise-detail">'+ex.detail+'</div></div><div class="exercise-link">\u25B6\u{FE0F}</div></div>';
+var eName=currentLang==='en'&&ex.nameEn?ex.nameEn:ex.name;
+var eDetail=currentLang==='en'&&ex.detailEn?ex.detailEn:ex.detail;
+h+='<div class="exercise-item" onclick="showExercise(\''+eName.replace(/'/g,"\\'")+'\',\''+ex.url+'\')"><div><div class="exercise-name">'+eName+'</div><div class="exercise-detail">'+eDetail+'</div></div><div class="exercise-link">\u25B6\u{FE0F}</div></div>';
 });
 c.innerHTML=h;
 }
 
 function showExercise(name,url){
 document.getElementById('modal-exercise-name').textContent=name;
-document.getElementById('modal-exercise-body').innerHTML='<a href="'+url+'" target="_blank" rel="noopener">\u{1F3AC} 观看 YouTube 教学视频</a><p style="font-size:13px;color:var(--text-dim);padding:0 14px">点击上方链接打开 YouTube 观看正确动作示范</p>';
+document.getElementById('modal-exercise-body').innerHTML='<a href="'+url+'" target="_blank" rel="noopener">\u{1F3AC} '+t('watch_video')+'</a><p style="font-size:13px;color:var(--text-dim);padding:0 14px">'+t('watch_video_hint')+'</p>';
 document.getElementById('exercise-modal').classList.add('show');
 }
 
@@ -637,42 +1350,48 @@ function closeModal(id){document.getElementById(id).classList.remove('show')}
 document.querySelectorAll('.modal-overlay').forEach(function(m){
 m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('show')});
 });
-
 // ===== PROGRESS =====
 function saveWeight(){
 var inp=document.getElementById('weight-input');var v=parseFloat(inp.value);
-if(!v||v<50||v>400){showToast('请输入有效体重');return}
+if(!v||v<50||v>400){showToast(t('toast_invalid_weight'));return}
 var d=JSON.parse(localStorage.getItem('weight_data')||'[]');
 var td=new Date().toISOString().split('T')[0];
 d=d.filter(function(x){return x.date!==td});
 d.push({date:td,value:v});while(d.length>56)d.shift();
 localStorage.setItem('weight_data',JSON.stringify(d));inp.value='';
-showToast('体重 '+v+' lbs 已记录');renderProgress();
+showToast(t('toast_weight_saved').replace('{v}',v));renderProgress();
 }
 function saveWaist(){
 var inp=document.getElementById('waist-input');var v=parseFloat(inp.value);
-if(!v||v<30||v>200){showToast('请输入有效腰围');return}
+if(!v||v<30||v>200){showToast(t('toast_invalid_waist'));return}
 var d=JSON.parse(localStorage.getItem('waist_data')||'[]');
 var td=new Date().toISOString().split('T')[0];
 d=d.filter(function(x){return x.date!==td});
 d.push({date:td,value:v});while(d.length>56)d.shift();
 localStorage.setItem('waist_data',JSON.stringify(d));inp.value='';
-showToast('腰围 '+v+' cm 已记录');renderProgress();
+showToast(t('toast_waist_saved').replace('{v}',v));renderProgress();
 }
 function renderProgress(){
 updateStreak();
 var wd=JSON.parse(localStorage.getItem('weight_data')||'[]');
-if(wd.length>0){var l=wd[wd.length-1];document.getElementById('weight-latest').textContent='最近记录: '+l.value+' lbs ('+l.date+')'}else{document.getElementById('weight-latest').textContent='暂无记录'}
+if(wd.length>0){var l=wd[wd.length-1];document.getElementById('weight-latest').textContent=t('latest_record').replace('{value}',l.value).replace('{unit}','lbs').replace('{date}',l.date)}else{document.getElementById('weight-latest').textContent=t('no_record')}
 drawChart('weight-chart',wd,'#00e676','lbs');
 var wa=JSON.parse(localStorage.getItem('waist_data')||'[]');
-if(wa.length>0){var l2=wa[wa.length-1];document.getElementById('waist-latest').textContent='最近记录: '+l2.value+' cm ('+l2.date+')'}else{document.getElementById('waist-latest').textContent='暂无记录'}
+if(wa.length>0){var l2=wa[wa.length-1];document.getElementById('waist-latest').textContent=t('latest_record').replace('{value}',l2.value).replace('{unit}','cm').replace('{date}',l2.date)}else{document.getElementById('waist-latest').textContent=t('no_record')}
 drawChart('waist-chart',wa,'#448aff','cm');
 // Photo reminder
 var sd=PROGRAM_START;var now=new Date();
 var dss=Math.floor((now-sd)/(864e5));
 var dun=14-(dss%14);var nd=new Date(now);nd.setDate(now.getDate()+dun);
-if(dun===14||dss%14===0){document.getElementById('next-photo-date').textContent='\u{1F4F8} 今天该拍对比照了！'}
-else{document.getElementById('next-photo-date').textContent='下次拍照日: '+nd.toISOString().split('T')[0]+' ('+dun+' 天后)'}
+var photoHtml=t('photo_text');
+if(dun===14||dss%14===0){photoHtml+='<br><br><span style="color:var(--accent);font-weight:600">\u{1F4F8} '+t('photo_today')+'</span>'}
+else{photoHtml+='<br><br><span style="color:var(--accent);font-weight:600">'+t('photo_next').replace('{date}',nd.toISOString().split('T')[0]).replace('{days}',dun)+'</span>'}
+document.getElementById('photo-reminder-text').innerHTML=photoHtml;
+
+// Load email
+var savedEmail=localStorage.getItem('fitness_export_email')||'';
+var emailInput=document.getElementById('export-email');
+if(emailInput)emailInput.value=savedEmail;
 }
 
 function drawChart(canvasId,data,color,unit){
@@ -680,7 +1399,7 @@ var canvas=document.getElementById(canvasId);var ctx=canvas.getContext('2d');
 var dpr=window.devicePixelRatio||1;var rect=canvas.getBoundingClientRect();
 canvas.width=rect.width*dpr;canvas.height=180*dpr;ctx.scale(dpr,dpr);
 var w=rect.width,h=180;ctx.clearRect(0,0,w,h);
-if(data.length===0){ctx.fillStyle='#555570';ctx.font='14px -apple-system,sans-serif';ctx.textAlign='center';ctx.fillText('暂无数据，开始记录吧',w/2,h/2);return}
+if(data.length===0){ctx.fillStyle='#555570';ctx.font='14px -apple-system,sans-serif';ctx.textAlign='center';ctx.fillText(t('no_chart_data'),w/2,h/2);return}
 var values=data.map(function(d){return d.value});
 var labels=data.map(function(d){var p=d.date.split('-');return p[1]+'/'+p[2]});
 var minV=Math.min.apply(null,values)-2,maxV=Math.max.apply(null,values)+2,range=maxV-minV||1;
@@ -713,36 +1432,32 @@ var el=document.getElementById('streak-count');if(el)el.textContent=streak;
 }
 
 // ===== EXPORT =====
-function exportData(){
+function getExportText(){
 var lines=[];
-lines.push('===== 健身计划数据导出 =====');
-lines.push('导出时间: '+new Date().toLocaleString('zh-CN'));
-lines.push('计划开始日期: '+localStorage.getItem('programStart'));
-lines.push('当前周: 第 '+getCurrentWeek()+' 周');
+lines.push(t('export_header'));
+lines.push(t('export_time')+': '+new Date().toLocaleString(currentLang==='zh'?'zh-CN':'en-US'));
+lines.push(t('export_start')+': '+localStorage.getItem('programStart'));
+lines.push(t('export_week').replace('{w}',getCurrentWeek()));
 lines.push('');
 
-// Streak
 var streak=0;var today=new Date();
 for(var i=0;i<365;i++){var d=new Date(today);d.setDate(d.getDate()-i);var key='checklist_'+d.toISOString().split('T')[0];var data=[];try{data=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}if(data.length>0&&data.some(function(v){return v})){streak++}else if(i>0){break}}
-lines.push('--- 连续打卡: '+streak+' 天 ---');
+lines.push(t('export_streak').replace('{n}',streak));
 lines.push('');
 
-// Weight
-lines.push('--- 体重记录 (lbs) ---');
+lines.push(t('export_weight_header'));
 var wd=JSON.parse(localStorage.getItem('weight_data')||'[]');
-if(wd.length===0)lines.push('暂无记录');
+if(wd.length===0)lines.push(t('no_record'));
 else wd.forEach(function(e){lines.push(e.date+': '+e.value+' lbs')});
 lines.push('');
 
-// Waist
-lines.push('--- 腰围记录 (cm) ---');
+lines.push(t('export_waist_header'));
 var wa=JSON.parse(localStorage.getItem('waist_data')||'[]');
-if(wa.length===0)lines.push('暂无记录');
+if(wa.length===0)lines.push(t('no_record'));
 else wa.forEach(function(e){lines.push(e.date+': '+e.value+' cm')});
 lines.push('');
 
-// Checklist history (last 14 days)
-lines.push('--- 每日清单 (最近14天) ---');
+lines.push(t('export_checklist_header'));
 for(var i=0;i<14;i++){
 var d=new Date();d.setDate(d.getDate()-i);
 var ds=d.toISOString().split('T')[0];
@@ -750,13 +1465,12 @@ var key='checklist_'+ds;
 var data=[];try{data=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
 if(data.length>0){
 var done=data.filter(function(v){return v}).length;
-lines.push(ds+': '+done+'/'+CHECKLIST_ITEMS.length+' 完成');
+lines.push(ds+': '+done+'/'+CHECKLIST_KEYS.length+' '+t('export_done'));
 }
 }
 lines.push('');
 
-// Water history (last 14 days)
-lines.push('--- 饮水记录 (最近14天) ---');
+lines.push(t('export_water_header'));
 for(var i=0;i<14;i++){
 var d=new Date();d.setDate(d.getDate()-i);
 var ds=d.toISOString().split('T')[0];
@@ -765,25 +1479,50 @@ var amt=parseInt(localStorage.getItem(key)||'0');
 if(amt>0)lines.push(ds+': '+(amt/1000).toFixed(1)+'L');
 }
 lines.push('');
-lines.push('===== 导出结束 =====');
+lines.push(t('export_footer'));
+return lines.join('\n');
+}
 
-var text=lines.join('\n');
+function exportData(){
+var text=getExportText();
+// Save email if present
+var emailInput=document.getElementById('export-email');
+if(emailInput&&emailInput.value){localStorage.setItem('fitness_export_email',emailInput.value)}
 
 if(navigator.share){
-navigator.share({title:'健身计划数据',text:text}).catch(function(){copyText(text)});
+navigator.share({title:currentLang==='zh'?'健身计划数据':'Fitness Plan Data',text:text}).catch(function(){copyText(text)});
 }else{copyText(text)}
 }
 
 function copyText(text){
 if(navigator.clipboard&&navigator.clipboard.writeText){
-navigator.clipboard.writeText(text).then(function(){showToast('已复制到剪贴板')}).catch(function(){fallbackCopy(text)});
+navigator.clipboard.writeText(text).then(function(){showToast(t('toast_copied'))}).catch(function(){fallbackCopy(text)});
 }else{fallbackCopy(text)}
 }
 function fallbackCopy(text){
 var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';
 document.body.appendChild(ta);ta.select();
-try{document.execCommand('copy');showToast('已复制到剪贴板')}catch(e){showToast('复制失败，请手动复制')}
+try{document.execCommand('copy');showToast(t('toast_copied'))}catch(e){showToast(t('toast_copy_fail'))}
 document.body.removeChild(ta);
+}
+
+// ===== EMAIL EXPORT =====
+function sendEmail(){
+var emailInput=document.getElementById('export-email');
+var email=emailInput?emailInput.value.trim():'';
+if(!email){showToast(t('toast_email_empty'));return}
+localStorage.setItem('fitness_export_email',email);
+
+var text=getExportText();
+var subject=t('export_email_subject')+new Date().toISOString().split('T')[0];
+// mailto body limit ~2000 chars
+var body=text;
+if(body.length>1800){
+body=body.substring(0,1800)+t('export_email_truncated');
+}
+var mailtoUrl='mailto:'+encodeURIComponent(email)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+showToast(t('toast_email_sent'));
+setTimeout(function(){window.location.href=mailtoUrl},300);
 }
 
 // ===== REMINDER SETTINGS =====
@@ -791,12 +1530,12 @@ function openSettings(){
 var settings=JSON.parse(localStorage.getItem('reminder_settings')||'{}');
 var h='';
 h+='<div class="settings-card">';
-h+='<div class="setting-row"><div class="setting-label">\u{1F3CB}\u{FE0F} 训练提醒</div><div style="display:flex;align-items:center"><input type="time" class="time-input" id="reminder-workout-time" value="'+(settings.workoutTime||'08:00')+'"><label class="toggle-switch"><input type="checkbox" id="reminder-workout" '+(settings.workout?'checked':'')+'><span class="toggle-slider"></span></label></div></div>';
-h+='<div class="setting-row"><div class="setting-label">\u{1F4A7} 喝水提醒 <span style="font-size:11px;color:var(--text-muted)">(每2小时)</span></div><div style="display:flex;align-items:center"><label class="toggle-switch"><input type="checkbox" id="reminder-water" '+(settings.water?'checked':'')+'><span class="toggle-slider"></span></label></div></div>';
-h+='<div class="setting-row"><div class="setting-label">\u{1F37D}\u{FE0F} 饮食提醒</div><div style="display:flex;align-items:center"><input type="time" class="time-input" id="reminder-meal-time" value="'+(settings.mealTime||'11:30')+'"><label class="toggle-switch"><input type="checkbox" id="reminder-meal" '+(settings.meal?'checked':'')+'><span class="toggle-slider"></span></label></div></div>';
+h+='<div class="setting-row"><div class="setting-label">\u{1F3CB}\u{FE0F} '+t('workout_reminder')+'</div><div style="display:flex;align-items:center"><input type="time" class="time-input" id="reminder-workout-time" value="'+(settings.workoutTime||'08:00')+'"><label class="toggle-switch"><input type="checkbox" id="reminder-workout" '+(settings.workout?'checked':'')+'><span class="toggle-slider"></span></label></div></div>';
+h+='<div class="setting-row"><div class="setting-label">\u{1F4A7} '+t('water_reminder')+' <span style="font-size:11px;color:var(--text-muted)">'+t('water_reminder_note')+'</span></div><div style="display:flex;align-items:center"><label class="toggle-switch"><input type="checkbox" id="reminder-water" '+(settings.water?'checked':'')+'><span class="toggle-slider"></span></label></div></div>';
+h+='<div class="setting-row"><div class="setting-label">\u{1F37D}\u{FE0F} '+t('meal_reminder')+'</div><div style="display:flex;align-items:center"><input type="time" class="time-input" id="reminder-meal-time" value="'+(settings.mealTime||'11:30')+'"><label class="toggle-switch"><input type="checkbox" id="reminder-meal" '+(settings.meal?'checked':'')+'><span class="toggle-slider"></span></label></div></div>';
 h+='</div>';
-h+='<button class="btn" style="width:100%;margin-bottom:12px" onclick="saveReminders()">保存设置</button>';
-h+='<div class="settings-note">提醒功能需要在浏览器/Safari 中授予通知权限。水提醒在页面打开时每2小时提醒一次。</div>';
+h+='<button class="btn" style="width:100%;margin-bottom:12px" onclick="saveReminders()">'+t('save_settings')+'</button>';
+h+='<div class="settings-note">'+t('settings_note')+'</div>';
 
 document.getElementById('settings-modal-body').innerHTML=h;
 document.getElementById('settings-modal').classList.add('show');
@@ -812,7 +1551,7 @@ mealTime:document.getElementById('reminder-meal-time').value
 };
 localStorage.setItem('reminder_settings',JSON.stringify(settings));
 closeModal('settings-modal');
-showToast('提醒设置已保存');
+showToast(t('toast_settings_saved'));
 
 if(settings.workout||settings.water||settings.meal){
 if('Notification' in window&&Notification.permission==='default'){
@@ -825,30 +1564,22 @@ setupReminders();
 var waterReminderInterval=null;
 function setupReminders(){
 var settings=JSON.parse(localStorage.getItem('reminder_settings')||'{}');
-
-// Clear existing
 if(waterReminderInterval){clearInterval(waterReminderInterval);waterReminderInterval=null}
-
 if(!('Notification' in window)||Notification.permission!=='granted')return;
-
-// Water reminder every 2 hours
 if(settings.water){
 waterReminderInterval=setInterval(function(){
 var h=new Date().getHours();
-if(h>=7&&h<=22){
-new Notification('健身计划',{body:'\u{1F4A7} 该喝水了！保持水分摄入。',icon:'icon-192.png'});
-}
+if(h>=7&&h<=22){new Notification(t('notif_title'),{body:'\u{1F4A7} '+t('notif_water'),icon:'icon-192.png'})}
 },2*60*60*1000);
 }
-
-// Workout/meal reminders - check every minute
 setInterval(function(){
-var now=new Date();var t=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-if(settings.workout&&t===settings.workoutTime){
-new Notification('健身计划',{body:'\u{1F3CB}\u{FE0F} 训练时间到！今天的训练：'+WORKOUTS[now.getDay()].title,icon:'icon-192.png'});
+var now=new Date();var tm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+if(settings.workout&&tm===settings.workoutTime){
+var wTitle=currentLang==='en'&&WORKOUTS[now.getDay()].titleEn?WORKOUTS[now.getDay()].titleEn:WORKOUTS[now.getDay()].title;
+new Notification(t('notif_title'),{body:'\u{1F3CB}\u{FE0F} '+t('notif_workout')+wTitle,icon:'icon-192.png'});
 }
-if(settings.meal&&t===settings.mealTime){
-new Notification('健身计划',{body:'\u{1F37D}\u{FE0F} 该准备饮食了！注意蛋白质摄入。',icon:'icon-192.png'});
+if(settings.meal&&tm===settings.mealTime){
+new Notification(t('notif_title'),{body:'\u{1F37D}\u{FE0F} '+t('notif_meal'),icon:'icon-192.png'});
 }
 },60000);
 }
@@ -858,10 +1589,12 @@ function showToast(msg){var t=document.getElementById('toast');t.textContent=msg
 
 // ===== INIT =====
 function init(){
+// Set lang toggle text
+document.getElementById('lang-toggle-text').textContent=currentLang==='zh'?'EN':'中';
+updateLanguage();
 renderToday();renderDiet();renderTraining();
 window.addEventListener('resize',function(){if(currentTab==='progress')renderProgress()});
 
-// Request notification permission if reminders are enabled
 var settings=JSON.parse(localStorage.getItem('reminder_settings')||'{}');
 if((settings.workout||settings.water||settings.meal)&&'Notification' in window){
 if(Notification.permission==='default'){Notification.requestPermission().then(function(){setupReminders()})}
