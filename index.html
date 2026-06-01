@@ -477,7 +477,8 @@ water_tracking: '饮水追踪', water_add_btn: '+ 1杯', water_hint: '每杯约 
 today_diet: '今日饮食', daily_checklist: '每日清单',
 // Checklist items
 chk_fasting: '16:8 断食遵守 (20:00-12:00)', chk_training: '今日训练完成', chk_protein: '蛋白质达标 (160g+)',
-chk_water: '喝水 3.5L', chk_sleep: '睡眠 7 小时+',
+chk_water: '喝水 3.5L', chk_sleep: '睡眠 7 小时+', chk_posture: '体态练习 (TVA + 站/坐姿)',
+posture_section_title: '体态与姿势训练', posture_section_subtitle: '每天 5 分钟，改变体态外观', posture_tip_label: '要点：',
 // Diet page
 diet_plan: '饮食计划', snack_title: '蛋白质补给（点击标记已吃）', snack_title_short: '蛋白补给（点击标记）',
 daily_total_label: '每日总计（不含零食，零食请在今日页面标记）', protein_label: '蛋白质', kcal_label: '千卡',
@@ -610,7 +611,8 @@ today_progress: 'Today\'s Progress', ring_water: 'Water', ring_protein: 'Protein
 water_tracking: 'Water Tracking', water_add_btn: '+ 1 Cup', water_hint: '~250ml per cup | Goal: 3.5L (14 cups)',
 today_diet: 'Today\'s Diet', daily_checklist: 'Daily Checklist',
 chk_fasting: '16:8 fasting maintained (8PM-12PM)', chk_training: 'Workout completed', chk_protein: 'Protein goal (160g+)',
-chk_water: 'Water 3.5L', chk_sleep: 'Sleep 7 hrs+',
+chk_water: 'Water 3.5L', chk_sleep: 'Sleep 7 hrs+', chk_posture: 'Posture practice (TVA + sitting/standing)',
+posture_section_title: 'Posture & Alignment', posture_section_subtitle: '5 min/day changes how your body looks', posture_tip_label: 'Key tip:',
 diet_plan: 'Diet Plan', snack_title: 'Protein Boost (tap to mark eaten)', snack_title_short: 'Protein Boost (tap to mark)',
 daily_total_label: 'Daily Total (excl. snacks, mark snacks on Today tab)', protein_label: 'Protein', kcal_label: 'kcal',
 fasting_label: 'Fasting Window', fasting_maintained: 'Maintained', fasting_window_info: 'Fast 8PM-12PM | Eat 12PM-8PM',
@@ -914,7 +916,14 @@ core:[
 ]
 };
 
-var CHECKLIST_KEYS=['chk_fasting','chk_training','chk_protein','chk_water','chk_sleep'];
+var POSTURE_DRILLS=[
+{name:'TVA 激活（腹横肌收紧）',nameEn:'TVA Activation (Transverse Abdominis)',detail:'吸气吐气配合收腹，保持 10 秒 x 10 次',detailEn:'Exhale & draw navel to spine, hold 10s x 10 reps',url:'https://www.youtube.com/watch?v=p6T2fv2q_yk',tip:'坐着站着随时可做。腹横肌是腹部最深层的"天然束腰带"，激活它能即刻收紧腰围。',tipEn:'Do anywhere sitting or standing. The TVA is your deepest ab muscle — your body\'s natural corset.'},
+{name:'骨盆中立位训练（纠正前倾）',nameEn:'Pelvic Tilt Correction (Fix Anterior Tilt)',detail:'站立骨盆前后摆动找中立位，保持 30 秒 x 3 组',detailEn:'Stand, tilt pelvis front-to-back, find neutral, hold 30s x 3',url:'https://www.youtube.com/watch?v=2NZMaI-HeNU',tip:'前骨盆倾斜会让肚子多突出 5-7cm！中立位是改善体态的关键第一步。',tipEn:'Anterior pelvic tilt adds 2-3 inches to belly appearance! Neutral pelvis is the #1 fix.'},
+{name:'坐姿体态矫正（办公桌）',nameEn:'Sitting Posture (Desk Ergonomics)',detail:'屏幕与视线齐平 | 大小腿 90° | 腰背贴椅背',detailEn:'Monitor at eye level | 90° knees | lumbar support',url:'https://www.youtube.com/watch?v=F8_ME4VwTiw',tip:'每 30 分钟检查一次坐姿。驼背+前倾骨盆是让肚子外凸的最差组合。',tipEn:'Check posture every 30 min. Slouch + anterior tilt combo is the worst for belly protrusion.'},
+{name:'站姿矫正（全身对齐）',nameEn:'Standing Posture (Full Body Alignment)',detail:'耳-肩-髋-膝-踝成一线 | 胸腔上提 | 重心均匀',detailEn:'Ear-shoulder-hip-knee-ankle aligned | chest up | weight even',url:'https://www.youtube.com/watch?v=lFE_fhDuFK4',tip:'良好站姿即刻让腰围看起来缩小 5cm，也让你看起来高 2-3cm。',tipEn:'Good standing posture instantly makes waist look 2\" slimmer and you 1\" taller.'}
+];
+
+var CHECKLIST_KEYS=['chk_fasting','chk_training','chk_protein','chk_water','chk_sleep','chk_posture'];
 
 // ===== STATE =====
 var currentTab='today';
@@ -1886,8 +1895,8 @@ var wTitle=currentLang==='en'&&w.titleEn?w.titleEn:w.title;
 var wSub=currentLang==='en'&&w.subtitleEn?w.subtitleEn:w.subtitle;
 if(w.isRest){
 var rd=currentLang==='en'&&w.restDescEn?w.restDescEn:w.restDesc;
-c.innerHTML='<div class="card rest-day-card"><div class="rest-emoji">'+w.restEmoji+'</div><div class="rest-title">'+wTitle+'</div><div class="rest-desc">'+rd.replace(/\n/g,'<br>')+'</div></div>';return;
-}
+c.innerHTML='<div class="card rest-day-card"><div class="rest-emoji">'+w.restEmoji+'</div><div class="rest-title">'+wTitle+'</div><div class="rest-desc">'+rd.replace(/\n/g,'<br>')+'</div></div>';
+}else{
 var h='<div class="card"><div class="workout-header">'+wTitle+'</div><div class="workout-subtitle">'+wSub+'</div></div>';
 w.exercises.forEach(function(ex,i){
 var actualEx=swappedExercises[day+'_'+i]||ex;
@@ -1899,6 +1908,32 @@ if(actualEx.group&&actualEx.group!=='cardio'){h+='<button class="ex-swap-btn" on
 h+='<div class="exercise-link" onclick="showExercise(\''+safeNameJs+'\',\''+actualEx.url+'\')">\u25B6\u{FE0F}</div></div></div>';
 });
 c.innerHTML=h;
+}
+c.insertAdjacentHTML('beforeend',buildPostureSection());
+}
+
+function buildPostureSection(){
+var h='<div class="section-divider" style="margin:20px 0 16px"></div>';
+h+='<div class="card" style="background:linear-gradient(135deg,rgba(206,147,216,.08),rgba(156,39,176,.04));border-left:3px solid #ce93d8;margin-bottom:14px">';
+h+='<div class="card-title" style="color:#ce93d8">\u{1F9CD} '+t('posture_section_title')+'</div>';
+h+='<div style="font-size:13px;color:var(--text-dim);line-height:1.6">'+t('posture_section_subtitle')+'</div>';
+h+='</div>';
+POSTURE_DRILLS.forEach(function(drill){
+var dName=currentLang==='en'&&drill.nameEn?drill.nameEn:drill.name;
+var dDetail=currentLang==='en'&&drill.detailEn?drill.detailEn:drill.detail;
+var dTip=currentLang==='en'&&drill.tipEn?drill.tipEn:drill.tip;
+var safeName=dName.replace(/'/g,"\\'").replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+h+='<div class="exercise-item" style="flex-direction:column;align-items:flex-start">';
+h+='<div style="display:flex;justify-content:space-between;align-items:center;width:100%;cursor:pointer" onclick="showExercise(\''+safeName+'\',\''+drill.url+'\')">';
+h+='<div style="flex:1"><div class="exercise-name">'+dName+'</div>';
+h+='<div class="exercise-detail">'+dDetail+'</div></div>';
+h+='<div class="exercise-link" style="color:#ce93d8">\u25B6\u{FE0F}</div>';
+h+='</div>';
+h+='<div style="font-size:12px;color:var(--text-muted);margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.04);line-height:1.5;width:100%">';
+h+='\u{1F4A1} '+t('posture_tip_label')+' '+dTip;
+h+='</div></div>';
+});
+return h;
 }
 
 function showExercise(name,url){
